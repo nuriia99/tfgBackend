@@ -6,9 +6,12 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 <<<<<<< HEAD
+<<<<<<< HEAD
 .pnpm-debug.log*
 =======
 >>>>>>> c2d113269a48bbb2b8238763aefd2946d34ef620
+=======
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -46,12 +49,17 @@ node_modules/
 jspm_packages/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 =======
 # TypeScript v1 declaration files
 typings/
 >>>>>>> c2d113269a48bbb2b8238763aefd2946d34ef620
+=======
+# TypeScript v1 declaration files
+typings/
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
 
 # TypeScript cache
 *.tsbuildinfo
@@ -63,11 +71,14 @@ typings/
 .eslintcache
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Optional stylelint cache
 .stylelintcache
 
 =======
 >>>>>>> c2d113269a48bbb2b8238763aefd2946d34ef620
+=======
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
 # Microbundle cache
 .rpt2_cache/
 .rts2_cache_cjs/
@@ -84,6 +95,7 @@ typings/
 .yarn-integrity
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # dotenv environment variable files
 .env
 .env.development.local
@@ -99,6 +111,8 @@ typings/
 .next
 out
 =======
+=======
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
 # dotenv environment variables file
 .env
 .env.test
@@ -108,7 +122,10 @@ out
 
 # Next.js build output
 .next
+<<<<<<< HEAD
 >>>>>>> c2d113269a48bbb2b8238763aefd2946d34ef620
+=======
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
 
 # Nuxt.js build / generate output
 .nuxt
@@ -117,18 +134,23 @@ dist
 # Gatsby files
 .cache/
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Comment in the public line in if your project uses Gatsby and not Next.js
 
 
 =======
 # Comment in the public line in if your project uses Gatsby and *not* Next.js
 >>>>>>> c2d113269a48bbb2b8238763aefd2946d34ef620
+=======
+# Comment in the public line in if your project uses Gatsby and *not* Next.js
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
 # vuepress build output
 .vuepress/dist
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # vuepress v2.x temp and cache directory
 .temp
@@ -139,6 +161,8 @@ dist
 
 =======
 >>>>>>> c2d113269a48bbb2b8238763aefd2946d34ef620
+=======
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
 # Serverless directories
 .serverless/
 
@@ -150,6 +174,7 @@ dist
 
 # TernJS port file
 .tern-port
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 # Stores VSCode versions used for testing VSCode extensions
@@ -163,3 +188,5 @@ dist
 .pnp.*
 =======
 >>>>>>> c2d113269a48bbb2b8238763aefd2946d34ef620
+=======
+>>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
