@@ -58,11 +58,11 @@ const TrabajadorSchema = new mongoose.Schema({
         type: String,
         required: true
       }
-    }]
+    }],
+    objetivos: {
+      type: [String]
+    }
   }],
-  objetivos: {
-    type: [String]
-  },
   citasPrevias: [{
     paciente: {
       type: String,

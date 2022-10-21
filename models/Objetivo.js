@@ -5,7 +5,11 @@ const ObjetivoSchema = new mongoose.Schema({
     type: String,
     requiered: true
   },
-  desc: {
+  descripcion: {
+    type: String,
+    requiered: true
+  },
+  tipo: {
     type: String,
     requiered: true
   },
