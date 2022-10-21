@@ -47,7 +47,92 @@ const PacienteSchema = new mongoose.Schema({
   direccion: {
     type: String,
     requiered: true
-  }
+  },
+  trabajadoresAsignados: [{
+    rol: {
+      type: String,
+      required: true,
+    },
+    trabajador: {
+      type: String,
+      required: true
+    },
+    inteligenciaActiva: {
+      tabaquismo: {
+        type: Boolean
+      },
+      actividadFísica: {
+        type: String
+      },
+      valoracionPacientesCronicos: {
+        type: String
+      },
+      frecuenciaCardiaca: {
+        type: Number
+      },
+      peso: {
+        type: Number
+      },
+      estatura: {
+        type: Number
+      },
+      colesterolTotal: {
+        type: Number
+      }
+    }
+  }],
+  documentos: [{
+    nombre: {
+      type: String, 
+      required: true
+    },
+    pdfUrl: {
+      type: String, 
+      required: true
+    },
+  }],
+  informes: [{
+    horaEntrada: {
+      type: Date,
+      required: true
+    },
+    horaSalida: {
+      type: Date,
+      required: true
+    },
+    horaAsistencia: {
+      type: Date,
+      required: true
+    },
+    motivo: {
+      type: String,
+      required: true
+    },
+    tipoVisita: {
+      type: String,
+      required: true
+    },
+    procedencia: {
+      type: String,
+      required: true
+    },
+    iniciativa: {
+      type: String,
+      required: true
+    },
+    medioLlegada: {
+      type: String,
+      required: true
+    },
+    descMotivo: {
+      type: String,
+      required: true
+    },
+    exploracion: {
+      type: String,
+      required: true
+    }
+  }]
 
 })
 

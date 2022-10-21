@@ -32,6 +32,10 @@ const TrabajadorSchema = new mongoose.Schema({
     type: String,
     requiered: true
   },
+  esDoctor: {
+    type: Boolean,
+    required: true
+  },
   numColegiado: {
     type: String,
     requiered: true
@@ -50,12 +54,9 @@ const TrabajadorSchema = new mongoose.Schema({
         type: Date,
         required: true
       },
-      esDoctor: {
-        type: Boolean,
+      rol: {
+        type: String,
         required: true
-      },
-      especialidad: {
-        type: String
       }
     }]
   }],
@@ -79,46 +80,10 @@ const TrabajadorSchema = new mongoose.Schema({
       require: true
     }
   }],
-  visitaUrgencia: [{
-    paciente: {
-      type: String,
-      required: true
-    },
-    segundoTrabajador: {
-      type: String
-    },
-    centro: {
-      type: String,
-      required: true
-    },
-    fecha: {
-      type: Date,
-      require: true
-    },
-    horaEntrada: {
-      type: Date,
-      require: true
-    },
-    horaAsistencia: {
-      type: Date,
-      require: true
-    },
-    horaSalida: {
-      type: Date,
-      require: true
-    },
-    motivo: {
-      type: String,
-      require: true
-    },
-    triaje: {
-      type: Number,
-      require: true
-    },
-    comentario: {
-      type: String
-    }
-  }]
+  visitasUrgencias: {
+    type: [String]
+  }//seguir con lo que queda de diagnostico
+  
 })
 
 export default mongoose.model('Trabajador', TrabajadorSchema)
