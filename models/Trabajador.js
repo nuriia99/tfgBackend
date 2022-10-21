@@ -82,8 +82,24 @@ const TrabajadorSchema = new mongoose.Schema({
   }],
   visitasUrgencias: {
     type: [String]
-  }//seguir con lo que queda de diagnostico
-  
+  },
+  informes: {
+    type: [String]
+  },
+  eleccionMedicamento: [{
+    medicamento: {
+      type: String,
+      require: true
+    },
+    diagnostico: {
+      type: String,
+      require: true
+    },
+    fecha: {
+      type: [Date],
+      require: true
+    }
+  }]
 })
 
 export default mongoose.model('Trabajador', TrabajadorSchema)

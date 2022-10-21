@@ -51,7 +51,7 @@ const PacienteSchema = new mongoose.Schema({
   trabajadoresAsignados: [{
     rol: {
       type: String,
-      required: true,
+      required: true
     },
     trabajador: {
       type: String,
@@ -83,55 +83,62 @@ const PacienteSchema = new mongoose.Schema({
   }],
   documentos: [{
     nombre: {
-      type: String, 
+      type: String,
       required: true
     },
     pdfUrl: {
-      type: String, 
-      required: true
-    },
-  }],
-  informes: [{
-    horaEntrada: {
-      type: Date,
-      required: true
-    },
-    horaSalida: {
-      type: Date,
-      required: true
-    },
-    horaAsistencia: {
-      type: Date,
-      required: true
-    },
-    motivo: {
-      type: String,
-      required: true
-    },
-    tipoVisita: {
-      type: String,
-      required: true
-    },
-    procedencia: {
-      type: String,
-      required: true
-    },
-    iniciativa: {
-      type: String,
-      required: true
-    },
-    medioLlegada: {
-      type: String,
-      required: true
-    },
-    descMotivo: {
-      type: String,
-      required: true
-    },
-    exploracion: {
       type: String,
       required: true
     }
+  }],
+  informes: {
+    type: [String]
+  },
+  diagnosticos: [{
+    diagnostico: {
+      type: String,
+      required: true
+    },
+    activo: {
+      type: Boolean,
+      required: true
+    }
+  }],
+  recetas: [{
+    fechaInicio: {
+      type: Date,
+      required: true
+    },
+    fechaFinal: {
+      type: Date,
+      required: true
+    },
+    instrucciones: {
+      type: String,
+      required: true
+    },
+    trabajador: {
+      type: String,
+      required: true
+    },
+    medicamentos: [{
+      medicamento: {
+        type: String,
+        required: true
+      },
+      dosis: {
+        type: Number,
+        required: true
+      },
+      frecuencia: {
+        type: Number,
+        required: true
+      },
+      duracion: {
+        type: Number,
+        required: true
+      }
+    }]
   }]
 
 })
