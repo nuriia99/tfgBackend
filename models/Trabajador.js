@@ -14,7 +14,8 @@ const TrabajadorSchema = new mongoose.Schema({
   },
   dni: {
     type: String,
-    requiered: true
+    requiered: true,
+    unique: true
   },
   correo: {
     type: String,
@@ -26,7 +27,8 @@ const TrabajadorSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    requiered: true
+    requiered: true,
+    unique: true
   },
   password: {
     type: String,
@@ -38,7 +40,8 @@ const TrabajadorSchema = new mongoose.Schema({
   },
   numColegiado: {
     type: String,
-    requiered: true
+    requiered: true,
+    unique: true
   },
   pacientes: {
     type: [String]

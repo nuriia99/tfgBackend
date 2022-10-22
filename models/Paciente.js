@@ -14,7 +14,8 @@ const PacienteSchema = new mongoose.Schema({
   },
   dni: {
     type: String,
-    requiered: true
+    requiered: true,
+    unique: true
   },
   correo: {
     type: String,
@@ -26,7 +27,8 @@ const PacienteSchema = new mongoose.Schema({
   },
   CIP: {
     type: String,
-    requiered: true
+    requiered: true,
+    unique: true
   },
   fechaNacimiento: {
     type: Date,
