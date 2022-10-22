@@ -46,6 +46,10 @@ const TrabajadorSchema = new mongoose.Schema({
   pacientes: {
     type: [String]
   },
+  especialidades: {
+    type: [String],
+    required: true
+  },
   centros: [{
     nombre: String,
     turnos: [{
