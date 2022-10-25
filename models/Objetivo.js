@@ -3,23 +3,23 @@ import mongoose from 'mongoose'
 const ObjetivoSchema = new mongoose.Schema({
   nombre: {
     type: String,
-    requiered: true
+    required: true
   },
   descripcion: {
     type: String,
-    requiered: true
+    required: true
   },
   tipo: {
     type: String,
-    requiered: true
+    required: true
   },
   numPaciententesTotal: {
     type: Number,
-    requiered: true
+    required: true
   },
   numPacientesCompletados: {
     type: Number,
-    requiered: true
+    required: true
   }
 
 })

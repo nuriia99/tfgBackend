@@ -3,23 +3,23 @@ import mongoose from 'mongoose'
 const MedicamentoSchema = new mongoose.Schema({
   componente: {
     type: String,
-    requiered: true
+    required: true
   },
   marca: {
     type: String,
-    requiered: true
+    required: true
   },
   numComprimidos: {
     type: Number,
-    requiered: true
+    required: true
   },
   recetaEnfPermitida: {
     type: Boolean,
-    requiered: true
+    required: true
   },
   alergias: {
     type: [String],
-    requiered: true
+    required: true
   }
 
 })

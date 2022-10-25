@@ -13,10 +13,6 @@ const InformeSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  motivo: {
-    type: String,
-    required: true
-  },
   tipoVisita: {
     type: String,
     required: true
@@ -39,6 +35,30 @@ const InformeSchema = new mongoose.Schema({
   },
   exploracion: {
     type: String,
+    required: true
+  },
+  evaluacion: {
+    type: String,
+    required: true
+  },
+  lenguaje: {
+    type: String,
+    required: true
+  },
+  documento: {
+    type: String,
+    required: true
+  },
+  paciente: {
+    type: String,
+    required: true
+  },
+  trabajadores: {
+    type: [String],
+    required: true
+  },
+  diagnoticos: {
+    type: [String],
     required: true
   }
 

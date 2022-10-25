@@ -3,36 +3,36 @@ import mongoose from 'mongoose'
 const TrabajadorSchema = new mongoose.Schema({
   nombre: {
     type: String,
-    requiered: true
+    required: true
   },
   apellido1: {
     type: String,
-    requiered: true
+    required: true
   },
   apellido2: {
     type: String
   },
   dni: {
     type: String,
-    requiered: true,
+    required: true,
     unique: true
   },
   correo: {
     type: String,
-    requiered: true
+    required: true
   },
   telefono: {
     type: String,
-    requiered: true
+    required: true
   },
   username: {
     type: String,
-    requiered: true,
+    required: true,
     unique: true
   },
   password: {
     type: String,
-    requiered: true
+    required: true
   },
   esDoctor: {
     type: Boolean,
@@ -40,7 +40,7 @@ const TrabajadorSchema = new mongoose.Schema({
   },
   numColegiado: {
     type: String,
-    requiered: true,
+    required: true,
     unique: true
   },
   pacientes: {
@@ -84,7 +84,7 @@ const TrabajadorSchema = new mongoose.Schema({
     },
     fecha: {
       type: Date,
-      require: true
+      required: true
     }
   }],
   visitasUrgencias: {
@@ -96,15 +96,15 @@ const TrabajadorSchema = new mongoose.Schema({
   eleccionMedicamento: [{
     medicamento: {
       type: String,
-      require: true
+      required: true
     },
     diagnostico: {
       type: String,
-      require: true
+      required: true
     },
     fecha: {
       type: [Date],
-      require: true
+      required: true
     }
   }]
 })

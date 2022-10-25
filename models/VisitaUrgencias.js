@@ -30,6 +30,10 @@ const VisitaUrgenciasSchema = new mongoose.Schema({
       type: Date,
       require: true
     },
+    tipoVisita: {
+      type: String,
+      required: true
+    },
     motivo: {
       type: String,
       require: true

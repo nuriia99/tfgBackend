@@ -3,15 +3,15 @@ import mongoose from 'mongoose'
 const DiagnosticoSchema = new mongoose.Schema({
   cie: {
     type: String,
-    require: true
+    required: true
   },
   nombre: {
     type: String,
-    require: true
+    required: true
   },
   severidad: {
     type: String,
-    require: true
+    required: true
   },
   informes: {
     type: [String]

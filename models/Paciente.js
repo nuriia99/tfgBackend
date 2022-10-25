@@ -3,52 +3,52 @@ import mongoose from 'mongoose'
 const PacienteSchema = new mongoose.Schema({
   nombre: {
     type: String,
-    requiered: true
+    required: true
   },
   apellido1: {
     type: String,
-    requiered: true
+    required: true
   },
   apellido2: {
     type: String
   },
   dni: {
     type: String,
-    requiered: true,
+    required: true,
     unique: true
   },
   correo: {
     type: String,
-    requiered: true
+    required: true
   },
   telefono: {
     type: String,
-    requiered: true
+    required: true
   },
   CIP: {
     type: String,
-    requiered: true,
+    required: true,
     unique: true
   },
   fechaNacimiento: {
     type: Date,
-    requiered: true
+    required: true
   },
   edad: {
     type: Number,
-    requiered: true
+    required: true
   },
   genero: {
     type: String,
-    requiered: true
+    required: true
   },
   paisOrigen: {
     type: String,
-    requiered: true
+    required: true
   },
   direccion: {
     type: String,
-    requiered: true
+    required: true
   },
   trabajadoresAsignados: [{
     rol: {

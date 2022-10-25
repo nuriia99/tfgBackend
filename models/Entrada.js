@@ -17,6 +17,10 @@ const EntradaSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  lenguaje: {
+    type: String,
+    required: true
+  },
   paciente: {
     type: String,
     required: true
