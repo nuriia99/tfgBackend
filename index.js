@@ -4,9 +4,14 @@ import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 
 import authRoute from './routes/auth.js'
+import workersRoute from './routes/workers.js'
+import homeRoute from './routes/home.js'
+import cors from 'cors'
 
 const app = express()
 dotenv.config()
+
+app.use(cors()) // Use this after the variable declaration
 
 const connect = async () => {
   // eslint-disable-next-line no-useless-catch
@@ -31,6 +36,8 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/auth', authRoute)
+app.use('/trabajadores', workersRoute)
+app.use('/home', homeRoute)
 
 app.use((error, req, res, next) => {
   let errorStatus = error.status

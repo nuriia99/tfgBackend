@@ -43,6 +43,9 @@ const TrabajadorSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  lenguaje: {
+    type: String
+  },
   pacientes: {
     type: [String]
   },
@@ -69,6 +72,11 @@ const TrabajadorSchema = new mongoose.Schema({
     objetivos: {
       type: [String]
     }
+  }],
+  turnos: [{
+    horaInicio: Date,
+    horaFinal: Date,
+    rol: 'String'
   }],
   citasPrevias: [{
     paciente: {

@@ -1,7 +1,11 @@
 import Worker from '../models/Trabajador.js'
 import bcrypt from 'bcrypt'
-import { handleError } from '../utils/errors.js'
 import jwt from 'jsonwebtoken'
+import { handleError } from '../utils/errors.js'
+
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+}
 
 export const register = async (req, res, next) => {
   try {
@@ -18,33 +22,39 @@ export const register = async (req, res, next) => {
       password: hash,
       esDoctor: req.body.esDoctor,
       numColegiado: req.body.numColegiado,
+      lenguaje: req.body.lenguaje,
       pacientes: req.body.pacientes,
+      especialidades: req.body.especialidades,
       centros: req.body.centros,
+      turnos: req.body.turnos,
       citasPrevias: req.body.citasPrevias,
       visitasUrgencias: req.body.visitasUrgencias,
       informes: req.body.informes,
       eleccionMedicamento: req.body.eleccionMedicamento
     })
     await newWorker.save()
-    res.status(200).json(newWorker)
+
+    // create a token
+    const token = createToken(newWorker.id)
+
+    res.status(200).json({ newWorker, token })
   } catch (error) {
     next(error)
   }
 }
 
 export const login = async (req, res, next) => {
+  const username = req.body.username
   try {
-    const loginWorker = await Worker.findOne({ username: req.body.username })
-    if (!loginWorker) return next(handleError(404, 'That worker does not exists!'))
-    const passwordCorrect = await bcrypt.compare(req.body.password, loginWorker.password)
+    const worker = await Worker.findOne({ username })
+    if (!worker) return next(handleError(404, 'That user does not exists!'))
+    const passwordCorrect = await bcrypt.compare(req.body.password, worker.password)
     if (!passwordCorrect) return next(handleError(400, 'The password or the username is incorrect!'))
 
-    const token = jwt.sign({ id: loginWorker._doc._id }, process.env.JWT)
+    const token = createToken(worker.id)
 
-    const { password, ...otherDetails } = loginWorker._doc
-    res.cookie('access_token', token, {
-      httpOnly: true
-    }).status(200).json(otherDetails)
+    const { password, ...workerData } = worker._doc
+    res.status(200).json({ workerData, token })
   } catch (error) {
     next(error)
   }
