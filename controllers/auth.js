@@ -53,8 +53,37 @@ export const login = async (req, res, next) => {
 
     const token = createToken(worker.id)
 
-    const { password, ...workerData } = worker._doc
+    const shift = worker.turnos.filter((t) => {
+      const currentDate = new Date()
+      const begin = new Date(t.horaInicio)
+      const end = new Date(t.horaFinal)
+      return begin < currentDate && currentDate < end
+    })
+
+    const centros = worker._doc.centros.map(centro => centro.nombre)
+
+    const workerData = {
+      _id: worker._doc._id,
+      nombre: worker._doc.nombre + ' ' + worker._doc.apellido1 + ' ' + worker._doc.apellido2,
+      username: worker._doc.username,
+      dni: worker._doc.dni,
+      correo: worker._doc.correo,
+      telefono: worker._doc.telefono,
+      numColegiado: worker._doc.numColegiado,
+      lenguaje: worker._doc.lenguaje,
+      turno: shift[0],
+      especialidades: worker._doc.especialidades,
+      centros
+    }
     res.status(200).json({ workerData, token })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const redirectLogin = async (req, res, next) => {
+  try {
+    res.status(200)
   } catch (error) {
     next(error)
   }

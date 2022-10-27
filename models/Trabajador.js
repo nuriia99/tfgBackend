@@ -55,20 +55,6 @@ const TrabajadorSchema = new mongoose.Schema({
   },
   centros: [{
     nombre: String,
-    turnos: [{
-      fechaInicio: {
-        type: Date,
-        required: true
-      },
-      fechaFinal: {
-        type: Date,
-        required: true
-      },
-      rol: {
-        type: String,
-        required: true
-      }
-    }],
     objetivos: {
       type: [String]
     }
@@ -76,7 +62,8 @@ const TrabajadorSchema = new mongoose.Schema({
   turnos: [{
     horaInicio: Date,
     horaFinal: Date,
-    rol: 'String'
+    rol: 'String',
+    centro: 'String'
   }],
   citasPrevias: [{
     paciente: {

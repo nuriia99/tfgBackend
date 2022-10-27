@@ -17,3 +17,12 @@ export const getWorker = async (req, res, next) => {
     next(error)
   }
 }
+
+export const updateLenguage = async (req, res, next) => {
+  try {
+    await Worker.updateOne({ _id: req.user._id }, { lenguaje: req.body.lenguage })
+    res.status(200)
+  } catch (error) {
+    next(error)
+  }
+}

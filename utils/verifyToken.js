@@ -6,7 +6,7 @@ export const verifyUser = async (req, res, next) => {
   // verify authetication
   const { authoritation } = req.headers
   if (!authoritation) {
-    return next(handleError(401, 'You are not authorized!'))
+    return next(handleError(401, 'You are not autheticated!'))
   }
 
   const token = authoritation.split(' ')[1]
@@ -14,7 +14,7 @@ export const verifyUser = async (req, res, next) => {
     const validation = jwt.verify(token, process.env.JWT_SECRET)
     try {
       req.user = await Worker.findOne({ _id: validation.id })
-      res.status(200)
+      next()
     } catch (error) {
       console.log(error)
     }

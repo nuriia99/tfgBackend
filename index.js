@@ -8,28 +8,21 @@ import workersRoute from './routes/workers.js'
 import homeRoute from './routes/home.js'
 import cors from 'cors'
 
-const app = express()
+export const app = express()
 dotenv.config()
 
 app.use(cors()) // Use this after the variable declaration
 
 const connect = async () => {
-  // eslint-disable-next-line no-useless-catch
-  try {
-    await mongoose.connect(process.env.MONGO)
-    console.log('connected to mongodb')
-  } catch (error) {
-    throw (error)
-  }
+  mongoose.connect(process.env.MONGO)
+  console.log('connected to mongodb')
 }
 
-mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB is disconnected')
-})
-
-mongoose.connection.on('connected', () => {
-  console.log('MongoDB is connected')
-})
+const disconnect = async () => {
+  mongoose.connection.on('disconnected', () => {
+    console.log('MongoDB is disconnected')
+  })
+}
 
 // middlewares
 app.use(express.json())
@@ -56,7 +49,8 @@ app.use((error, req, res, next) => {
   return res.status(errorStatus).json(errorMessage)
 })
 
-app.listen(3000, () => {
+export const server = app.listen(3000, () => {
   connect()
+  disconnect()
   console.log('connected')
 })
