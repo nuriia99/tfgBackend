@@ -5,6 +5,7 @@ import { handleError } from './errors.js'
 export const verifyUser = async (req, res, next) => {
   // verify authetication
   const { authoritation } = req.headers
+  console.log(req.headers)
   if (!authoritation) {
     return next(handleError(401, 'You are not autheticated!'))
   }

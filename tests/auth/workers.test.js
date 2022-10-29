@@ -35,6 +35,38 @@ describe('tests related to login', () => {
   })
 })
 
+describe('tests related to update workers', () => {
+  let worker = null
+  test('if the token and the id are valid respond with a 200 status code', async () => {
+    const response = await api.post('/auth/login')
+      .send({
+        username: '1Q2W3E4R',
+        password: '1Q2W3E4R'
+      })
+    worker = response.body.workerData
+    await api.post('/trabajadores/' + worker._id + '/updateLenguage')
+      .send({ lenguage: 'Español' })
+      .set({
+        Authoritation: `Bearer ${response.body.token}`
+      })
+      .expect(200)
+  })
+  test('if the token does not exist respond with a 401 status code', async () => {
+    await api.post('/trabajadores/' + worker._id + '/updateLenguage')
+      .send({ lenguage: 'Español' })
+      .expect(401)
+  })
+
+  test('if the token is not valid respond with a 403 status code', async () => {
+    await api.post('/trabajadores/' + worker._id + '/updateLenguage')
+      .send({ lenguage: 'Español' })
+      .set({
+        Authoritation: 'hfehgifgoewi'
+      })
+      .expect(403)
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
   server.close()

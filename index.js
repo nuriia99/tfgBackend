@@ -14,14 +14,8 @@ dotenv.config()
 app.use(cors()) // Use this after the variable declaration
 
 const connect = async () => {
-  mongoose.connect(process.env.MONGO)
+  await mongoose.connect(process.env.MONGO)
   console.log('connected to mongodb')
-}
-
-const disconnect = async () => {
-  mongoose.connection.on('disconnected', () => {
-    console.log('MongoDB is disconnected')
-  })
 }
 
 // middlewares
@@ -51,6 +45,5 @@ app.use((error, req, res, next) => {
 
 export const server = app.listen(3000, () => {
   connect()
-  disconnect()
   console.log('connected')
 })

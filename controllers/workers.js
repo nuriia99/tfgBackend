@@ -20,8 +20,8 @@ export const getWorker = async (req, res, next) => {
 
 export const updateLenguage = async (req, res, next) => {
   try {
-    await Worker.updateOne({ _id: req.user._id }, { lenguaje: req.body.lenguage })
-    res.status(200)
+    const response = await Worker.updateOne({ _id: req.user._id }, { lenguaje: req.body.lenguage })
+    res.status(200).json(response)
   } catch (error) {
     next(error)
   }
