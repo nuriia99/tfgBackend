@@ -106,6 +106,9 @@ const PacienteSchema = new mongoose.Schema({
       required: true
     }
   }],
+  alergias: {
+    type: [String]
+  },
   prescripciones: [{
     fechaInicio: {
       type: Date,

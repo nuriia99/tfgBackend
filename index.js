@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import authRoute from './routes/auth.js'
 import workersRoute from './routes/workers.js'
 import homeRoute from './routes/home.js'
+import patientsRoute from './routes/patients.js'
 import cors from 'cors'
 
 export const app = express()
@@ -25,6 +26,7 @@ app.use(cookieParser())
 app.use('/auth', authRoute)
 app.use('/trabajadores', workersRoute)
 app.use('/home', homeRoute)
+app.use('/patients', patientsRoute)
 
 app.use((error, req, res, next) => {
   let errorStatus = error.status

@@ -24,7 +24,6 @@ export const createPatient = async (req, res, next) => {
       prescripciones: req.body.prescripciones
     })
     await newPatient.save()
-
     res.status(200).json(newPatient)
   } catch (error) {
     next(error)
