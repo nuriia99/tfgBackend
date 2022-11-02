@@ -25,7 +25,7 @@ const PacienteSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  CIP: {
+  cip: {
     type: String,
     required: true,
     unique: true
@@ -38,7 +38,7 @@ const PacienteSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  genero: {
+  sexo: {
     type: String,
     required: true
   },
@@ -58,31 +58,31 @@ const PacienteSchema = new mongoose.Schema({
     trabajador: {
       type: String,
       required: true
-    },
-    inteligenciaActiva: {
-      tabaquismo: {
-        type: Boolean
-      },
-      actividadFísica: {
-        type: String
-      },
-      valoracionPacientesCronicos: {
-        type: String
-      },
-      frecuenciaCardiaca: {
-        type: Number
-      },
-      peso: {
-        type: Number
-      },
-      estatura: {
-        type: Number
-      },
-      colesterolTotal: {
-        type: Number
-      }
     }
   }],
+  inteligenciaActiva: {
+    tabaquismo: {
+      type: Boolean
+    },
+    actividadFisica: {
+      type: String
+    },
+    valoracionPacientesCronicos: {
+      type: String
+    },
+    frecuenciaCardiaca: {
+      type: Number
+    },
+    peso: {
+      type: Number
+    },
+    estatura: {
+      type: Number
+    },
+    colesterolTotal: {
+      type: Number
+    }
+  },
   documentos: [{
     nombre: {
       type: String,
@@ -106,7 +106,7 @@ const PacienteSchema = new mongoose.Schema({
       required: true
     }
   }],
-  recetas: [{
+  prescripciones: [{
     fechaInicio: {
       type: Date,
       required: true
@@ -123,24 +123,22 @@ const PacienteSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    medicamentos: [{
-      medicamento: {
-        type: String,
-        required: true
-      },
-      dosis: {
-        type: Number,
-        required: true
-      },
-      frecuencia: {
-        type: Number,
-        required: true
-      },
-      duracion: {
-        type: Number,
-        required: true
-      }
-    }]
+    medicamento: {
+      type: String,
+      required: true
+    },
+    dosis: {
+      type: Number,
+      required: true
+    },
+    frecuencia: {
+      type: Number,
+      required: true
+    },
+    duracion: {
+      type: Number,
+      required: true
+    }
   }]
 
 })

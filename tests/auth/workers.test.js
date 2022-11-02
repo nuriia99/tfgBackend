@@ -35,7 +35,7 @@ describe('tests related to login', () => {
   })
 })
 
-describe('tests related to update workers', () => {
+describe('tests related to update the workers lenguage', () => {
   let worker = null
   test('if the token and the id are valid respond with a 200 status code', async () => {
     const response = await api.post('/auth/login')
@@ -47,7 +47,7 @@ describe('tests related to update workers', () => {
     await api.post('/trabajadores/' + worker._id + '/updateLenguage')
       .send({ lenguage: 'Español' })
       .set({
-        Authoritation: `Bearer ${response.body.token}`
+        authorization: `Bearer ${response.body.token}`
       })
       .expect(200)
   })
@@ -61,7 +61,7 @@ describe('tests related to update workers', () => {
     await api.post('/trabajadores/' + worker._id + '/updateLenguage')
       .send({ lenguage: 'Español' })
       .set({
-        Authoritation: 'hfehgifgoewi'
+        authorization: 'hfehgifgoewi'
       })
       .expect(403)
   })

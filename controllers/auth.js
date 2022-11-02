@@ -50,9 +50,7 @@ export const login = async (req, res, next) => {
     if (!worker) return next(handleError(404, 'That user does not exists!'))
     const passwordCorrect = await bcrypt.compare(req.body.password, worker.password)
     if (!passwordCorrect) return next(handleError(400, 'The password or the username is incorrect!'))
-
     const token = createToken(worker.id)
-
     const shift = worker.turnos.filter((t) => {
       const currentDate = new Date()
       const begin = new Date(t.horaInicio)
