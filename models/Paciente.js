@@ -42,6 +42,10 @@ const PacienteSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  genero: {
+    type: String,
+    required: true
+  },
   paisOrigen: {
     type: String,
     required: true

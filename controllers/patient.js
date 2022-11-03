@@ -13,6 +13,7 @@ export const createPatient = async (req, res, next) => {
       fechaNacimiento: req.body.fechaNacimiento,
       edad: req.body.edad,
       sexo: req.body.sexo,
+      genero: req.body.genero,
       paisOrigen: req.body.paisOrigen,
       direccion: req.body.direccion,
       alergias: req.body.alergias,
