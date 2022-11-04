@@ -65,27 +65,105 @@ const PacienteSchema = new mongoose.Schema({
     }
   }],
   inteligenciaActiva: {
-    tabaquismo: {
-      type: Boolean
-    },
-    actividadFisica: {
-      type: String
-    },
-    valoracionPacientesCronicos: {
-      type: String
-    },
-    frecuenciaCardiaca: {
-      type: Number
-    },
-    peso: {
-      type: Number
-    },
-    estatura: {
-      type: Number
-    },
-    colesterolTotal: {
-      type: Number
-    }
+    tabaquismo: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    alcohol: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    drogas: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    actividadFisica: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    valoracionPacientesCronicos: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    frecuenciaCardiaca: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    colesterolTotal: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    peso: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }],
+    estatura: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
+    }]
   },
   documentos: [{
     nombre: {
