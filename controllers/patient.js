@@ -64,15 +64,16 @@ export const getActiveIntelligence = async (req, res, next) => {
         dates.add(JSON.stringify(item2.date))
       })
     })
+    const sortedDates = Array.from(dates).sort()
     const entries = Object.entries(ai)
     const aiArray = []
     let row = []
     row.push('-')
-    for (const date of dates) {
+    for (const date of sortedDates) {
       const d = new Date(JSON.parse(date))
-      let day = d.getDay()
+      let day = d.getDate()
       if (day < 10) day = '0' + day
-      let month = d.getMonth()
+      let month = d.getMonth() + 1
       if (month < 10) month = '0' + month
       row.push(day + '/' + month + '/' + d.getFullYear())
     }
@@ -86,7 +87,7 @@ export const getActiveIntelligence = async (req, res, next) => {
           let hasValue = false
           item2.forEach(item3 => {
             hasValue = true
-            for (const date of dates) {
+            for (const date of sortedDates) {
               if (date === JSON.stringify(item3.date)) {
                 row.push(item3.value)
               } else {
@@ -95,7 +96,7 @@ export const getActiveIntelligence = async (req, res, next) => {
             }
           })
           if (!hasValue) {
-            for (let i = 0; i <= dates.size; i++) {
+            for (let i = 0; i < dates.size; i++) {
               row.push('-')
             }
           }
