@@ -88,6 +88,9 @@ const TrabajadorSchema = new mongoose.Schema({
   informes: {
     type: [String]
   },
+  entradas: {
+    type: [String]
+  },
   eleccionMedicamento: [{
     medicamento: {
       type: String,

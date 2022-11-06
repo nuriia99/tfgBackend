@@ -163,6 +163,17 @@ const PacienteSchema = new mongoose.Schema({
         type: Date,
         requiered: true
       }
+    }],
+    alergias: [{
+      value: {
+        type: String,
+        requiered: true,
+        default: false
+      },
+      date: {
+        type: Date,
+        requiered: true
+      }
     }]
   },
   documentos: [{
@@ -172,6 +183,10 @@ const PacienteSchema = new mongoose.Schema({
     },
     pdfUrl: {
       type: String,
+      required: true
+    },
+    fechaSubida: {
+      type: Date,
       required: true
     }
   }],
@@ -188,43 +203,38 @@ const PacienteSchema = new mongoose.Schema({
       required: true
     }
   }],
-  alergias: {
-    type: [String]
-  },
   prescripciones: [{
     fechaInicio: {
       type: Date,
       required: true
     },
-    fechaFinal: {
-      type: Date,
-      required: true
-    },
     instrucciones: {
-      type: String,
-      required: true
+      type: String
     },
     trabajador: {
       type: String,
       required: true
     },
-    medicamento: {
+    nombreMedicamento: {
       type: String,
       required: true
     },
-    dosis: {
-      type: Number,
+    principioActivo: {
+      type: String,
       required: true
     },
     frecuencia: {
-      type: Number,
+      type: String,
       required: true
     },
     duracion: {
-      type: Number,
+      type: String,
       required: true
     }
-  }]
+  }],
+  entradas: {
+    type: [String]
+  }
 
 })
 

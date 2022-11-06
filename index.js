@@ -7,12 +7,17 @@ import authRoute from './routes/auth.js'
 import workersRoute from './routes/workers.js'
 import homeRoute from './routes/home.js'
 import patientsRoute from './routes/patients.js'
+import entriesRoute from './routes/entries.js'
 import cors from 'cors'
+import url from 'url'
+import path from 'path'
 
 export const app = express()
 dotenv.config()
 
 app.use(cors()) // Use this after the variable declaration
+
+export const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 const connect = async () => {
   await mongoose.connect(process.env.MONGO)
@@ -27,6 +32,7 @@ app.use('/auth', authRoute)
 app.use('/trabajadores', workersRoute)
 app.use('/home', homeRoute)
 app.use('/patients', patientsRoute)
+app.use('/entries', entriesRoute)
 
 app.use((error, req, res, next) => {
   let errorStatus = error.status

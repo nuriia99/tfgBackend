@@ -22,12 +22,45 @@ export const createPatient = async (req, res, next) => {
       inteligenciaActiva: req.body.inteligenciaActiva,
       documentos: req.body.documentos,
       informes: req.body.informes,
+      entradas: req.body.entradas,
       diagnosticos: req.body.diagnosticos,
       prescripciones: req.body.prescripciones
     })
     await newPatient.save()
-    console.log(newPatient)
     res.status(200).json(newPatient)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const updatePatient = async (req, res, next) => {
+  try {
+    await Patient.deleteOne({ _id: req.params.id })
+    const newPatient = new Patient({
+      _id: req.params.id,
+      nombre: req.body.nombre,
+      apellido1: req.body.apellido1,
+      apellido2: req.body.apellido2,
+      dni: req.body.dni,
+      correo: req.body.correo,
+      telefono: req.body.telefono,
+      cip: req.body.cip,
+      fechaNacimiento: req.body.fechaNacimiento,
+      edad: req.body.edad,
+      sexo: req.body.sexo,
+      genero: req.body.genero,
+      paisOrigen: req.body.paisOrigen,
+      direccion: req.body.direccion,
+      trabajadoresAsignados: req.body.trabajadoresAsignados,
+      inteligenciaActiva: req.body.inteligenciaActiva,
+      documentos: req.body.documentos,
+      informes: req.body.informes,
+      entradas: req.body.entradas,
+      diagnosticos: req.body.diagnosticos,
+      prescripciones: req.body.prescripciones
+    })
+    await newPatient.save()
+    res.status(200).json('update correctly')
   } catch (error) {
     next(error)
   }
@@ -53,7 +86,7 @@ export const getActiveIntelligence = async (req, res, next) => {
       peso: patient.inteligenciaActiva.peso,
       estatura: patient.inteligenciaActiva.estatura,
       colesterolTotal: patient.inteligenciaActiva.colesterolTotal,
-      alergias: patient.alergias,
+      alergias: patient.inteligenciaActiva.alergias,
       alcohol: patient.inteligenciaActiva.alcohol,
       drogas: patient.inteligenciaActiva.drogas
     }
@@ -83,23 +116,14 @@ export const getActiveIntelligence = async (req, res, next) => {
       item.forEach((item2) => {
         if (typeof item2 === 'string') {
           row.push(_.startCase(item2))
-        } else {
-          let hasValue = false
-          item2.forEach(item3 => {
-            hasValue = true
-            for (const date of sortedDates) {
-              if (date === JSON.stringify(item3.date)) {
-                row.push(item3.value)
-              } else {
-                row.push('-')
-              }
-            }
-          })
-          if (!hasValue) {
-            for (let i = 0; i < dates.size; i++) {
-              row.push('-')
-            }
+          for (let i = 0; i < sortedDates.length; i++) {
+            row.push('-')
           }
+        } else {
+          item2.forEach(item3 => {
+            const indice = sortedDates.indexOf(JSON.stringify(item3.date))
+            row[indice + 1] = item3.value
+          })
         }
       })
       aiArray.push(row)

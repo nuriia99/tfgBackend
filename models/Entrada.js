@@ -5,33 +5,49 @@ const EntradaSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  asunto: {
-    type: String,
-    required: true
-  },
-  exploracion: {
-    type: String,
-    required: true
-  },
-  evaluacion: {
-    type: String,
-    required: true
-  },
   lenguaje: {
     type: String,
     required: true
   },
+  nota: [{
+    asunto: {
+      type: String,
+      required: true
+    },
+    exploracion: {
+      type: String,
+      required: true
+    },
+    tratamiento: {
+      type: String,
+      required: true
+    },
+    diagnostico: {
+      type: String,
+      required: true
+    },
+    prescripciones: {
+      type: [String],
+      required: true
+    }
+  }],
   paciente: {
     type: String,
     required: true
   },
-  trabajadores: {
-    type: [String],
-    required: true
-  },
-  diagnosticos: {
-    type: [String],
-    required: true
+  trabajador: {
+    id: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    role: {
+      type: String,
+      required: true
+    }
   }
 
 })

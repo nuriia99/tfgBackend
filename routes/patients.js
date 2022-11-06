@@ -1,10 +1,10 @@
 import express from 'express'
-import { getPatient, createPatient, getActiveIntelligence } from '../controllers/patient.js'
+import { getPatient, createPatient, getActiveIntelligence, updatePatient } from '../controllers/patient.js'
 import { verifyUser } from '../utils/verifyToken.js'
 const router = express.Router()
 
 router.post('/createPatient', createPatient)
+router.post('/:id/updatePatient', updatePatient)
 router.get('/:id', verifyUser, getPatient)
 router.get('/:id/activeIntelligence', verifyUser, getActiveIntelligence)
-
 export default router

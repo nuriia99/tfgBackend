@@ -1,7 +1,11 @@
 import mongoose from 'mongoose'
 
 const MedicamentoSchema = new mongoose.Schema({
-  componente: {
+  nombre: {
+    type: String,
+    required: true
+  },
+  principioActivo: {
     type: String,
     required: true
   },
@@ -15,10 +19,6 @@ const MedicamentoSchema = new mongoose.Schema({
   },
   recetaEnfPermitida: {
     type: Boolean,
-    required: true
-  },
-  alergias: {
-    type: [String],
     required: true
   }
 
