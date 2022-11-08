@@ -9,7 +9,7 @@ const EntradaSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  nota: [{
+  notas: [{
     asunto: {
       type: String,
       required: true
@@ -23,6 +23,14 @@ const EntradaSchema = new mongoose.Schema({
       required: true
     },
     diagnostico: {
+      type: String,
+      required: true
+    },
+    estado: {
+      type: String,
+      required: true
+    },
+    severidad: {
       type: String,
       required: true
     },

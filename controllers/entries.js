@@ -4,7 +4,7 @@ export const createEntry = async (req, res, next) => {
   try {
     const newEntry = new Entry({
       fecha: req.body.fecha,
-      nota: req.body.nota,
+      notas: req.body.notas,
       lenguaje: req.body.lenguaje,
       paciente: req.body.paciente,
       trabajador: req.body.trabajador

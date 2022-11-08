@@ -4,13 +4,15 @@ import { app, server } from '../../index.js'
 
 const api = request(app)
 
+const user = {
+  username: '1Q2W3E4R',
+  password: '1Q2W3E4R'
+}
+
 describe('tests related to login', () => {
   test('a valid login should respond with a 200 status code and with the worker data and his token', async () => {
     const response = await api.post('/auth/login')
-      .send({
-        username: '1Q2W3E4R',
-        password: '1Q2W3E4R'
-      })
+      .send(user)
       .expect(200)
     // eslint-disable-next-line jest/valid-expect, no-prototype-builtins
     expect(response.body.hasOwnProperty('token', 'workerData'))
@@ -37,12 +39,10 @@ describe('tests related to login', () => {
 
 describe('tests related to update the workers lenguage', () => {
   let worker = null
+
   test('if the token and the id are valid respond with a 200 status code', async () => {
     const response = await api.post('/auth/login')
-      .send({
-        username: '1Q2W3E4R',
-        password: '1Q2W3E4R'
-      })
+      .send(user)
     worker = response.body.workerData
     await api.post('/trabajadores/' + worker._id + '/updateLenguage')
       .send({ lenguage: 'Español' })

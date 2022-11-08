@@ -75,6 +75,33 @@ export const getPatient = async (req, res, next) => {
   }
 }
 
+export const searchPatient = async (req, res, next) => {
+  try {
+    const nombre = req.query.nombre || ''
+    const apellido1 = req.query.apellido1 || ''
+    const apellido2 = req.query.apellido2 || ''
+    const sex = req.query.sexo || ''
+    const dni = req.query.dni || ''
+    const cip = req.query.cip || ''
+
+    const patients = await Patient
+      .find({
+        nombre: { $regex: nombre, $options: 'i' },
+        apellido1: { $regex: apellido1, $options: 'i' },
+        apellido2: { $regex: apellido2, $options: 'i' },
+        sexo: { $regex: sex, $options: 'i' },
+        dni: { $regex: dni, $options: 'i' },
+        cip: { $regex: cip, $options: 'i' }
+      })
+      .sort({ apellido1: 1, apellido2: 1, nombre: 1 })
+
+    res.status(200).json(patients)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
 export const getActiveIntelligence = async (req, res, next) => {
   try {
     const patient = await Patient.findById(req.params.id)
