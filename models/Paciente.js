@@ -208,6 +208,10 @@ const PacienteSchema = new mongoose.Schema({
       type: Date,
       required: true
     },
+    fechaFinal: {
+      type: Date,
+      required: true
+    },
     instrucciones: {
       type: String
     },

@@ -1,5 +1,6 @@
 import Patient from '../models/Paciente.js'
 import _ from 'lodash'
+import { handleError } from '../utils/errors.js'
 
 export const createPatient = async (req, res, next) => {
   try {
@@ -84,6 +85,7 @@ export const searchPatient = async (req, res, next) => {
     const dni = req.query.dni || ''
     const cip = req.query.cip || ''
 
+    if (nombre === '' && apellido1 === '' && apellido2 === '' && sex === '' && dni === '' && cip === '') throw handleError(400, 'There is not any query param')
     const patients = await Patient
       .find({
         nombre: { $regex: nombre, $options: 'i' },
@@ -97,7 +99,6 @@ export const searchPatient = async (req, res, next) => {
 
     res.status(200).json(patients)
   } catch (error) {
-    console.log(error)
     next(error)
   }
 }
@@ -105,6 +106,7 @@ export const searchPatient = async (req, res, next) => {
 export const getActiveIntelligence = async (req, res, next) => {
   try {
     const patient = await Patient.findById(req.params.id)
+    if (patient === null) throw handleError(404, 'The user does not exists.')
     const ai = {
       tabaquismo: patient.inteligenciaActiva.tabaquismo,
       actividadFisica: patient.inteligenciaActiva.actividadFisica,
