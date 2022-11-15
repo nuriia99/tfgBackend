@@ -1,6 +1,6 @@
 import Patient from '../models/Paciente.js'
 import _ from 'lodash'
-import { handleError } from '../utils/errors.js'
+import { handleError } from '../middleware/errors.js'
 
 export const createPatient = async (req, res, next) => {
   try {

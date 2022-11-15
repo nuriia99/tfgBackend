@@ -1,5 +1,5 @@
 import express from 'express'
-import { verifyUser } from '../utils/verifyToken.js'
+import { verifyUser } from '../middleware/verifyToken.js'
 import { redirectLogin } from '../controllers/auth.js'
 const router = express.Router()
 

@@ -1,6 +1,6 @@
 import express from 'express'
 import { getWorkers, getWorker, updateLenguage } from '../controllers/workers.js'
-import { verifyUser } from '../utils/verifyToken.js'
+import { verifyUser } from '../middleware/verifyToken.js'
 const router = express.Router()
 
 router.get('/', getWorkers)
