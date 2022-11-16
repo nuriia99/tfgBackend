@@ -81,11 +81,12 @@ export const searchPatient = async (req, res, next) => {
     const nombre = req.query.nombre || ''
     const apellido1 = req.query.apellido1 || ''
     const apellido2 = req.query.apellido2 || ''
-    const sex = req.query.sexo || ''
+    let sex = req.query.sexo || ''
     const dni = req.query.dni || ''
     const cip = req.query.cip || ''
+    if (sex === 'all') sex = ''
 
-    if (nombre === '' && apellido1 === '' && apellido2 === '' && sex === '' && dni === '' && cip === '') throw handleError(400, 'There is not any query param')
+    // if (nombre === '' && apellido1 === '' && apellido2 === '' && sex === '' && dni === '' && cip === '') throw handleError(400)
     const patients = await Patient
       .find({
         nombre: { $regex: nombre, $options: 'i' },
@@ -107,27 +108,14 @@ export const getActiveIntelligence = async (req, res, next) => {
   try {
     const patient = await Patient.findById(req.params.id)
     if (patient === null) throw handleError(404, 'The user does not exists.')
-    const ai = {
-      tabaquismo: patient.inteligenciaActiva.tabaquismo,
-      actividadFisica: patient.inteligenciaActiva.actividadFisica,
-      valoracionPacientesCronicos: patient.inteligenciaActiva.valoracionPacientesCronicos,
-      frecuenciaCardiaca: patient.inteligenciaActiva.frecuenciaCardiaca,
-      peso: patient.inteligenciaActiva.peso,
-      estatura: patient.inteligenciaActiva.estatura,
-      colesterolTotal: patient.inteligenciaActiva.colesterolTotal,
-      alergias: patient.inteligenciaActiva.alergias,
-      alcohol: patient.inteligenciaActiva.alcohol,
-      drogas: patient.inteligenciaActiva.drogas
-    }
+    const ai = patient.inteligenciaActiva
     const dates = new Set()
-    const values = Object.values(ai)
-    values.forEach((item) => {
-      item.forEach((item2) => {
+    ai.forEach((item) => {
+      item.values.forEach((item2) => {
         dates.add(JSON.stringify(item2.date))
       })
     })
     const sortedDates = Array.from(dates).sort()
-    const entries = Object.entries(ai)
     const aiArray = []
     let row = []
     row.push('-')
@@ -139,24 +127,22 @@ export const getActiveIntelligence = async (req, res, next) => {
       if (month < 10) month = '0' + month
       row.push(day + '/' + month + '/' + d.getFullYear())
     }
+    row.push('lastValues')
     aiArray.push(row)
-    row = []
-    entries.forEach((item) => {
-      item.forEach((item2) => {
-        if (typeof item2 === 'string') {
-          row.push(_.startCase(item2))
-          for (let i = 0; i < sortedDates.length; i++) {
-            row.push('-')
-          }
-        } else {
-          item2.forEach(item3 => {
-            const indice = sortedDates.indexOf(JSON.stringify(item3.date))
-            row[indice + 1] = item3.value
-          })
-        }
-      })
-      aiArray.push(row)
+    ai.forEach((item) => {
       row = []
+      let lastValue = '-'
+      row.push(_.startCase(item.name))
+      for (let i = 0; i < sortedDates.length; i++) {
+        row.push('-')
+      }
+      item.values.forEach((item2) => {
+        const indice = sortedDates.indexOf(JSON.stringify(item2.date))
+        row[indice + 1] = item2.value
+        lastValue = item2.value
+      })
+      row.push(lastValue)
+      aiArray.push(row)
     })
     res.status(200).json(aiArray)
   } catch (error) {
