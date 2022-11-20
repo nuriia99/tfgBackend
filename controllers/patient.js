@@ -1,4 +1,6 @@
 import Patient from '../models/Paciente.js'
+import Diagnostico from '../models/Diagnostico.js'
+import Prescripcion from '../models/Prescripcion.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/errors.js'
 
@@ -34,11 +36,28 @@ export const createPatient = async (req, res, next) => {
   }
 }
 
+export const createPrescription = async (req, res, next) => {
+  try {
+    const newPrescription = new Prescripcion({
+      fechaInicio: req.body.fechaInicio,
+      fechaFinal: req.body.fechaFinal,
+      instrucciones: req.body.instrucciones,
+      trabajador: req.body.trabajador,
+      nombreMedicamento: req.body.nombreMedicamento,
+      principioActivo: req.body.principioActivo,
+      frecuencia: req.body.frecuencia,
+      duracion: req.body.duracion
+    })
+    await newPrescription.save()
+    res.status(200).json(newPrescription)
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const updatePatient = async (req, res, next) => {
   try {
-    await Patient.deleteOne({ _id: req.params.id })
-    const newPatient = new Patient({
-      _id: req.params.id,
+    const newPatient = {
       nombre: req.body.nombre,
       apellido1: req.body.apellido1,
       apellido2: req.body.apellido2,
@@ -59,19 +78,27 @@ export const updatePatient = async (req, res, next) => {
       entradas: req.body.entradas,
       diagnosticos: req.body.diagnosticos,
       prescripciones: req.body.prescripciones
-    })
-    await newPatient.save()
+    }
+    await Patient.findByIdAndUpdate(req.params.id, newPatient)
     res.status(200).json('update correctly')
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }
 
 export const getPatient = async (req, res, next) => {
   try {
-    const patient = await Patient.findById(req.params.id)
+    const patient = await Patient.findById(req.params.id).populate('prescripciones').populate({
+      path: 'entradas',
+      populate: {
+        path: 'notas.diagnostico',
+        module: Diagnostico
+      }
+    })
     res.status(200).json(patient)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }

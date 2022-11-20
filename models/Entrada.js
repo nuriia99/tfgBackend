@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const EntradaSchema = new mongoose.Schema({
   fecha: { type: Date, required: true },
@@ -7,18 +7,14 @@ const EntradaSchema = new mongoose.Schema({
     asunto: { type: String, required: true },
     exploracion: { type: String, required: true },
     tratamiento: { type: String, required: true },
-    diagnostico: { type: String, required: true },
+    diagnostico: { type: Schema.ObjectId, ref: 'Diagnostico', required: true },
     estado: { type: String, required: true },
-    severidad: { type: String, required: true },
-    prescripciones: { type: [String], required: true }
+    prescripciones: [{ type: Schema.ObjectId, ref: 'Prescripcion' }]
   }],
-  paciente: { type: String, required: true },
   trabajador: {
-    id: { type: String, required: true },
-    name: { type: String, required: true },
+    id: { type: Schema.ObjectId, ref: 'Trabajador', required: true },
     role: { type: String, required: true }
   }
-
 })
 
 export default mongoose.model('Entrada', EntradaSchema)

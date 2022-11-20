@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const PacienteSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
@@ -16,7 +16,7 @@ const PacienteSchema = new mongoose.Schema({
   direccion: { type: String, required: true },
   trabajadoresAsignados: [{
     rol: { type: String, required: true },
-    trabajador: { type: String, required: true }
+    trabajador: { type: Schema.ObjectId, ref: 'Trabajador' }
   }],
   inteligenciaActiva: [{
     name: { type: String, requiered: true },
@@ -30,22 +30,15 @@ const PacienteSchema = new mongoose.Schema({
     pdfUrl: { type: String, required: true },
     fechaSubida: { type: Date, required: true }
   }],
-  informes: [String],
-  diagnosticos: [{
-    diagnostico: { type: String, required: true },
-    activo: { type: Boolean, required: true }
+  citasPrevias: [{
+    primerTrabajador: { type: Schema.ObjectId, ref: 'Trabajador', required: true },
+    segundoTrabajador: String,
+    centro: { type: String, required: true },
+    fecha: { type: Date, required: true }
   }],
-  prescripciones: [{
-    fechaInicio: { type: Date, required: true },
-    fechaFinal: { type: Date, required: true },
-    instrucciones: String,
-    trabajador: { type: String, required: true },
-    nombreMedicamento: { type: String, required: true },
-    principioActivo: { type: String, required: true },
-    frecuencia: { type: String, required: true },
-    duracion: { type: String, required: true }
-  }],
-  entradas: [String]
+  informes: [{ type: Schema.ObjectId, ref: 'Informe' }],
+  prescripciones: [{ type: Schema.ObjectId, ref: 'Prescripcion' }],
+  entradas: [{ type: Schema.ObjectId, ref: 'Entrada' }]
 })
 
 export default mongoose.model('Paciente', PacienteSchema)

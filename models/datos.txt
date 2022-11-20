@@ -1,0 +1,483 @@
+{
+    "nombre": "Juan",
+    "apellido1": "Ruíz",
+    "apellido2": "Rocas",
+    "dni": "83647582B",
+    "correo": "JuanRuizRocas@gmail.com",
+    "telefono": "765897698",
+    "username": "FBU578MN",
+    "password": "FBU578MN",
+    "esDoctor": true,
+    "numColegiado": "364378",
+    "lenguaje": "ca",
+    "pacientes": [],
+    "especialidades": ["Medicina general"],
+    "centros": [
+        {
+            "nombre": "CUAP Gran Corazón",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Antón de Borja",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP San Genís",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Doctor Joan Planas",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Vallirana",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Baix Ebre",
+            "objetivos": []
+        }
+    ],
+    "turnos": [
+        {
+            "horaInicio": "2022-10-20T09:00:00",
+            "horaFinal": "2023-10-20T09:00:00",
+            "rol": "Medicina general",
+            "centro": "CUAP Gran Corazón"
+        }
+    ],
+    "citasPrevias": [],
+    "visitasUrgencias": [],
+    "informes": [],
+    "entradas": [],
+    "eleccionMedicamento": []
+}
+
+------------------------------------------------------
+
+{
+    "nombre": "Marco",
+    "apellido1": "Carreño",
+    "apellido2": "Millan",
+    "dni": "83647582B",
+    "correo": "MarcoCarreñoMillan@gmail.com",
+    "telefono": "765897698",
+    "username": "1Q2W3E4R",
+    "password": "1Q2W3E4R",
+    "esDoctor": true,
+    "numColegiado": "364320",
+    "lenguaje": "es",
+    "pacientes": [],
+    "especialidades": ["Medicina general", "Enfermeria"],
+    "centros": [
+        {
+            "nombre": "CUAP Gran Corazón",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Antón de Borja",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP San Genís",
+            "objetivos": []
+        }
+    ],
+    "turnos": [
+        {
+            "horaInicio": "2022-10-20T09:00:00",
+            "horaFinal": "2023-10-20T09:00:00",
+            "rol": "Medicina general",
+            "centro": "CUAP Gran Corazón"
+        },
+        {
+            "horaInicio": "2022-09-20T09:00:00",
+            "horaFinal": "2022-10-20T09:00:00",
+            "rol": "Medicina general",
+            "centro": "CUAP Gran Corazón"
+        }
+    ],
+    "citasPrevias": [],
+    "visitasUrgencias": [],
+    "informes": [],
+    "entradas": [],
+    "eleccionMedicamento": []
+}
+
+—--------------------------------------------------------------------------------------------------
+
+{
+    "nombre": "Fátima",
+    "apellido1": "Menéndez",
+    "apellido2": "Becerra",
+    "dni": "86457356H",
+    "correo": "FátimaMenéndezBecerra@gmail.com",
+    "telefono": "736524563",
+    "cip": "FAME1111111111",
+    "fechaNacimiento": "1975-07-26T13:33:03.511Z",
+    "edad": 47,
+    "sexo": "F",
+    "genero": "F",
+    "paisOrigen": "España",
+    "direccion": "C/ Eras 33, 28743 - Canencia",
+    "trabajadoresAsignados": [
+        {
+            "rol": "Medicina general",
+            "trabajador": "6378b7c938938f2984193d56"
+        }
+    ],
+    "inteligenciaActiva": [
+        {
+            "name": "tabaquismo",
+            "values": [
+                {
+                    "value": "Sí",
+                    "date": "2018-08-19T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "drogas",
+            "values": []
+        },
+        {
+            "name": "alcohol",
+            "values": []
+        },
+        {
+            "name": "actividadFisica",
+            "values": [
+                {
+                    "value": "Activa",
+                    "date": "2012-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "valoracionPacientesCronicos",
+            "values": [
+                {
+                    "value": "leve",
+                    "date": "2011-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "frecuenciaCardiaca",
+            "values": [
+                {
+                    "value": "85",
+                    "date": "2017-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "peso",
+            "values": [
+                {
+                    "value": "60",
+                    "date": "2009-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "estatura",
+            "values": [
+                {
+                    "value": "175",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "colesterolTotal",
+            "values": [
+                {
+                    "value": "153",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "alergias",
+            "values": [
+                {
+                    "value": "Al polen.",
+                    "date": "2018-02-25T00:00:00.511Z",
+                    "_id": "63756e4f1318a104b59f9618"
+                },
+                {
+                    "value": "Al polen y al paracetamol.",
+                    "date": "2018-02-25T00:00:00.511Z",
+                    "_id": "63756e4f1318a104b59f9619"
+                }
+            ]
+        }
+    ],
+    "documentos": [
+        {
+            "nombre": "Informe CUAP 1",
+            "pdfUrl": "Informe1.pdf",
+            "fechaSubida": "1999-07-26T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 2",
+            "pdfUrl": "Informe2.pdf",
+            "fechaSubida": "2010-02-13T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 3",
+            "pdfUrl": "Informe3.pdf",
+            "fechaSubida": "2018-05-17T13:33:03.511Z"
+        }
+    ],
+    "informes": [],
+    "prescripciones": ["6379244d3a73ffa85c64ae3a", "6379247d3a73ffa85c64aea0"],
+    "entradas": ["6378cc1bdfb163bdbe1115c1", "6378cc24dfb163bdbe1115c5", "6378cc38dfb163bdbe1115c8"]
+}
+
+{
+    "nombre": "Alexandra",
+    "apellido1": "Gilavert",
+    "apellido2": "Novoa",
+    "dni": "76456523C",
+    "correo": "AlexandraGilavertNovoa@gmail.com",
+    "telefono": "657836735",
+    "cip": "GINO1111111111",
+    "fechaNacimiento": "1994-02-14T13:33:03.511Z",
+    "edad": 28,
+    "sexo": "F",
+    "genero": "F",
+    "paisOrigen": "España",
+    "direccion": "C/ Eras 33, 28743 - Canencia",
+    "trabajadoresAsignados": [
+        {
+            "rol": "Medicina general",
+            "trabajador": "635e58f75dae6d8c149e1875"
+        }
+    ],
+    "inteligenciaActiva": [
+        {
+            "name": "tabaquismo",
+            "values": []
+        },
+        {
+            "name": "drogas",
+            "values": []
+        },
+        {
+            "name": "alcohol",
+            "values": []
+        },
+        {
+            "name": "actividadFisica",
+            "values": [
+                {
+                    "value": "Activa",
+                    "date": "2012-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "valoracionPacientesCronicos",
+            "values": [
+                {
+                    "value": "leve",
+                    "date": "2011-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "frecuenciaCardiaca",
+            "values": [
+                {
+                    "value": "85",
+                    "date": "2017-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "peso",
+            "values": [
+                {
+                    "value": "60",
+                    "date": "2009-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "estatura",
+            "values": [
+                {
+                    "value": "175",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "colesterolTotal",
+            "values": [
+                {
+                    "value": "153",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "alergias",
+            "values": [
+                {
+                    "value": "Al polen.",
+                    "date": "2018-02-25T00:00:00.511Z"
+                },
+                {
+                    "value": "Al polen y al paracetamol.",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        }
+    ],
+    "documentos": [
+        {
+            "nombre": "Informe CUAP 1",
+            "pdfUrl": "Informe1.pdf",
+            "fechaSubida": "1999-07-26T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 2",
+            "pdfUrl": "Informe2.pdf",
+            "fechaSubida": "2010-02-13T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 3",
+            "pdfUrl": "Informe3.pdf",
+            "fechaSubida": "2018-05-17T13:33:03.511Z"
+        }
+    ],
+    "informes": [],
+    "diagnosticos": [],
+    "prescripciones": [],
+    "entradas": []
+}
+
+
+—--------------------------------------------------------------------------------
+
+{
+  "fechaInicio": "2022-11-04T00:00:00.511Z",
+  "fechaFinal": "2023-11-18T00:00:00.511Z",
+  "instrucciones": "Comer antes de ingerir el alimento.",
+  "trabajador": "6378b7c938938f2984193d56",
+  "nombreMedicamento": "Ibuprofeno Normon 600 mg comprimidos recubiertos con película EFG",
+  "principioActivo": "IBUPROFENO",
+  "frecuencia": "1 x 12h",
+  "duracion": "14 dias"
+}
+
+{
+  "fechaInicio": "2022-11-16T00:00:00.511Z",
+  "fechaFinal": "2022-11-30T00:00:00.511Z",
+  "instrucciones": "Comer antes de ingerir el alimento.",
+  "trabajador": "6378b7c938938f2984193d56",
+  "nombreMedicamento": "Paracetamol Normon 500 mg EFG, 20 Comprimidos",
+  "principioActivo": "PARACETAMOL",
+  "frecuencia": "1 x 12h",
+  "duracion": "14 dias"
+}
+
+-----------------------------------------------------------------------
+{
+    "trabajador": {
+        "id": "6378b7c938938f2984193d56",
+        "role": "Medicina general"
+    },
+    "fecha": "2022-01-13T15:43:00.511Z",
+    "lenguaje": "es",
+    "notas": [
+        {
+            "asunto": "El paciente viene a consulta por una fiebre alta.",
+            "exploracion": "Se realiza la exploración.",
+            "tratamiento": "El paciente padece de gripe A.",
+            "diagnostico": "6378cb4e3fd7f657a2b28e7d",
+            "prescripciones": [],
+            "estado": "activo",
+            "severidad": "grave"
+        },
+        {
+            "asunto": "El paciente viene a consulta con fiebre desde el dia anterior, con cuadro de MEG, odinofagia y carraspera.",
+            "exploracion": "MVC sin ruidos añadidos . Faringe hiperémica con moco claro.",
+            "tratamiento": "Ibuprofeno de 600 alterno con paracetamol 1gr cada 4 horas por 5-7 días.",
+            "diagnostico": "6378cbdb3fd7f657a2b2bf65",
+            "prescripciones": [],
+            "estado": "activo",
+            "severidad": "leve"
+        }
+    ]
+}
+
+{
+    "trabajador": {
+        "id": "6378b7c938938f2984193d56",
+        "role": "Medicina general"
+    },
+    "fecha": "2021-12-04T15:43:00.511Z",
+    "lenguaje": "es",
+    "notas": [
+        {
+            "asunto": "El paciente viene a consulta con fiebre desde el dia anterior, con cuadro de MEG, odinofagia y carraspera.",
+            "exploracion": "MVC sin ruidos añadidos . Faringe hiperémica con moco claro.",
+            "tratamiento": "Ibuprofeno de 600 alterno con paracetamol 1gr cada 4 horas por 5-7 días.",
+            "diagnostico": "6378cbdb3fd7f657a2b2bf65",
+            "prescripciones": [],
+            "estado": "activo",
+            "severidad": "leve"
+        }
+    ]
+}
+
+{
+    "trabajador": {
+        "id": "6378b7c938938f2984193d56",
+        "role": "Medicina general"
+    },
+    "fecha": "2018-11-05T11:00:00.511Z",
+    "lenguaje": "es",
+    "notas": [
+        {
+            "asunto": "Erupción cutánea tras consumir atún.",
+            "exploracion": "MCV sin ruidos añadidos. Faringe normal. Lesiones eritematosas, habonosas, generalizadas.",
+            "tratamiento": "Actocortina 100mg ev + polaramine 1amp ev + urbason 40mg ev + omeprazol 40mg ev + SF 500 + 500cc.",
+            "diagnostico": "6378cb923fd7f657a2b2a669",
+            "prescripciones": [],
+            "estado": "inactivo",
+            "severidad": "medio"
+        }
+    ]
+}
+
+
+----------------------------------------------
+
+{
+  "nombre": "Gripe A",
+  "severidad": "grave",
+  "informes": [],
+  "entradas": [],
+  "pacientes": []
+}
+
+{
+  "nombre": "Urticaria Alérgica",
+  "severidad": "medio",
+  "informes": [],
+  "entradas": [],
+  "pacientes": []
+}
+
+{
+  "nombre": "Viriasi",
+  "severidad": "leve",
+  "informes": [],
+  "entradas": [],
+  "pacientes": []
+}

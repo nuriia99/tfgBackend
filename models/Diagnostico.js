@@ -1,12 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const DiagnosticoSchema = new mongoose.Schema({
-  cie: { type: String, required: true },
   nombre: { type: String, required: true },
   severidad: { type: String, required: true },
-  informes: [String],
-  entradas: [String],
-  pacientes: [String]
+  informes: [{ type: Schema.ObjectId, ref: 'Informe' }],
+  entradas: [{ type: Schema.ObjectId, ref: 'Entrada' }],
+  pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }]
 })
 
 export default mongoose.model('Diagnostico', DiagnosticoSchema)

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const InformeSchema = new mongoose.Schema({
   horaEntrada: { type: Date, required: true },
@@ -13,9 +13,9 @@ const InformeSchema = new mongoose.Schema({
   evaluacion: { type: String, required: true },
   lenguaje: { type: String, required: true },
   documento: { type: String, required: true },
-  paciente: { type: String, required: true },
-  trabajadores: { type: [String], required: true },
-  diagnoticos: { type: [String], required: true }
+  paciente: { type: Schema.ObjectId, ref: 'Paciente' },
+  trabajadores: [{ type: Schema.ObjectId, ref: 'Trabajador' }],
+  diagnoticos: [{ type: Schema.ObjectId, ref: 'Diagnostico' }]
 })
 
 export default mongoose.model('Informe', InformeSchema)

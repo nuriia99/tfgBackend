@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const TrabajadorSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
@@ -12,26 +12,21 @@ const TrabajadorSchema = new mongoose.Schema({
   esDoctor: { type: Boolean, required: true },
   numColegiado: { type: String, required: true, unique: true },
   lenguaje: String,
-  pacientes: [String],
+  pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }],
   especialidades: { type: [String], required: true },
   centros: [{
     nombre: String,
-    objetivos: [String]
+    objetivos: [{ type: Schema.ObjectId, ref: 'Objetivo' }]
   }],
-  turnos: [{ horaInicio: Date, horaFinal: Date, rol: 'String', centro: 'String' }],
-  citasPrevias: [{
-    paciente: { type: String, required: true },
-    segundoTrabajador: String,
-    centro: { type: String, required: true },
-    fecha: { type: Date, required: true }
-  }],
-  visitasUrgencias: [String],
-  informes: [String],
-  entradas: [String],
+  turnos: [{ horaInicio: Date, horaFinal: Date, rol: String, centro: String }],
+  citasPrevias: [{ type: Schema.ObjectId, ref: 'CitaPrevia' }],
+  visitasUrgencias: [{ type: Schema.ObjectId, ref: 'VisitaUrgencias' }],
+  informes: [{ type: Schema.ObjectId, ref: 'Informe' }],
+  entradas: [{ type: Schema.ObjectId, ref: 'Entrada' }],
   eleccionMedicamento: [{
-    medicamento: { type: String, required: true },
-    diagnostico: { type: String, required: true },
-    fecha: { type: [Date], required: true }
+    medicamento: { type: Schema.ObjectId, ref: 'Medicamento', required: true },
+    diagnostico: { type: Schema.ObjectId, ref: 'Diagnostico', required: true },
+    fechas: { type: [Date], required: true }
   }]
 })
 

@@ -3,7 +3,7 @@ import { createEntry, getEntry, getPatientEntries, translateEntry } from '../con
 import { verifyUser } from '../middleware/verifyToken.js'
 const router = express.Router()
 
-router.post('/createEntry', createEntry)
+router.post('/createEntry/', createEntry)
 router.get('/:id', verifyUser, getEntry)
 router.get('/patient/:id', verifyUser, getPatientEntries)
 router.post('/translateEntry', verifyUser, translateEntry)

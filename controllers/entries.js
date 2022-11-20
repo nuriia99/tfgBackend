@@ -7,12 +7,12 @@ export const createEntry = async (req, res, next) => {
       fecha: req.body.fecha,
       notas: req.body.notas,
       lenguaje: req.body.lenguaje,
-      paciente: req.body.paciente,
       trabajador: req.body.trabajador
     })
     await newEntry.save()
     res.status(200).json(newEntry)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }

@@ -30,14 +30,12 @@ export const register = async (req, res, next) => {
       citasPrevias: req.body.citasPrevias,
       visitasUrgencias: req.body.visitasUrgencias,
       informes: req.body.informes,
+      entradas: req.body.entardas,
       eleccionMedicamento: req.body.eleccionMedicamento
     })
     await newWorker.save()
 
-    // create a token
-    const token = createToken(newWorker.id)
-
-    res.status(200).json({ newWorker, token })
+    res.status(200).json({ newWorker })
   } catch (error) {
     next(error)
   }

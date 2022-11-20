@@ -1,9 +1,8 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const VisitaUrgenciasSchema = new mongoose.Schema({
   visitaUrgencia: [{
-    paciente: { type: String, required: true },
-    trabajadores: [{ type: String, requiered: true }],
+    paciente: { type: Schema.ObjectId, ref: 'Paciente', required: true },
     centro: { type: String, required: true },
     fecha: { type: Date, require: true },
     horaEntrada: { type: Date, require: true },
