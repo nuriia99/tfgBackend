@@ -1,6 +1,5 @@
 import Patient from '../models/Paciente.js'
 import Diagnostico from '../models/Diagnostico.js'
-import Prescripcion from '../models/Prescripcion.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/errors.js'
 
@@ -31,25 +30,6 @@ export const createPatient = async (req, res, next) => {
     })
     await newPatient.save()
     res.status(200).json(newPatient)
-  } catch (error) {
-    next(error)
-  }
-}
-
-export const createPrescription = async (req, res, next) => {
-  try {
-    const newPrescription = new Prescripcion({
-      fechaInicio: req.body.fechaInicio,
-      fechaFinal: req.body.fechaFinal,
-      instrucciones: req.body.instrucciones,
-      trabajador: req.body.trabajador,
-      nombreMedicamento: req.body.nombreMedicamento,
-      principioActivo: req.body.principioActivo,
-      frecuencia: req.body.frecuencia,
-      duracion: req.body.duracion
-    })
-    await newPrescription.save()
-    res.status(200).json(newPrescription)
   } catch (error) {
     next(error)
   }

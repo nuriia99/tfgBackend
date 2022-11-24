@@ -1,13 +1,18 @@
 import mongoose, { Schema } from 'mongoose'
 
 const EntradaSchema = new mongoose.Schema({
+  paciente: { type: Schema.ObjectId, ref: 'Paciente' },
   fecha: { type: Date, required: true },
   lenguaje: { type: String, required: true },
   notas: [{
-    asunto: { type: String, required: true },
-    exploracion: { type: String, required: true },
-    tratamiento: { type: String, required: true },
+    motivo: String,
+    antecedentes: String,
+    clinica: String,
+    exploracion: String,
+    pruebasComplementarias: String,
+    planTerapeutico: String,
     diagnostico: { type: Schema.ObjectId, ref: 'Diagnostico', required: true },
+    descDiagnostico: String,
     estado: { type: String, required: true },
     prescripciones: [{ type: Schema.ObjectId, ref: 'Prescripcion' }]
   }],

@@ -1,16 +1,33 @@
 import Entry from '../models/Entrada.js'
+import Patient from '../models/Paciente.js'
 import axios from 'axios'
 
 export const createEntry = async (req, res, next) => {
   try {
     const newEntry = new Entry({
+      paciente: req.body.paciente,
       fecha: req.body.fecha,
       notas: req.body.notas,
       lenguaje: req.body.lenguaje,
       trabajador: req.body.trabajador
     })
-    await newEntry.save()
-    res.status(200).json(newEntry)
+    const entry = await newEntry.save()
+    const patient = await Patient.updateOne({ _id: req.body.paciente }, { $push: { entradas: { $each: [entry._id], $position: 0 } } })
+    res.status(200).json(patient)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const createNote = async (req, res, next) => {
+  try {
+    const newNote = req.body
+    const entryId = newNote.entryId
+    delete newNote.entryId
+    newNote.diagnostico = newNote.diagnostico._id
+    const entry = await Entry.updateOne({ _id: entryId }, { $push: { notas: newNote } })
+    res.status(200).json(entry)
   } catch (error) {
     console.log(error)
     next(error)
