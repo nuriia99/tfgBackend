@@ -8,4 +8,5 @@ router.get('/searchDiagnosis', verifyUser, searchDiagnosis)
 router.post('/createMed', createMed)
 router.post('/createPrescription', verifyUser, createPrescription)
 router.delete('/deletePrescription/:id', verifyUser, deletePrescription)
+
 export default router

@@ -5,7 +5,8 @@ const DiagnosticoSchema = new mongoose.Schema({
   severidad: { type: String, required: true },
   informes: [{ type: Schema.ObjectId, ref: 'Informe' }],
   entradas: [{ type: Schema.ObjectId, ref: 'Entrada' }],
-  pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }]
+  pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }],
+  palabrasClave: [String]
 })
 
 export default mongoose.model('Diagnostico', DiagnosticoSchema)

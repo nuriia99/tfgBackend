@@ -1,6 +1,7 @@
 import Entry from '../models/Entrada.js'
 import Patient from '../models/Paciente.js'
 import axios from 'axios'
+import Diagnostico from '../models/Diagnostico.js'
 
 export const createEntry = async (req, res, next) => {
   try {
@@ -11,9 +12,18 @@ export const createEntry = async (req, res, next) => {
       lenguaje: req.body.lenguaje,
       trabajador: req.body.trabajador
     })
+    newEntry.notas.forEach((nota) => {
+      nota.diagnostico = nota.diagnostico._id
+      const prescripciones = []
+      nota.prescripciones.forEach((prescription) => {
+        if (prescription._id) prescripciones.push(prescription._id)
+        else prescripciones.push(prescription)
+      })
+      nota.prescripciones = prescripciones
+    })
     const entry = await newEntry.save()
-    const patient = await Patient.updateOne({ _id: req.body.paciente }, { $push: { entradas: { $each: [entry._id], $position: 0 } } })
-    res.status(200).json(patient)
+    await Patient.updateOne({ _id: req.body.paciente }, { $push: { entradas: { $each: [entry._id], $position: 0 } } })
+    res.status(200).json(entry)
   } catch (error) {
     console.log(error)
     next(error)
@@ -26,8 +36,53 @@ export const createNote = async (req, res, next) => {
     const entryId = newNote.entryId
     delete newNote.entryId
     newNote.diagnostico = newNote.diagnostico._id
+    const prescripciones = []
+    newNote.prescripciones.forEach((prescription) => {
+      if (prescription._id) prescripciones.push(prescription._id)
+      else prescripciones.push(prescription)
+    })
+    newNote.prescripciones = prescripciones
     const entry = await Entry.updateOne({ _id: entryId }, { $push: { notas: newNote } })
     res.status(200).json(entry)
+  } catch (error) {
+    // console.log(error)
+    next(error)
+  }
+}
+
+export const updateNote = async (req, res, next) => {
+  try {
+    const newNotes = req.body.newNotes
+    const entryId = req.params.id
+    newNotes.forEach((nota) => {
+      nota.diagnostico = nota.diagnostico._id
+      const prescripciones = []
+      nota.prescripciones.forEach((prescription) => {
+        if (prescription._id) prescripciones.push(prescription._id)
+        else prescripciones.push(prescription)
+      })
+      nota.prescripciones = prescripciones
+    })
+    const entry = await Entry.updateOne({ _id: entryId }, { $set: { notas: newNotes } })
+    console.log(entryId)
+    res.status(200).json(entry)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const deleteNote = async (req, res, next) => {
+  try {
+    const newNotes = req.body.newNotes
+    const entryId = req.params.id
+    if (newNotes.length === 0) {
+      await Entry.findOneAndDelete({ _id: entryId })
+      await Patient.updateOne({ _id: req.body.patient }, { $pull: { entradas: entryId } })
+    } else {
+      await Entry.updateOne({ _id: entryId }, { $set: { notas: newNotes } })
+    }
+    res.status(200).json('Has been deleted.')
   } catch (error) {
     console.log(error)
     next(error)
@@ -77,6 +132,44 @@ export const translateEntry = async (req, res, next) => {
       })
     )
     res.status(200).json(newNotes)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const updateDiagnosis = async (req, res, next) => {
+  try {
+    const newDiagnosis = {
+      nombre: req.body.nombre,
+      severidad: req.body.severidad,
+      informes: req.body.apellidinformeso2,
+      entradas: req.body.entradas,
+      pacientes: req.body.pacientes,
+      palabrasClave: req.body.palabrasClave
+    }
+    await Diagnostico.findByIdAndUpdate(req.params.id, newDiagnosis)
+    res.status(200).json('update correctly')
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const getDiagnosisRec = async (req, res, next) => {
+  try {
+    // eslint-disable-next-line quotes
+    const allWords = ["disnea", "tos", "tos seca", "fiebre", "febril", "dolor de cabeza", "ronchas", "piel", "picor", "inflamacion", "dificultad", "diarrea", "nauseas", "vomitos", "dolor", "fiebre"]
+    const clinicaWords = req.query.clinica.split(' ')
+    const matchWords = []
+    clinicaWords.forEach((word) => {
+      if (allWords.includes(word)) matchWords.push(word)
+    })
+    const result = await Diagnostico.find({ palabrasClave: { $in: matchWords } })
+    console.log(result)
+    result.sort((a, b) => (a.pacientes.length >= b.pacientes.length) ? 1 : ((a.pacientes.length < b.pacientes.length) ? -1 : 0))
+    const slicedResult = result.slice(0, 4)
+    res.status(200).json(slicedResult)
   } catch (error) {
     console.log(error)
     next(error)

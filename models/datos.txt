@@ -377,7 +377,8 @@
 {
   "fechaInicio": "2022-11-16T00:00:00.511Z",
   "fechaFinal": "2022-11-30T00:00:00.511Z",
-  "instrucciones": "Comer antes de ingerir el alimento.",
+  "insPaciente": "Comer antes de ingerir el alimento.",
+  "insFarmacia": "Recordar al paciente que ha de ingerir alimentos antes de ingerir el medicamento.",
   "trabajador": "6378b7c938938f2984193d56",
   "nombreMedicamento": "Paracetamol Normon 500 mg EFG, 20 Comprimidos",
   "principioActivo": "PARACETAMOL",
@@ -386,23 +387,16 @@
 }
 
 -----------------------------------------------------------------------
+
 {
+    "paciente": "6378be9738938f2984193dbe",
     "trabajador": {
         "id": "6378b7c938938f2984193d56",
         "role": "Medicina general"
     },
-    "fecha": "2022-01-13T15:43:00.511Z",
+    "fecha": "2021-12-04T15:43:00.511Z",
     "lenguaje": "es",
     "notas": [
-        {
-            "asunto": "El paciente viene a consulta por una fiebre alta.",
-            "exploracion": "Se realiza la exploración.",
-            "tratamiento": "El paciente padece de gripe A.",
-            "diagnostico": "6378cb4e3fd7f657a2b28e7d",
-            "prescripciones": [],
-            "estado": "activo",
-            "severidad": "grave"
-        },
         {
             "asunto": "El paciente viene a consulta con fiebre desde el dia anterior, con cuadro de MEG, odinofagia y carraspera.",
             "exploracion": "MVC sin ruidos añadidos . Faringe hiperémica con moco claro.",
@@ -414,8 +408,29 @@
         }
     ]
 }
+{
+    "paciente": "6378be9738938f2984193dbe",
+    "trabajador": {
+        "id": "6378b7c938938f2984193d56",
+        "role": "Medicina general"
+    },
+    "fecha": "2022-01-13T15:43:00.511Z",
+    "lenguaje": "es",
+    "notas": [
+        {
+            "motivo": "El paciente viene a consulta por una fiebre alta.",
+            "exploracion": "Se realiza la exploración.",
+            "tratamiento": "El paciente padece de gripe A.",
+            "diagnostico": "6378cb4e3fd7f657a2b28e7d",
+            "prescripciones": [],
+            "estado": "activo",
+            "severidad": "grave"
+        }
+    ]
+}
 
 {
+    "paciente": "6378be9738938f2984193dbe",
     "trabajador": {
         "id": "6378b7c938938f2984193d56",
         "role": "Medicina general"
@@ -455,6 +470,32 @@
     ]
 }
 
+{
+    "paciente": "6378be9738938f2984193dbe",
+    "trabajador": {
+        "id": "6378b7c938938f2984193d56",
+        "role": "Medicina general"
+    },
+    "fecha": "2022-04-22T16:00:00.511Z",
+    "lenguaje": "es",
+    "notas": [
+        {
+            "motivo": "Mujer acude a urgencias por disnea, tos seca y fiebre.",
+            "antecedentes": "Fumadora desde los 11 años hasta los 19 años, no FRCV ni  cadipatías conocidas, sobrepeso y asma desde los 14-15 años. Nació en parto eutócico y fue diagnosticada de asma en la adolescencia. Refiere otitis y bronquitis, pero ningún ingreso por crisis asmáticas.",
+            "clinica": "3-4 días de evolución de disnea a moderados esfuerzos, tos seca sin expectoración y pico febril de 38º sin tiritona. R efiere empeoramiento de lo síntomas con los ácaros y la humedad.",
+            "exploracion": "",
+            "pruebasComplementarias": "Analítica: reactantes de fase aguda discretamente elevados.\nGasometría arterial(FiO2 31%): HCO3 20'7, lactato 3'9, PaFi 162.\nPCR de virus: positivo para gripe A \nRadiografía de tórax: sin alteraciones.",
+            "planTerapeutico": "Se inicia tratamiento con oxigenoterapia (FiO2 50% al inicio), nebulizaciones (Salbutamol + Bromuro de Ipratropio) y corticoides sistémicos. Se decide ingresar al paciente en la planta de neumología por persistenica de broncoespasmo e insuficiencia cardiaca respiratioria moderada.",
+            "diagnostico": "6378cb4e3fd7f657a2b28e7d",
+            "descDiagnostico": "",
+            "prescripciones": [],
+            "estado": "inactivo"
+        }
+    ]
+}
+
+
+
 
 ----------------------------------------------
 
@@ -463,7 +504,8 @@
   "severidad": "grave",
   "informes": [],
   "entradas": [],
-  "pacientes": []
+  "pacientes": [],
+  "palabrasClave": ["disnea", "tos", "tos seca", "fiebre", "febril", "dolor"]
 }
 
 {
@@ -471,7 +513,8 @@
   "severidad": "medio",
   "informes": [],
   "entradas": [],
-  "pacientes": []
+  "pacientes": [],
+  "palabrasClave": ["ronchas", "piel", "picor", "inflamacion", "dificultad"]
 }
 
 {
@@ -479,5 +522,79 @@
   "severidad": "leve",
   "informes": [],
   "entradas": [],
-  "pacientes": []
+  "pacientes": [],
+  "palabrasClave": ["diarrea", "nauseas", "vomitos", "dolor", "fiebre"]
 }
+
+
+
+-------------------------------------------------
+
+{
+  "nombre": "IBUPROFENO CINFA 100MG/5ML 200ML SUSPENSI ORAL EPG",
+  "principioActivo": "IBUPROFENO",
+  "numComprimidos": "200",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "Comer antes de ingerir el alimento.",
+  "insFarmacia": "Recordar al paciente que ha de ingerir alimentos antes de ingerir el medicamento.",
+  "unidad": "1",
+  "frecuencia": "12",
+  "duracion": "7"
+}
+
+{
+  "nombre": "IBUPROFENO ABDRUG 600MG 40 COMPRIMIDOS RECUBIERTOS PELICULA",
+  "principioActivo": "IBUPROFENO",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "Comer antes de ingerir el alimento.",
+  "insFarmacia": "Recordar al paciente que ha de ingerir alimentos antes de ingerir el medicamento.",
+  "unidad": "1",
+  "frecuencia": "12",
+  "duracion": "7"
+}
+
+{
+  "nombre": "IBUPROFENO ALTER 600MG 40 COMPRIMIDOS RECUB EFG",
+  "principioActivo": "IBUPROFENO",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "Comer antes de ingerir el alimento.",
+  "insFarmacia": "Recordar al paciente que ha de ingerir alimentos antes de ingerir el medicamento.",
+  "unidad": "1",
+  "frecuencia": "12",
+  "duracion": "7"
+}
+
+{
+  "nombre": "OSELTAMIVIR ZENTIVA 75MG CÁPSULAS DURAS EFG",
+  "principioActivo": "OSELTAMIVIR",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "",
+  "insFarmacia": "",
+  "unidad": "1",
+  "frecuencia": "12",
+  "duracion": "5"
+}
+
+{
+  "nombre": "FORMOTEROL STADA 12MG POLVO PARA INHALACIÓN (CÁPSULA DURA)",
+  "principioActivo": "FORMOTEROL",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "",
+  "insFarmacia": "",
+  "unidad": "1",
+  "frecuencia": "12",
+  "duracion": "7"
+}
+
+{
+  "nombre": "BUDESONIDA ALDO-UNIÓN 200MG/PULSACIÓN",
+  "principioActivo": "BUDESONIDA",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "",
+  "insFarmacia": "",
+  "unidad": "1",
+  "frecuencia": "12",
+  "duracion": "14"
+}
+
+

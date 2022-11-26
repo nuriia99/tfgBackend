@@ -1,5 +1,6 @@
 import Patient from '../models/Paciente.js'
 import Diagnostico from '../models/Diagnostico.js'
+import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/errors.js'
 
@@ -71,10 +72,16 @@ export const getPatient = async (req, res, next) => {
   try {
     const patient = await Patient.findById(req.params.id).populate('prescripciones').populate({
       path: 'entradas',
-      populate: {
-        path: 'notas.diagnostico',
-        module: Diagnostico
-      }
+      populate: [
+        {
+          path: 'notas.diagnostico',
+          module: Diagnostico
+        },
+        {
+          path: 'trabajador.id',
+          module: Trabajador
+        }
+      ]
     })
     res.status(200).json(patient)
   } catch (error) {
