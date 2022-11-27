@@ -38,28 +38,7 @@ export const createPatient = async (req, res, next) => {
 
 export const updatePatient = async (req, res, next) => {
   try {
-    const newPatient = {
-      nombre: req.body.nombre,
-      apellido1: req.body.apellido1,
-      apellido2: req.body.apellido2,
-      dni: req.body.dni,
-      correo: req.body.correo,
-      telefono: req.body.telefono,
-      cip: req.body.cip,
-      fechaNacimiento: req.body.fechaNacimiento,
-      edad: req.body.edad,
-      sexo: req.body.sexo,
-      genero: req.body.genero,
-      paisOrigen: req.body.paisOrigen,
-      direccion: req.body.direccion,
-      trabajadoresAsignados: req.body.trabajadoresAsignados,
-      inteligenciaActiva: req.body.inteligenciaActiva,
-      documentos: req.body.documentos,
-      informes: req.body.informes,
-      entradas: req.body.entradas,
-      diagnosticos: req.body.diagnosticos,
-      prescripciones: req.body.prescripciones
-    }
+    const newPatient = req.body
     await Patient.findByIdAndUpdate(req.params.id, newPatient)
     res.status(200).json('update correctly')
   } catch (error) {
@@ -160,6 +139,16 @@ export const getActiveIntelligence = async (req, res, next) => {
     })
     res.status(200).json(aiArray)
   } catch (error) {
+    next(error)
+  }
+}
+
+export const deleteDocument = async (req, res, next) => {
+  try {
+    const response = await Patient.updateOne({ _id: req.params.id }, { $pull: { documentos: { _id: req.params.idDoc } } })
+    res.status(200).json(response)
+  } catch (error) {
+    console.log(error)
     next(error)
   }
 }
