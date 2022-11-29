@@ -1,11 +1,17 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const ObjetivoSchema = new mongoose.Schema({
+  tipo: { type: String, required: true },
+  codigo: { type: String, required: true, unique: true },
   nombre: { type: String, required: true },
   descripcion: { type: String, required: true },
-  tipo: { type: String, required: true },
-  numPaciententesTotal: { type: Number, required: true },
-  numPacientesCompletados: { type: Number, required: true }
+  objetivo: { type: String, required: true },
+  pacientesTotales: [{ type: Schema.ObjectId, ref: 'Paciente' }],
+  pacientesCompletados: [{ type: Schema.ObjectId, ref: 'Paciente' }],
+  puntosTotales: { type: Number, required: true },
+  diagnostico: { type: Schema.ObjectId, ref: 'Diagnostico', required: true },
+  medicamentos: [{ type: String, required: true }],
+  edad: { type: String, required: true }
 })
 
 export default mongoose.model('Objetivo', ObjetivoSchema)

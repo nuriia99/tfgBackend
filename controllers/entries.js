@@ -89,6 +89,24 @@ export const deleteNote = async (req, res, next) => {
   }
 }
 
+export const createDiagnosis = async (req, res, next) => {
+  try {
+    const newDiagnosis = new Diagnostico({
+      nombre: req.body.nombre,
+      severidad: req.body.severidad,
+      informes: req.body.informes,
+      entradas: req.body.entradas,
+      pacientes: req.body.pacientes,
+      palabrasClave: req.body.palabrasClave
+    })
+    await newDiagnosis.save()
+    res.status(200).json(newDiagnosis)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
 export const getEntry = async (req, res, next) => {
   try {
     const entry = await Entry.findById(req.params.id)
@@ -159,16 +177,24 @@ export const updateDiagnosis = async (req, res, next) => {
 export const getDiagnosisRec = async (req, res, next) => {
   try {
     // eslint-disable-next-line quotes
-    const allWords = ["disnea", "tos", "tos seca", "fiebre", "febril", "dolor de cabeza", "ronchas", "piel", "picor", "inflamacion", "dificultad", "diarrea", "nauseas", "vomitos", "dolor", "fiebre"]
+    const allWords = ["disnea", "tos", "tos seca", "fiebre", "febril", "dolor de cabeza", "ronchas", "piel", "picor", "inflamacion", "dificultad", "diarrea", "nauseas", "vomitos", "dolor", "fiebre", "pecho", "meareo", "fatiga", "debilidad", "aliento", "latidos"]
     const clinicaWords = req.query.clinica.split(' ')
     const matchWords = []
     clinicaWords.forEach((word) => {
       if (allWords.includes(word)) matchWords.push(word)
     })
     const result = await Diagnostico.find({ palabrasClave: { $in: matchWords } })
-    console.log(result)
-    result.sort((a, b) => (a.pacientes.length >= b.pacientes.length) ? 1 : ((a.pacientes.length < b.pacientes.length) ? -1 : 0))
-    const slicedResult = result.slice(0, 4)
+    const docArray = result.map(function (Diagnostico) { return Diagnostico.toObject() })
+    docArray.forEach((res) => {
+      const count = res.palabrasClave.filter((x) => {
+        return matchWords.includes(x)
+      })
+      res.count = count.length
+    })
+    docArray.sort((a, b) => {
+      return b.count - a.count || b.pacientes.length - a.pacientes.length
+    })
+    const slicedResult = docArray.slice(0, 4)
     res.status(200).json(slicedResult)
   } catch (error) {
     console.log(error)

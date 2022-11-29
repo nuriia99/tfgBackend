@@ -10,7 +10,7 @@
     "esDoctor": true,
     "numColegiado": "364378",
     "lenguaje": "ca",
-    "pacientes": [],
+    "pacientes": ["6378be9738938f2984193dbe","6378cf259172ee3d235c102d"],
     "especialidades": ["Medicina general"],
     "centros": [
         {
@@ -526,6 +526,16 @@
   "palabrasClave": ["diarrea", "nauseas", "vomitos", "dolor", "fiebre"]
 }
 
+{
+  "nombre": "Fibrilación Auricular",
+  "severidad": "grave",
+  "informes": [],
+  "entradas": [],
+  "pacientes": [],
+  "palabrasClave": ["dolor", "pecho", "meareo", "fatiga", "debilidad", "aliento", "latidos"]
+}
+
+
 
 
 -------------------------------------------------
@@ -597,4 +607,27 @@
   "duracion": "14"
 }
 
+{
+  "nombre": "SINTROM 1MG COMPRIMIDOS",
+  "principioActivo": "ACENOCUMAROL",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "",
+  "insFarmacia": "",
+  "unidad": "2",
+  "frecuencia": "24",
+  "duracion": "7"
+}
 
+
+-----------------------------------------------------
+
+{
+    "trabajador": "6378b7c938938f2984193d56",
+    "tipo": "Malaltia cardiovascular",
+    "codigo": "EQA0201",
+    "nombre": "Tratamiento adecuado de la fibrilación auricular",
+    "descripcion": "Tratamiento adecuado de FA",
+    "objetivo": "Adecuar el tratamiento antitrombótico en pacientes con fibrilación auricular no valvular en función de su riesgo de sufrir un evento tromboembólico (escala CHA2DS2-VASc) y hemorrágico (escala HAS-BLED).",
+    "puntosTotales": "46",
+    "diagnostico": "Fibrilación Auricular"
+}

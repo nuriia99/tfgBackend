@@ -57,7 +57,6 @@ export const createMed = async (req, res, next) => {
 export const createPrescription = async (req, res, next) => {
   try {
     const newPres = req.body.newPrescription
-    console.log(newPres)
     const newPrescription = new Prescripcion({
       paciente: newPres.paciente,
       fechaInicio: newPres.fechaInicio,
@@ -71,7 +70,8 @@ export const createPrescription = async (req, res, next) => {
       duracion: newPres.duracion
     })
     const prescription = await newPrescription.save()
-    await Patient.updateOne({ _id: req.body.patient }, { $push: { prescripciones: prescription._id } })
+    const pat = await Patient.updateOne(req.body.patient, { $push: { prescripciones: prescription._id } })
+    console.log(pat)
     const worker = await Trabajador.findOne({ _id: newPrescription.trabajador }).select('eleccionMedicamento')
     let find = false
     worker.eleccionMedicamento.every((eleccion) => {
