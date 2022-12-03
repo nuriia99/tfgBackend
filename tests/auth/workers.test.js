@@ -38,27 +38,32 @@ describe('tests related to login', () => {
 })
 
 describe('tests related to update the workers lenguage', () => {
-  let worker = null
-
-  test('if the token and the id are valid respond with a 200 status code', async () => {
+  let worker
+  let token
+  beforeEach(async () => {
     const response = await api.post('/auth/login')
       .send(user)
     worker = response.body.workerData
-    await api.post('/trabajadores/' + worker._id + '/updateLenguage')
+    token = response.body.token
+  })
+
+  test('if the token and the id are valid respond with a 200 status code', async () => {
+    console.log('/trabajadores/' + worker._id + '/updateLenguage')
+    await api.patch('/trabajadores/' + worker._id + '/updateLenguage')
       .send({ lenguage: 'Español' })
       .set({
-        authorization: `Bearer ${response.body.token}`
+        authorization: `Bearer ${token}`
       })
       .expect(200)
   })
   test('if the token does not exist respond with a 401 status code', async () => {
-    await api.post('/trabajadores/' + worker._id + '/updateLenguage')
+    await api.patch('/trabajadores/' + worker._id + '/updateLenguage')
       .send({ lenguage: 'Español' })
       .expect(401)
   })
 
   test('if the token is not valid respond with a 403 status code', async () => {
-    await api.post('/trabajadores/' + worker._id + '/updateLenguage')
+    await api.patch('/trabajadores/' + worker._id + '/updateLenguage')
       .send({ lenguage: 'Español' })
       .set({
         authorization: 'hfehgifgoewi'

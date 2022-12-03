@@ -2,6 +2,7 @@ import Goal from '../models/Objetivo.js'
 import Trabajador from '../models/Trabajador.js'
 import Entrada from '../models/Entrada.js'
 import Prescripcion from '../models/Prescripcion.js'
+import Paciente from '../models/Paciente.js'
 
 export const createGoal = async (req, res, next) => {
   try {
@@ -49,6 +50,7 @@ export const createGoal = async (req, res, next) => {
       nombre: req.body.nombre,
       descripcion: req.body.descripcion,
       objetivo: req.body.objetivo,
+      definicion: req.body.definicion,
       pacientesTotales,
       pacientesCompletados,
       puntosTotales: req.body.puntosTotales,
@@ -86,13 +88,47 @@ export const getGoal = async (req, res, next) => {
     })
     let objetivos
     worker.centros.every((centro) => {
-      if (centro.nombre === req.body.centro) {
+      if (centro.nombre === req.query.centro) {
         objetivos = centro.objetivos
         return true
       }
       return true
     })
-    res.status(200).json(objetivos)
+    const result = objetivos.reduce((group, obj) => {
+      const { tipo } = obj
+      group[tipo] = group[tipo] ?? []
+      group[tipo].push(obj)
+      return group
+    }, {})
+    res.status(200).json(result)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const updateGoal = async (req, res, next) => {
+  try {
+    const newGoal = req.body
+    await Goal.findByIdAndUpdate(req.params.id, newGoal)
+    res.status(200).json('update correctly')
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const getPatients = async (req, res, next) => {
+  try {
+    const pacientesTotales = req.query.pacientesTotales || []
+    const pacientesCompletados = req.query.pacientesCompletados || []
+    const pacientesACompletar = pacientesTotales.filter(x => {
+      if (pacientesCompletados) return !pacientesCompletados.includes(x)
+      return true
+    })
+    const pacientesCompletadosData = await Paciente.find({ _id: { $in: pacientesCompletados } }).select('_id telefono cip nombre apellido1 apellido2')
+    const pacientesACompletarData = await Paciente.find({ _id: { $in: pacientesACompletar } }).select('_id telefono cip nombre apellido1 apellido2')
+    res.status(200).json({ pacientesACompletarData, pacientesCompletadosData })
   } catch (error) {
     console.log(error)
     next(error)

@@ -360,6 +360,130 @@
     "entradas": []
 }
 
+{
+    "nombre": "Dario",
+    "apellido1": "Carmona",
+    "apellido2": "Rueda",
+    "dni": "87564567C",
+    "correo": "DarioCarmonaRueda@gmail.com",
+    "telefono": "632571390",
+    "cip": "CARU1111111111",
+    "fechaNacimiento": "1947-08-03T13:33:03.511Z",
+    "edad": 75,
+    "sexo": "M",
+    "genero": "M",
+    "paisOrigen": "España",
+    "direccion": "C/ Travesía Ana, 457, 9ºE, 59267 - Teruel",
+    "trabajadoresAsignados": [
+        {
+            "rol": "Medicina general",
+            "trabajador": "6378b7c938938f2984193d56"
+        }
+    ],
+    "inteligenciaActiva": [
+        {
+            "name": "tabaquismo",
+            "values": []
+        },
+        {
+            "name": "drogas",
+            "values": []
+        },
+        {
+            "name": "alcohol",
+            "values": []
+        },
+        {
+            "name": "actividadFisica",
+            "values": [
+                {
+                    "value": "Activa",
+                    "date": "2012-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "valoracionPacientesCronicos",
+            "values": [
+                {
+                    "value": "leve",
+                    "date": "2011-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "frecuenciaCardiaca",
+            "values": [
+                {
+                    "value": "85",
+                    "date": "2017-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "peso",
+            "values": [
+                {
+                    "value": "60",
+                    "date": "2009-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "estatura",
+            "values": [
+                {
+                    "value": "175",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "colesterolTotal",
+            "values": [
+                {
+                    "value": "153",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "alergias",
+            "values": [
+                {
+                    "value": "Al polen.",
+                    "date": "2018-02-25T00:00:00.511Z"
+                },
+                {
+                    "value": "Al polen y al paracetamol.",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        }
+    ],
+    "documentos": [
+        {
+            "nombre": "Informe CUAP 1",
+            "pdfUrl": "Informe1.pdf",
+            "fechaSubida": "1999-07-26T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 2",
+            "pdfUrl": "Informe2.pdf",
+            "fechaSubida": "2010-02-13T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 3",
+            "pdfUrl": "Informe3.pdf",
+            "fechaSubida": "2018-05-17T13:33:03.511Z"
+        }
+    ],
+    "informes": [],
+    "diagnosticos": [],
+    "prescripciones": [],
+    "entradas": []
+}
+
 
 —--------------------------------------------------------------------------------
 
@@ -535,6 +659,15 @@
   "palabrasClave": ["dolor", "pecho", "meareo", "fatiga", "debilidad", "aliento", "latidos"]
 }
 
+{
+  "nombre": "Enfermedad Renal Crónica",
+  "severidad": "grave",
+  "informes": [],
+  "entradas": [],
+  "pacientes": [],
+  "palabrasClave": ["apetito", "malestar", "dolor", "fatiga", "picazón", "resequedad", "peso"]
+}
+
 
 
 
@@ -618,16 +751,46 @@
   "duracion": "7"
 }
 
+{
+  "nombre": "ATORVASTATINA EDIGEN 10MG COMPRIMIDOS RECUBIERTOS CON PELÍCULA EFG",
+  "principioActivo": "ATORVASTATINA",
+  "recetaEnfPermitida": "false",
+  "insPaciente": "Antes de consumir, llevar dieta estándar para reducir niveles de colesterol.",
+  "insFarmacia": "",
+  "unidad": "1",
+  "frecuencia": "24",
+  "duracion": "30"
+}
+
 
 -----------------------------------------------------
 
 {
     "trabajador": "6378b7c938938f2984193d56",
+    "centro": "CUAP Gran Corazón",
     "tipo": "Malaltia cardiovascular",
     "codigo": "EQA0201",
     "nombre": "Tratamiento adecuado de la fibrilación auricular",
     "descripcion": "Tratamiento adecuado de FA",
-    "objetivo": "Adecuar el tratamiento antitrombótico en pacientes con fibrilación auricular no valvular en función de su riesgo de sufrir un evento tromboembólico (escala CHA2DS2-VASc) y hemorrágico (escala HAS-BLED).",
+    "definicion": "Porcentaje de personas entre 15 y 90 años diagnosticadas de ACxFA con correcta indicación del tratamiento anticoagulante según su riesgo de tromboembolismo (escala CHA2DS2VASC) y según el cálculo de su riesgo hemorrágico mediante la escala HAS-BLED.",
     "puntosTotales": "46",
-    "diagnostico": "Fibrilación Auricular"
+    "objetivo": "70",
+    "diagnostico": "6385e68b40f241e46bac63ee",
+    "medicamentos": ["ACENOCUMAROL"],
+    "edad": "15-90"
+}
+
+{
+    "trabajador": "6378b7c938938f2984193d56",
+    "centro": "CUAP Gran Corazón",
+    "tipo": "Malaltia cardiovascular",
+    "codigo": "EQA0237",
+    "nombre": "Tratamiento con IECA o ARAII en la HTA o DM2 con nefropatía",
+    "descripcion": "Tratamiento con IECA o ARAII en HTA o DM2 con nefropatía.",
+    "definicion": "Porcentaje de personas entre 14 y 90 años, con el diagnóstico de IRC+HTA o nefropatía+DM2, en el que consta tratamiento actual con IECA (o ARA2 en caso de intolerancia a los IECA).",
+    "objetivo": "80",
+    "puntosTotales": "46",
+    "diagnostico": "638658ad7d93b8e9cdab7793",
+    "medicamentos": ["ATORVASTATINA"],
+    "edad": "14-90"
 }

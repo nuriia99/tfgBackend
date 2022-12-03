@@ -62,6 +62,7 @@ export const getPatient = async (req, res, next) => {
         }
       ]
     })
+    if (patient === null) next(handleError(404))
     res.status(200).json(patient)
   } catch (error) {
     console.log(error)

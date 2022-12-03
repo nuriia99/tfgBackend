@@ -3,15 +3,16 @@ import { createEntry, createNote, getEntry, createDiagnosis, getDiagnosisRec, up
 import { verifyUser } from '../middleware/verifyToken.js'
 const router = express.Router()
 
+router.get('/getEntry/:id', verifyUser, getEntry)
+router.get('/getDiagnosisRec', verifyUser, getDiagnosisRec)
+router.get('/patient/:id', verifyUser, getPatientEntries)
 router.post('/createEntry', verifyUser, createEntry)
 router.post('/createNote', verifyUser, createNote)
-router.post('/createDiagnosis', createDiagnosis)
+router.post('/translateEntry', verifyUser, translateEntry)
 router.patch('/updateNote/:id', verifyUser, updateNote)
 router.delete('/deleteNote/:id', verifyUser, deleteNote)
-router.get('/getEntry/:id', verifyUser, getEntry)
-router.get('/patient/:id', verifyUser, getPatientEntries)
-router.post('/translateEntry', verifyUser, translateEntry)
+
 router.patch('/updateDiagnosis/:id', updateDiagnosis)
-router.get('/getDiagnosisRec', verifyUser, getDiagnosisRec)
+router.post('/createDiagnosis', createDiagnosis)
 
 export default router
