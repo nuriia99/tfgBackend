@@ -1,6 +1,6 @@
 import request from 'supertest'
 import mongoose from 'mongoose'
-import { app, server } from '../../index.js'
+import { app, server } from '../index.js'
 
 const api = request(app)
 

@@ -75,7 +75,7 @@ export const createGoal = async (req, res, next) => {
   }
 }
 
-export const getGoal = async (req, res, next) => {
+export const getGoals = async (req, res, next) => {
   try {
     const worker = await Trabajador.findById(req.params.id).select('centros').populate({
       path: 'centros',

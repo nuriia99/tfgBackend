@@ -1,6 +1,6 @@
 import request from 'supertest'
 import mongoose from 'mongoose'
-import { app, server } from '../../index.js'
+import { app, server } from '../index.js'
 
 const api = request(app)
 
@@ -9,6 +9,60 @@ const user = {
   password: '1Q2W3E4R',
   id: '6378be9738938f2984193dbe'
 }
+
+describe('tests related to documents', () => {
+  let token
+  let documentId
+  beforeEach(async () => {
+    const response = await api.post('/auth/login')
+      .send(user)
+    token = response.body.token
+  })
+
+  test('deleteDocument return a 200 status code', async () => {
+    const newDocuments = {
+      documentos: [
+        {
+          nombre: 'Informe CUAP 4',
+          pdfUrl: 'Informe4.pdf',
+          fechaSubida: '2019-07-26T13:33:03.511Z'
+        },
+        {
+          nombre: 'Informe CUAP 3',
+          pdfUrl: 'Informe3.pdf',
+          fechaSubida: '2018-05-17T13:33:03.511Z'
+        },
+        {
+          nombre: 'Informe CUAP 2',
+          pdfUrl: 'Informe2.pdf',
+          fechaSubida: '2010-02-13T13:33:03.511Z'
+        },
+        {
+          nombre: 'Informe CUAP 1',
+          pdfUrl: 'Informe1.pdf',
+          fechaSubida: '1999-07-26T13:33:03.511Z'
+        }
+      ]
+    }
+    await api.patch('/patients/' + user.id + '/updatePatient')
+      .send(newDocuments)
+      .set({
+        authorization: `Bearer ${token}`
+      })
+      .expect(200)
+    const patient = await api.get('/patients/' + user.id)
+      .set({
+        authorization: `Bearer ${token}`
+      })
+      .expect(200)
+    documentId = patient.body.documentos[0]._id
+    await api.delete('/patients/' + user.id + '/deleteDoc/' + documentId)
+      .set({
+        authorization: `Bearer ${token}`
+      })
+      .expect(200)
+  })
+})
 
 describe('tests related to prescriptions', () => {
   let token
@@ -22,7 +76,7 @@ describe('tests related to prescriptions', () => {
   test('createPrescription return a 200 status code', async () => {
     const newPrescription = {
       newPrescription: {
-        patient: '6378be9738938f2984193dbe',
+        paciente: '6378be9738938f2984193dbe',
         fechaInicio: '2022-11-04T00:00:00.511Z',
         fechaFinal: '2023-11-18T00:00:00.511Z',
         instrucciones: 'Comer antes de ingerir el alimento.',

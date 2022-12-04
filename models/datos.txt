@@ -674,9 +674,19 @@
 -------------------------------------------------
 
 {
+  "nombre": "PARACETAMOL MABO 500MG COMPRIMIDOS",
+  "principioActivo": "PARACETAMOL",
+  "recetaEnfPermitida": "true",
+  "insPaciente": "",
+  "insFarmacia": "",
+  "unidad": "1",
+  "frecuencia": "6",
+  "duracion": "7"
+}
+
+{
   "nombre": "IBUPROFENO CINFA 100MG/5ML 200ML SUSPENSI ORAL EPG",
   "principioActivo": "IBUPROFENO",
-  "numComprimidos": "200",
   "recetaEnfPermitida": "false",
   "insPaciente": "Comer antes de ingerir el alimento.",
   "insFarmacia": "Recordar al paciente que ha de ingerir alimentos antes de ingerir el medicamento.",
