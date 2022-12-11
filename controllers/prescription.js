@@ -8,17 +8,35 @@ import { refreshObj } from '../middleware/verifyObj.js'
 
 export const searchMed = async (req, res, next) => {
   try {
+    const role = req.query.role
     const name = req.query.name || ''
-    const meds = await Med
-      .find({
-        $or: [
-          { nombre: { $regex: name, $options: 'i' } },
-          { principioActivo: { $regex: name, $options: 'i' } }
-        ]
-      })
-      .sort({ nombre: 1 })
+    let meds
+    if (role === 'Enfermeria') {
+      meds = await Med
+        .find({
+          $and: [{ recetaEnfPermitida: true },
+            {
+              $or: [
+                { nombre: { $regex: name, $options: 'i' } },
+                { principioActivo: { $regex: name, $options: 'i' } }
+              ]
+            }
+          ]
+        })
+        .sort({ nombre: 1 })
+    } else {
+      meds = await Med
+        .find({
+          $or: [
+            { nombre: { $regex: name, $options: 'i' } },
+            { principioActivo: { $regex: name, $options: 'i' } }
+          ]
+        })
+        .sort({ nombre: 1 })
+    }
     res.status(200).json(meds)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }
