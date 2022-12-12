@@ -4,7 +4,7 @@ import Patient from '../models/Paciente.js'
 import Diagnostico from '../models/Diagnostico.js'
 import Trabajador from '../models/Trabajador.js'
 import Objetivo from '../models/Objetivo.js'
-import { refreshObj } from '../middleware/verifyObj.js'
+import { refreshObj, deletePatientObj } from '../middleware/verifyObj.js'
 
 export const searchMed = async (req, res, next) => {
   try {
@@ -173,7 +173,7 @@ export const updatePrescription = async (req, res, next) => {
     })
     if (removedObjs.length > 0) {
       removedObjs.forEach(obj => {
-        refreshObj(obj, newPrescription.paciente)
+        deletePatientObj(obj, newPrescription.paciente)
       })
     }
     if (objs.length > 0) {
@@ -212,8 +212,7 @@ export const deletePrescription = async (req, res, next) => {
     })
     if (removedObjs.length > 0) {
       removedObjs.forEach(obj => {
-        console.log('patient en prescr', req.body.patient)
-        refreshObj(obj, req.body.patient)
+        deletePatientObj(obj, req.body.patient)
       })
     }
     res.status(200).json(response)

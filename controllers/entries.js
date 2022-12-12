@@ -4,7 +4,7 @@ import axios from 'axios'
 import Diagnostico from '../models/Diagnostico.js'
 import Objetivo from '../models/Objetivo.js'
 import Trabajador from '../models/Trabajador.js'
-import { refreshObj } from '../middleware/verifyObj.js'
+import { refreshObj, deletePatientObj } from '../middleware/verifyObj.js'
 import { handleError } from '../middleware/errors.js'
 
 export const createEntry = async (req, res, next) => {
@@ -138,7 +138,7 @@ export const updateNote = async (req, res, next) => {
     })
     if (objsRemoved.length > 0) {
       objsRemoved.forEach(obj => {
-        refreshObj(obj, req.body.patient)
+        deletePatientObj(obj, req.body.patient)
       })
     }
     if (objs.length > 0) {
@@ -187,7 +187,7 @@ export const deleteNote = async (req, res, next) => {
     })
     if (objsRemoved.length > 0) {
       objsRemoved.forEach(obj => {
-        refreshObj(obj, req.body.patient)
+        deletePatientObj(obj, req.body.patient)
       })
     }
     res.status(200).json('Has been deleted.')
