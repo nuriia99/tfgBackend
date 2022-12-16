@@ -26,10 +26,10 @@ const connect = async () => {
   console.log('connected to mongodb')
 }
 
-// middlewares
 app.use(express.json())
 app.use(cookieParser())
 
+// middlewares
 app.use('/auth', authRoute)
 app.use('/trabajadores', workersRoute)
 app.use('/home', homeRoute)
