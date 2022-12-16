@@ -1,6 +1,6 @@
 import express from 'express'
 import { getPatient, createPatient, getActiveIntelligence, updatePatient, searchPatient, deleteDocument } from '../controllers/patient.js'
-import { verifyUser } from '../middleware/verifyToken.js'
+import { verifyUser } from '../middleware/verifyUser.js'
 const router = express.Router()
 
 router.get('/:id', verifyUser, getPatient)// -

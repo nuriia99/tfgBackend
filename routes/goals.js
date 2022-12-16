@@ -1,5 +1,5 @@
 import express from 'express'
-import { verifyUser } from '../middleware/verifyToken.js'
+import { verifyUser } from '../middleware/verifyUser.js'
 import { createGoal, getGoals, updateGoal, getPatients } from '../controllers/goals.js'
 const router = express.Router()
 

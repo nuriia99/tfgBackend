@@ -1,6 +1,6 @@
 import express from 'express'
 import { searchMed, createMed, createPrescription, deletePrescription, searchDiagnosis, updatePrescription } from '../controllers/prescription.js'
-import { verifyUser } from '../middleware/verifyToken.js'
+import { verifyUser } from '../middleware/verifyUser.js'
 const router = express.Router()
 
 router.get('/searchMed', verifyUser, searchMed)// -

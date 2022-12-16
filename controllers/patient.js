@@ -2,7 +2,7 @@ import Patient from '../models/Paciente.js'
 import Diagnostico from '../models/Diagnostico.js'
 import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
-import { handleError } from '../middleware/errors.js'
+import { handleError } from '../middleware/handleErrors.js'
 
 export const createPatient = async (req, res, next) => {
   try {

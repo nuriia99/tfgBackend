@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import Worker from '../models/Trabajador.js'
-import { handleError } from './errors.js'
+import { handleError } from './handleErrors.js'
 
 export const verifyUser = async (req, res, next) => {
   // verify authetication

@@ -1,6 +1,6 @@
 import express from 'express'
 import { getWorkers, getWorker, updateLenguage, updateWorker, getRecs } from '../controllers/workers.js'
-import { verifyUser } from '../middleware/verifyToken.js'
+import { verifyUser } from '../middleware/verifyUser.js'
 const router = express.Router()
 
 router.get('/:id/getRecs/:diagnosis', verifyUser, getRecs)// -

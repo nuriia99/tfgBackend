@@ -5,7 +5,7 @@ import Diagnostico from '../models/Diagnostico.js'
 import Objetivo from '../models/Objetivo.js'
 import Trabajador from '../models/Trabajador.js'
 import { refreshObj, deletePatientObj } from '../middleware/verifyObj.js'
-import { handleError } from '../middleware/errors.js'
+import { handleError } from '../middleware/handleErrors.js'
 
 export const createEntry = async (req, res, next) => {
   try {

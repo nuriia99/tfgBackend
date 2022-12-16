@@ -1,7 +1,7 @@
 import Worker from '../models/Trabajador.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { handleError } from '../middleware/errors.js'
+import { handleError } from '../middleware/handleErrors.js'
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
