@@ -37,6 +37,11 @@ const PacienteSchema = new mongoose.Schema({
     fecha: { type: Date, required: true }
   }],
   informes: [{ type: Schema.ObjectId, ref: 'Informe' }],
+  diagnosticos: [{
+    idDiagnostico: { type: Schema.ObjectId, ref: 'Diagnostico', required: true },
+    fecha: { type: Date, required: true },
+    estadoDiagnostico: { type: String, required: true }
+  }],
   prescripciones: [{ type: Schema.ObjectId, ref: 'Prescripcion' }],
   entradas: [{ type: Schema.ObjectId, ref: 'Entrada' }]
 })

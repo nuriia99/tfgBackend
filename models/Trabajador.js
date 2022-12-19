@@ -12,11 +12,11 @@ const TrabajadorSchema = new mongoose.Schema({
   esDoctor: { type: Boolean, required: true },
   numColegiado: { type: String, required: true, unique: true },
   lenguaje: String,
-  pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }],
   especialidades: { type: [String], required: true },
   centros: [{
     nombre: String,
-    objetivos: [{ type: Schema.ObjectId, ref: 'Objetivo' }]
+    objetivos: [{ type: Schema.ObjectId, ref: 'Objetivo' }],
+    pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }]
   }],
   turnos: [{ horaInicio: Date, horaFinal: Date, rol: String, centro: String }],
   citasPrevias: [{ type: Schema.ObjectId, ref: 'CitaPrevia' }],

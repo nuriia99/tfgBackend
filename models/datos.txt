@@ -72,11 +72,13 @@
     "centros": [
         {
             "nombre": "CUAP Gran Corazón",
-            "objetivos": []
+            "objetivos": ["63864049451fbc6cc4409be5","638659a87d93b8e9cdab77d6","638676f2d9058d78b2578a8e","638676ffd9058d78b2578aed"],
+            "pacientes": ["63866ceb8a592a2aa398a23e"]
         },
         {
             "nombre": "CAP Antón de Borja",
-            "objetivos": []
+            "objetivos": [],
+            "pacientes": ["6378cf259172ee3d235c102d"]
         },
         {
             "nombre": "CAP San Genís",

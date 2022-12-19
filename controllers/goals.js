@@ -134,3 +134,108 @@ export const getPatients = async (req, res, next) => {
     next(error)
   }
 }
+
+export const getPatientsLists = async (req, res, next) => {
+  try {
+    const query = []
+
+    const startDate = req.query.parameters.startDate
+    const endDate = req.query.parameters.endDate
+
+    if (req.query.diagnosis) {
+      const diagnosisId = []
+      const diagnosisState = []
+      req.query.diagnosis.forEach(d => {
+        diagnosisId.push(d.diagnosis._id)
+        diagnosisState.push(d.statusDiagnosis)
+      })
+      diagnosisId.forEach((d, index) => {
+        const id = diagnosisId[index]
+        const state = diagnosisState[index]
+        query.push({ 'diagnosticos.idDiagnostico': id })
+        if (state !== 'B') query.push({ 'diagnosticos.estadoDiagnostico': state })
+        query.push({ 'diagnosticos.fecha': { $gte: startDate, $lte: endDate } })
+      })
+    }
+
+    const sex = req.query.parameters.sex
+    if (sex !== 'B') {
+      query.push({ sexo: sex })
+    }
+
+    const minAge = req.query.parameters.minAge
+    const maxAge = req.query.parameters.maxAge
+    query.push({ edad: { $gte: minAge, $lte: maxAge } })
+
+    const currentSelect = req.query.parameters.currentSelect
+    if (currentSelect === 'Todos los centros' || currentSelect === 'Tots els centres') {
+      const patients = []
+      req.query.centros.forEach((center) => {
+        if (center.pacientes) center.pacientes.map(p => patients.push(p))
+      })
+      query.push({ _id: { $in: patients } })
+    } else if (currentSelect !== 'Todos los pacientes' || currentSelect !== 'Tots els pacients') {
+      req.query.centros.every(c => {
+        if (c.nombre === currentSelect) {
+          const patients = c.pacientes
+          query.push({ _id: { $in: patients } })
+          return false
+        }
+        return true
+      })
+    }
+
+    const medsName = []
+    const medsState = []
+    if (req.query.meds) {
+      req.query.meds.forEach(d => {
+        medsName.push(d.med.nombre)
+        medsState.push(d.statusMed)
+      })
+    }
+
+    const currentDay = new Date()
+    await Paciente.find({
+      $and: query
+    }).populate('entradas prescripciones').select('prescripciones cip nombre apellido1 apellido2 sexo edad inteligenciaActiva').exec((_err, patients) => {
+      patients = patients.filter((patient) => {
+        let isNotAMatch = false
+        medsName.every((med, index) => {
+          let isOnPrescriptions = false
+          patient.prescripciones.every((p) => {
+            if (p.nombreMedicamento === medsName[index] && startDate <= p.fechaInicio.toString()) {
+              if (medsState[index] === 'active') {
+                if (p.fechaFinal >= currentDay) {
+                  isOnPrescriptions = true
+                  return false
+                }
+                return true
+              }
+              if (medsState[index] === 'inactive') {
+                if (p.fechaFinal < currentDay) {
+                  isOnPrescriptions = true
+                  return false
+                }
+                return true
+              }
+              isOnPrescriptions = true
+              return false
+            }
+            return true
+          })
+          if (!isOnPrescriptions) {
+            isNotAMatch = true
+            return false
+          }
+          return true
+        })
+        return !isNotAMatch
+      })
+      console.log(patients)
+      res.status(200).json(patients)
+    })
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}

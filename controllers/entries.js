@@ -16,15 +16,13 @@ export const createEntry = async (req, res, next) => {
       lenguaje: req.body.newEntry.lenguaje,
       trabajador: req.body.newEntry.trabajador
     })
-    newEntry.notas.forEach((nota) => {
-      nota.diagnostico = nota.diagnostico._id
-      const prescripciones = []
-      nota.prescripciones.forEach((prescription) => {
-        if (prescription._id) prescripciones.push(prescription._id)
-        else prescripciones.push(prescription)
-      })
-      nota.prescripciones = prescripciones
+    newEntry.notas[0].diagnostico = newEntry.notas[0].diagnostico._id
+    const prescripciones = []
+    newEntry.notas[0].prescripciones.forEach((prescription) => {
+      if (prescription._id) prescripciones.push(prescription._id)
+      else prescripciones.push(prescription)
     })
+    newEntry.notas[0].prescripciones = prescripciones
     const entry = await newEntry.save()
     const centros = await Trabajador.findById(req.body.newEntry.trabajador.id).select('centros').populate({
       path: 'centros.objetivos',
@@ -47,7 +45,8 @@ export const createEntry = async (req, res, next) => {
         refreshObj(obj, req.body.newEntry.paciente)
       })
     }
-    await Patient.updateOne({ _id: req.body.newEntry.paciente }, { $push: { entradas: { $each: [entry._id], $position: 0 } } })
+    const diagnosis = { idDiagnostico: newEntry.notas[0].diagnostico._id, fecha: new Date(), estadoDiagnostico: 'active' }
+    await Patient.updateOne({ _id: req.body.newEntry.paciente }, { $push: { entradas: { $each: [entry._id], $position: 0 }, diagnosticos: diagnosis } })
     res.status(200).json(entry)
   } catch (error) {
     console.log(error)
@@ -68,6 +67,8 @@ export const createNote = async (req, res, next) => {
     })
     newNote.prescripciones = prescripciones
     const entry = await Entry.updateOne({ _id: entryId }, { $push: { notas: newNote } })
+    const diagnosis = { idDiagnostico: newNote.diagnostico, fecha: new Date(), estadoDiagnostico: 'active' }
+    await Patient.updateOne({ _id: req.body.patient }, { $push: { diagnosticos: diagnosis } })
     const centros = await Trabajador.findById(req.body.worker).select('centros').populate({
       path: 'centros.objetivos',
       module: Objetivo

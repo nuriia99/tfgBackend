@@ -69,7 +69,8 @@ export const login = async (req, res, next) => {
       lenguaje: worker._doc.lenguaje,
       turno: shift[0],
       especialidades: worker._doc.especialidades,
-      centros
+      centros,
+      centrosInfo: worker._doc.centros
     }
     res.status(200).json({ workerData, token })
   } catch (error) {
