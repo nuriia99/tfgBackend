@@ -15,15 +15,19 @@
     "centros": [
         {
             "nombre": "CUAP Gran Corazón",
-            "objetivos": []
+            "objetivos": ["63864049451fbc6cc4409be5","638659a87d93b8e9cdab77d6","638676f2d9058d78b2578a8e","638676ffd9058d78b2578aed"],
+            "pacientes": ["63866ceb8a592a2aa398a23e"]
         },
         {
             "nombre": "CAP Antón de Borja",
-            "objetivos": []
+            "objetivos": [],
+            "pacientes": ["6378cf259172ee3d235c102d"],
+            "agenda": "63a1dd8b536f565da1466ab3"
         },
         {
             "nombre": "CAP San Genís",
-            "objetivos": []
+            "objetivos": [],
+            "agenda": "63a1dd96536f565da1466ab5"
         },
         {
             "nombre": "CAP Doctor Joan Planas",
@@ -78,11 +82,14 @@
         {
             "nombre": "CAP Antón de Borja",
             "objetivos": [],
-            "pacientes": ["6378cf259172ee3d235c102d"]
+            "pacientes": ["6378cf259172ee3d235c102d"],
+            "agenda": "63a1dc99536f565da1466a9f"
         },
         {
             "nombre": "CAP San Genís",
-            "objetivos": []
+            "objetivos": [],
+            "pacientes": ["6378cf259172ee3d235c102d"],
+            "agenda": "63a1dcaa536f565da1466aa1"
         }
     ],
     "turnos": [
@@ -90,7 +97,7 @@
             "horaInicio": "2022-10-20T09:00:00",
             "horaFinal": "2023-10-20T09:00:00",
             "rol": "Medicina general",
-            "centro": "CUAP Gran Corazón"
+            "centro": "CAP Antón de Borja"
         },
         {
             "horaInicio": "2022-09-20T09:00:00",
@@ -104,6 +111,40 @@
     "informes": [],
     "entradas": [],
     "eleccionMedicamento": []
+}
+
+--------------------------------------------------------------------------
+
+{
+    "centros": [
+        {
+            "nombre": "CUAP Gran Corazón",
+            "objetivos": ["63864049451fbc6cc4409be5","638659a87d93b8e9cdab77d6","638676f2d9058d78b2578a8e","638676ffd9058d78b2578aed"],
+            "pacientes": ["63866ceb8a592a2aa398a23e"]
+        },
+        {
+            "nombre": "CAP Antón de Borja",
+            "objetivos": [],
+            "pacientes": ["6378cf259172ee3d235c102d"],
+            "agenda": "63a22c64aae2132292a2673d"
+        },
+        {
+            "nombre": "CAP San Genís",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Doctor Joan Planas",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Vallirana",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Baix Ebre",
+            "objetivos": []
+        }
+    ]
 }
 
 —--------------------------------------------------------------------------------------------------

@@ -61,6 +61,14 @@ export const getPatient = async (req, res, next) => {
           module: Trabajador
         }
       ]
+    }).populate({
+      path: 'citasPrevias',
+      populate: [
+        {
+          path: 'trabajador',
+          module: Trabajador
+        }
+      ]
     })
     if (patient === null) next(handleError(404))
     res.status(200).json(patient)

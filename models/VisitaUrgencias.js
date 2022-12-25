@@ -8,8 +8,6 @@ const VisitaUrgenciasSchema = new mongoose.Schema({
     horaEntrada: { type: Date, require: true },
     horaAsistencia: { type: Date, require: true },
     horaSalida: { type: Date, require: true },
-    tipoVisita: { type: String, required: true },
-    motivo: { type: String, require: true },
     triaje: { type: Number, require: true },
     comentario: String
   }]

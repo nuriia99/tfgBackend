@@ -10,6 +10,7 @@ import patientsRoute from './routes/patients.js'
 import entriesRoute from './routes/entries.js'
 import prescriptionRoute from './routes/prescription.js'
 import goalsRoute from './routes/goals.js'
+import schedulesRoute from './routes/schedules.js'
 import cors from 'cors'
 import url from 'url'
 import path from 'path'
@@ -37,6 +38,7 @@ app.use('/patients', patientsRoute)
 app.use('/entries', entriesRoute)
 app.use('/prescriptions', prescriptionRoute)
 app.use('/goals', goalsRoute)
+app.use('/schedules', schedulesRoute)
 
 app.use((error, req, res, next) => {
   let errorStatus = error.status

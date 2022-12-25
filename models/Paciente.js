@@ -30,12 +30,7 @@ const PacienteSchema = new mongoose.Schema({
     pdfUrl: { type: String, required: true },
     fechaSubida: { type: Date, required: true }
   }],
-  citasPrevias: [{
-    primerTrabajador: { type: Schema.ObjectId, ref: 'Trabajador', required: true },
-    segundoTrabajador: String,
-    centro: { type: String, required: true },
-    fecha: { type: Date, required: true }
-  }],
+  citasPrevias: [{ type: Schema.ObjectId, ref: 'CitaPrevia' }],
   informes: [{ type: Schema.ObjectId, ref: 'Informe' }],
   diagnosticos: [{
     idDiagnostico: { type: Schema.ObjectId, ref: 'Diagnostico', required: true },

@@ -16,7 +16,8 @@ const TrabajadorSchema = new mongoose.Schema({
   centros: [{
     nombre: String,
     objetivos: [{ type: Schema.ObjectId, ref: 'Objetivo' }],
-    pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }]
+    pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }],
+    agenda: { type: Schema.ObjectId, ref: 'Agenda' }
   }],
   turnos: [{ horaInicio: Date, horaFinal: Date, rol: String, centro: String }],
   citasPrevias: [{ type: Schema.ObjectId, ref: 'CitaPrevia' }],
