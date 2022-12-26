@@ -11,6 +11,10 @@ export const getAppointments = async (req, res, next) => {
         {
           path: 'trabajador',
           module: Trabajador
+        },
+        {
+          path: 'agenda',
+          module: Agenda
         }
       ]
     }).select('citasPrevias')
@@ -48,7 +52,7 @@ export const getSchedule = async (req, res, next) => {
 
 export const getSchedules = async (req, res, next) => {
   try {
-    const schedules = await Agenda.find({ centro: req.query.centro })
+    const schedules = await Agenda.find({ centro: req.query.centro }).populate('trabajador citasPrevias')
     res.status(200).json(schedules)
   } catch (error) {
     console.log(error)
@@ -58,28 +62,43 @@ export const getSchedules = async (req, res, next) => {
 
 export const createAppointment = async (req, res, next) => {
   try {
-    const worker = await Trabajador.findById({ _id: req.body.appointment.trabajador }).select('centros')
-    let agenda
-    worker.centros.every(c => {
-      if (c.nombre === req.body.centro) {
-        agenda = c.agenda
-        return false
-      }
-      return true
-    })
     const newAppointment = new CitaPrevia({
       paciente: req.body.appointment.paciente,
-      trabajador: req.body.appointment.trabajador,
+      trabajador: req.body.appointment.trabajador._id,
       tipoVisita: req.body.appointment.tipoVisita,
       centro: req.body.appointment.centro,
       fecha: req.body.appointment.fecha,
       especialidad: req.body.appointment.especialidad,
-      agenda
+      agenda: req.body.appointment.agenda._id,
+      motivo: req.body.appointment.motivo
     })
+    if (new Date() > newAppointment.fecha) return res.status(200).json({ message: 'Las fecha ya ha pasado.' })
+    const schedule = await Agenda.findById(req.body.appointment.agenda._id).populate('citasPrevias')
+    let solapa = false
+    schedule.citasPrevias.every((a) => {
+      const timeAppointment = a.tipoVisita === 'Presencial 30min' || a.tipoVisita === 'Domicilio' ? 30 : 15
+      const maxTime = new Date(a.fecha)
+      maxTime.setMinutes(maxTime.getMinutes() + timeAppointment)
+      if (newAppointment.fecha >= a.fecha && newAppointment.fecha < maxTime) {
+        solapa = true
+        return false
+      }
+      return true
+    })
+    if (solapa) return res.status(200).json({ message: 'Las fechas se solapan.' })
+    solapa = false
+    req.body.appointment.trabajador.turnos.every(t => {
+      if (t.horaInicio < newAppointment.fecha.toISOString() && t.horaFinal > newAppointment.fecha.toISOString()) {
+        solapa = true
+        return false
+      }
+      return true
+    })
+    if (!solapa) return res.status(200).json({ message: 'El trabajador no tiene ese turno asignado' })
     const appointment = await newAppointment.save()
-    await Agenda.findByIdAndUpdate({ _id: agenda }, { $push: { citasPrevias: appointment } })
+    await Agenda.findByIdAndUpdate({ _id: req.body.appointment.agenda._id }, { $push: { citasPrevias: appointment } })
     await Paciente.findByIdAndUpdate({ _id: req.body.appointment.paciente }, { $push: { citasPrevias: appointment } })
-    res.status(200).json(newAppointment)
+    res.status(200).json(appointment)
   } catch (error) {
     console.log(error)
     next(error)
@@ -105,9 +124,42 @@ export const createSchedule = async (req, res, next) => {
 
 export const updateAppointment = async (req, res, next) => {
   try {
-    const newAppointment = req.body
+    const newAppointment = new CitaPrevia({
+      _id: req.params.id,
+      paciente: req.body.appointment.paciente,
+      trabajador: req.body.appointment.trabajador._id,
+      tipoVisita: req.body.appointment.tipoVisita,
+      centro: req.body.appointment.centro,
+      fecha: req.body.appointment.fecha,
+      especialidad: req.body.appointment.especialidad,
+      agenda: req.body.appointment.agenda._id,
+      motivo: req.body.appointment.motivo
+    })
+    if (new Date() > newAppointment.fecha) return res.status(200).json({ message: 'Las fecha ya ha pasado.' })
+    const schedule = await Agenda.findById(req.body.appointment.agenda._id).populate('citasPrevias')
+    let solapa = false
+    schedule.citasPrevias.every((a) => {
+      const timeAppointment = a.tipoVisita === 'Presencial 30min' || a.tipoVisita === 'Domicilio' ? 30 : 15
+      const maxTime = new Date(a.fecha)
+      maxTime.setMinutes(maxTime.getMinutes() + timeAppointment)
+      if (newAppointment.fecha >= a.fecha && newAppointment.fecha < maxTime) {
+        solapa = true
+        return false
+      }
+      return true
+    })
+    if (solapa) return res.status(200).json({ message: 'Las fechas se solapan.' })
+    solapa = false
+    req.body.appointment.trabajador.turnos.every(t => {
+      if (t.horaInicio < newAppointment.fecha.toISOString() && t.horaFinal > newAppointment.fecha.toISOString()) {
+        solapa = true
+        return false
+      }
+      return true
+    })
+    if (!solapa) return res.status(200).json({ message: 'El trabajador no tiene ese turno asignado' })
     await CitaPrevia.findByIdAndUpdate(req.params.id, newAppointment)
-    res.status(200).json('update correctly')
+    res.status(200).json(newAppointment)
   } catch (error) {
     console.log(error)
     next(error)

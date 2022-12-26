@@ -3,6 +3,7 @@ import Diagnostico from '../models/Diagnostico.js'
 import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/handleErrors.js'
+import Agenda from '../models/Agenda.js'
 
 export const createPatient = async (req, res, next) => {
   try {
@@ -67,6 +68,10 @@ export const getPatient = async (req, res, next) => {
         {
           path: 'trabajador',
           module: Trabajador
+        },
+        {
+          path: 'agenda',
+          module: Agenda
         }
       ]
     })

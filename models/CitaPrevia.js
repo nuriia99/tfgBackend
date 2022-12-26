@@ -8,7 +8,7 @@ const CitaPreviaSchema = new mongoose.Schema({
   centro: { type: String, required: true },
   fecha: { type: Date, required: true },
   especialidad: { type: String, required: true },
-  motivo: { type: String, required: true }
+  motivo: { type: String }
 })
 
 export default mongoose.model('CitaPrevia', CitaPreviaSchema)

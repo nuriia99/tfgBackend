@@ -68,6 +68,7 @@ export const login = async (req, res, next) => {
       numColegiado: worker._doc.numColegiado,
       lenguaje: worker._doc.lenguaje,
       turno: shift[0],
+      turnos: worker._doc.turnos,
       especialidades: worker._doc.especialidades,
       centros,
       centrosInfo: worker._doc.centros
