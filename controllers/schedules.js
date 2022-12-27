@@ -1,4 +1,5 @@
 import CitaPrevia from '../models/CitaPrevia.js'
+import VisitaUrgencias from '../models/VisitaUrgencias.js'
 import Agenda from '../models/Agenda.js'
 import Trabajador from '../models/Trabajador.js'
 import Paciente from '../models/Paciente.js'
@@ -27,23 +28,38 @@ export const getAppointments = async (req, res, next) => {
 
 export const getSchedule = async (req, res, next) => {
   try {
-    await Agenda.findById({ _id: req.params.id }).populate({
-      path: 'citasPrevias',
-      populate: [
+    const schedule = await Agenda.findById({ _id: req.params.id }).populate(
+      [
         {
-          path: 'paciente',
-          module: Paciente
+          path: 'citasPrevias',
+          populate: [
+            {
+              path: 'paciente',
+              module: Paciente
+            }
+          ]
+        },
+        {
+          path: 'visitasUrgencia',
+          populate: [
+            {
+              path: 'paciente',
+              module: Paciente
+            }
+          ]
         }
       ]
-    }).exec((_err, schedule) => {
-      const appointments = schedule.citasPrevias.filter((cita) => {
+    )
+    let appointments = []
+    if (schedule.citasPrevias) {
+      appointments = schedule.citasPrevias.filter((cita) => {
         const currentDate = new Date(req.query.scheduleDay)
         const appointmentDate = new Date(cita.fecha)
         return currentDate.getFullYear() === appointmentDate.getFullYear() && currentDate.getMonth() === appointmentDate.getMonth() && currentDate.getDate() === appointmentDate.getDate()
       })
       schedule.citasPrevias = appointments
-      res.status(200).json(schedule)
-    })
+    }
+    res.status(200).json(schedule)
   } catch (error) {
     console.log(error)
     next(error)
@@ -52,7 +68,8 @@ export const getSchedule = async (req, res, next) => {
 
 export const getSchedules = async (req, res, next) => {
   try {
-    const schedules = await Agenda.find({ centro: req.query.centro }).populate('trabajador citasPrevias')
+    const schedules = await Agenda.find({ centro: req.query.centro, nombre: { $regex: req.query.name, $options: 'i' } }).populate('trabajador citasPrevias')
+    console.log(schedules)
     res.status(200).json(schedules)
   } catch (error) {
     console.log(error)
@@ -98,6 +115,26 @@ export const createAppointment = async (req, res, next) => {
     const appointment = await newAppointment.save()
     await Agenda.findByIdAndUpdate({ _id: req.body.appointment.agenda._id }, { $push: { citasPrevias: appointment } })
     await Paciente.findByIdAndUpdate({ _id: req.body.appointment.paciente }, { $push: { citasPrevias: appointment } })
+    res.status(200).json(appointment)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const createUrgAppointment = async (req, res, next) => {
+  try {
+    const newAppointment = new VisitaUrgencias({
+      paciente: req.body.paciente,
+      fechaEntrada: req.body.fechaEntrada,
+      tipoVisita: req.body.tipoVisita,
+      centro: req.body.centro,
+      triaje: req.body.triaje,
+      agenda: req.body.agenda,
+      comentario: req.body.comentario
+    })
+    const appointment = await newAppointment.save()
+    await Agenda.findByIdAndUpdate({ _id: req.body.agenda }, { $push: { visitasUrgencia: appointment } })
     res.status(200).json(appointment)
   } catch (error) {
     console.log(error)

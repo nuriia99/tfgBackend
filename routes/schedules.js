@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAppointments, createAppointment, getSchedules, updateAppointment, deleteAppointment, createSchedule, getSchedule } from '../controllers/schedules.js'
+import { getAppointments, createAppointment, getSchedules, updateAppointment, createUrgAppointment, deleteAppointment, createSchedule, getSchedule } from '../controllers/schedules.js'
 import { verifyUser } from '../middleware/verifyUser.js'
 const router = express.Router()
 
@@ -10,6 +10,7 @@ router.post('/createAppointment', verifyUser, createAppointment)
 router.patch('/updateAppointment/:id', verifyUser, updateAppointment)
 router.delete('/deleteAppointment/:id', verifyUser, deleteAppointment)
 
+router.post('/createUrgAppointment', createUrgAppointment)
 router.post('/createSchedule', createSchedule)
 
 export default router
