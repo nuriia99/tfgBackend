@@ -214,3 +214,14 @@ export const deleteAppointment = async (req, res, next) => {
     next(error)
   }
 }
+
+export const deleteUrgAppointment = async (req, res, next) => {
+  try {
+    const response = await VisitaUrgencias.findByIdAndDelete(req.params.id)
+    await Agenda.findByIdAndUpdate(req.body.agenda, { $pull: { visitasUrgencia: req.params.id } })
+    res.status(200).json(response)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}

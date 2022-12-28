@@ -4,6 +4,9 @@ import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/handleErrors.js'
 import Agenda from '../models/Agenda.js'
+import pdf from 'html-pdf'
+import { __dirname } from '../docs/path.js'
+import fs from 'fs'
 
 export const createPatient = async (req, res, next) => {
   try {
@@ -160,7 +163,116 @@ export const getActiveIntelligence = async (req, res, next) => {
 export const deleteDocument = async (req, res, next) => {
   try {
     const response = await Patient.updateOne({ _id: req.params.id }, { $pull: { documentos: { _id: req.params.idDoc } } })
+    fs.unlink(`${__dirname}\\` + req.body.reportName, function (err) {
+      if (err) throw err
+    })
     res.status(200).json(response)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+export const uploadReport = async (req, res, next) => {
+  try {
+    let currentDay = new Date()
+    currentDay = currentDay.getTime()
+    const doc = {
+      nombre: 'Informe ' + req.body.report.center,
+      pdfUrl: 'Informe' + currentDay + '.pdf',
+      fechaSubida: new Date(currentDay)
+    }
+    await Patient.updateOne({ _id: req.body.report.paciente }, { $push: { documentos: doc } })
+    pdf.create(htmlTemplate(req.body.report), {}).toFile('./docs/Informe' + currentDay + '.pdf', (err) => {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      if (err) res.send(Promise.reject())
+      res.send(Promise.resolve())
+    })
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+const htmlTemplate = (report) => {
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>PDF Result Template</title>
+        <style>
+          .export {
+            font-family: "Segoe UI",Helvetica,Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";
+            position: absolute;
+            top: 0;
+            z-index: 7;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 50px;
+            width: 100%;
+            box-sizing: border-box;
+          }
+          .export label{
+            font-weight: 600;
+            padding: 0;
+            padding-right: 4px;
+          }
+          .export p{
+            margin: 0;
+            padding-right: 4px;
+          }
+          .export_first{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          .export_first_center{
+            align-self: flex-end;
+          }
+          .export_first_patientData_row{
+            display: flex;
+            padding: 10px 0 0 0;
+          }
+          .export_title{
+            background-color: #0979b0;
+            margin: 15px 0;
+            padding: 5px;
+            color: white;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="export">
+          <div class="export_first">
+            <div class='export_first_center'>${report.center}</div>
+            <div class="export_first_patientData">
+              <div class="export_first_patientData_row">
+                <label>${report.tradName}:</label>
+                <p>${report.name}</p>
+              </div>
+              <div class="export_first_patientData_row">
+                <label>CIP : </label>
+                <p>${report.cip}</p>
+                <label>${report.tradNacimiento}</label>
+                <p>${report.nacimiento}</p>
+                <label>${report.tradSexo}</label>
+                <p>${report.sexo}</p>
+              </div>
+            </div>
+          </div>
+          <div class="export_title">
+            ${report.tradTitle}
+          </div>
+        </div>
+      </body>
+  </html>
+    `
+}
+
+export const downloadReport = (req, res, next) => {
+  try {
+    res.sendFile(`${__dirname}\\` + req.query.reportName)
   } catch (error) {
     console.log(error)
     next(error)
