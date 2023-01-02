@@ -55,6 +55,7 @@ export const getSchedule = async (req, res, next) => {
       appointments = schedule.citasPrevias.filter((cita) => {
         const currentDate = new Date(req.query.scheduleDay)
         const appointmentDate = new Date(cita.fecha)
+        if (appointmentDate.getHours() === 0) return currentDate.getFullYear() === appointmentDate.getFullYear() && currentDate.getMonth() === appointmentDate.getMonth() && currentDate.getDate() === (appointmentDate.getDate() - 1)
         return currentDate.getFullYear() === appointmentDate.getFullYear() && currentDate.getMonth() === appointmentDate.getMonth() && currentDate.getDate() === appointmentDate.getDate()
       })
       schedule.citasPrevias = appointments
@@ -68,8 +69,8 @@ export const getSchedule = async (req, res, next) => {
 
 export const getSchedules = async (req, res, next) => {
   try {
-    const schedules = await Agenda.find({ centro: req.query.centro, nombre: { $regex: req.query.name, $options: 'i' } }).populate('trabajador citasPrevias')
-    console.log(schedules)
+    const name = req.query.name || ''
+    const schedules = await Agenda.find({ centro: req.query.centro, nombre: { $regex: name, $options: 'i' } }).populate('trabajador citasPrevias')
     res.status(200).json(schedules)
   } catch (error) {
     console.log(error)
@@ -89,6 +90,7 @@ export const createAppointment = async (req, res, next) => {
       agenda: req.body.appointment.agenda._id,
       motivo: req.body.appointment.motivo
     })
+    console.log(req.body.appointment.fecha)
     if (new Date() > newAppointment.fecha) return res.status(200).json({ message: 'Las fecha ya ha pasado.' })
     const schedule = await Agenda.findById(req.body.appointment.agenda._id).populate('citasPrevias')
     let solapa = false

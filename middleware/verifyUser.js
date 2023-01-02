@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import Worker from '../models/Trabajador.js'
 import { handleError } from './handleErrors.js'
+import CryptoJS from 'crypto-js'
 
 export const verifyUser = async (req, res, next) => {
   // verify authetication
@@ -21,4 +22,12 @@ export const verifyUser = async (req, res, next) => {
   } catch (error) {
     next(handleError(403, 'You are not authorized!'))
   }
+}
+
+export const encrypt = (word) => {
+  return CryptoJS.AES.encrypt(word, process.env.CRYPT_WORD).toString()
+}
+
+export const decrypt = (word) => {
+  return CryptoJS.AES.decrypt(word, process.env.CRYPT_WORD).toString(CryptoJS.enc.Utf8)
 }

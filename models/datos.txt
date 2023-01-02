@@ -157,12 +157,12 @@
     "correo": "FátimaMenéndezBecerra@gmail.com",
     "telefono": "736524563",
     "cip": "FAME1111111111",
+    "direccion": "C/ Eras 33, 28743 - Canencia",
     "fechaNacimiento": "1975-07-26T13:33:03.511Z",
     "edad": 47,
     "sexo": "F",
     "genero": "F",
     "paisOrigen": "España",
-    "direccion": "C/ Eras 33, 28743 - Canencia",
     "trabajadoresAsignados": [
         {
             "rol": "Medicina general",
@@ -287,12 +287,12 @@
     "correo": "AlexandraGilavertNovoa@gmail.com",
     "telefono": "657836735",
     "cip": "GINO1111111111",
+    "direccion": "C/ Eras 33, 28743 - Canencia",
     "fechaNacimiento": "1994-02-14T13:33:03.511Z",
     "edad": 28,
     "sexo": "F",
     "genero": "F",
     "paisOrigen": "España",
-    "direccion": "C/ Eras 33, 28743 - Canencia",
     "trabajadoresAsignados": [
         {
             "rol": "Medicina general",
@@ -411,12 +411,12 @@
     "correo": "DarioCarmonaRueda@gmail.com",
     "telefono": "632571390",
     "cip": "CARU1111111111",
+    "direccion": "C/ Travesía Ana, 457, 9ºE, 59267 - Teruel",
     "fechaNacimiento": "1947-08-03T13:33:03.511Z",
     "edad": 75,
     "sexo": "M",
     "genero": "M",
     "paisOrigen": "España",
-    "direccion": "C/ Travesía Ana, 457, 9ºE, 59267 - Teruel",
     "trabajadoresAsignados": [
         {
             "rol": "Medicina general",
@@ -526,6 +526,134 @@
     "prescripciones": [],
     "entradas": []
 }
+
+{
+    "nombre": "Ignacio",
+    "apellido1": "Domenech",
+    "apellido2": "Beltrán",
+    "dni": "89673920H",
+    "correo": "IgnacioDomenechBeltrán@gmail.com",
+    "telefono": "604912118",
+    "cip": "DOBE1111111111",
+    "direccion": "Plaça Laia, 262, 64º C - Domingo del Pozo",
+    "fechaNacimiento": "1981-07-16T13:33:03.511Z",
+    "edad": 41,
+    "sexo": "M",
+    "genero": "M",
+    "paisOrigen": "España",
+    "trabajadoresAsignados": [
+        {
+            "rol": "Medicina general",
+            "trabajador": "6378b7c938938f2984193d56"
+        }
+    ],
+    "inteligenciaActiva": [
+        {
+            "name": "tabaquismo",
+            "values": []
+        },
+        {
+            "name": "drogas",
+            "values": []
+        },
+        {
+            "name": "alcohol",
+            "values": [{
+                    "value": "Sí",
+                    "date": "2014-10-27T00:00:00.511Z"
+                }]
+        },
+        {
+            "name": "actividadFisica",
+            "values": [
+                {
+                    "value": "Activa",
+                    "date": "2012-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "valoracionPacientesCronicos",
+            "values": [
+                {
+                    "value": "leve",
+                    "date": "2011-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "frecuenciaCardiaca",
+            "values": [
+                {
+                    "value": "85",
+                    "date": "2017-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "peso",
+            "values": [
+                {
+                    "value": "60",
+                    "date": "2009-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "estatura",
+            "values": [
+                {
+                    "value": "175",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "colesterolTotal",
+            "values": [
+                {
+                    "value": "153",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "alergias",
+            "values": [
+                {
+                    "value": "Al polen.",
+                    "date": "2018-02-25T00:00:00.511Z"
+                },
+                {
+                    "value": "Al polen y al paracetamol.",
+                    "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        }
+    ],
+    "documentos": [
+        {
+            "nombre": "Informe CUAP 1",
+            "pdfUrl": "Informe1.pdf",
+            "fechaSubida": "1999-07-26T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 2",
+            "pdfUrl": "Informe2.pdf",
+            "fechaSubida": "2010-02-13T13:33:03.511Z"
+        },
+        {
+            "nombre": "Informe CUAP 3",
+            "pdfUrl": "Informe3.pdf",
+            "fechaSubida": "2018-05-17T13:33:03.511Z"
+        }
+    ],
+    "informes": [],
+    "diagnosticos": [],
+    "prescripciones": [],
+    "entradas": []
+}
+
 
 
 —--------------------------------------------------------------------------------

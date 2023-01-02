@@ -139,13 +139,13 @@ export const getPatientsLists = async (req, res, next) => {
   try {
     const query = []
 
-    const startDate = req.query.parameters.startDate
-    const endDate = req.query.parameters.endDate
+    const startDate = req.body.parameters.startDate
+    const endDate = req.body.parameters.endDate
 
-    if (req.query.diagnosis) {
+    if (req.body.diagnosis) {
       const diagnosisId = []
       const diagnosisState = []
-      req.query.diagnosis.forEach(d => {
+      req.body.diagnosis.forEach(d => {
         diagnosisId.push(d.diagnosis._id)
         diagnosisState.push(d.statusDiagnosis)
       })
@@ -158,24 +158,24 @@ export const getPatientsLists = async (req, res, next) => {
       })
     }
 
-    const sex = req.query.parameters.sex
+    const sex = req.body.parameters.sex
     if (sex !== 'B') {
       query.push({ sexo: sex })
     }
 
-    const minAge = req.query.parameters.minAge
-    const maxAge = req.query.parameters.maxAge
+    const minAge = req.body.parameters.minAge
+    const maxAge = req.body.parameters.maxAge
     query.push({ edad: { $gte: minAge, $lte: maxAge } })
 
-    const currentSelect = req.query.parameters.currentSelect
+    const currentSelect = req.body.parameters.currentSelect
     if (currentSelect === 'Todos los centros' || currentSelect === 'Tots els centres') {
       const patients = []
-      req.query.centros.forEach((center) => {
+      req.body.centros.forEach((center) => {
         if (center.pacientes) center.pacientes.map(p => patients.push(p))
       })
       query.push({ _id: { $in: patients } })
     } else if (currentSelect !== 'Todos los pacientes' || currentSelect !== 'Tots els pacients') {
-      req.query.centros.every(c => {
+      req.body.centros.every(c => {
         if (c.nombre === currentSelect) {
           const patients = c.pacientes
           query.push({ _id: { $in: patients } })
@@ -187,8 +187,8 @@ export const getPatientsLists = async (req, res, next) => {
 
     const medsName = []
     const medsState = []
-    if (req.query.meds) {
-      req.query.meds.forEach(d => {
+    if (req.body.meds) {
+      req.body.meds.forEach(d => {
         medsName.push(d.med.nombre)
         medsState.push(d.statusMed)
       })
@@ -231,7 +231,6 @@ export const getPatientsLists = async (req, res, next) => {
         })
         return !isNotAMatch
       })
-      console.log(patients)
       res.status(200).json(patients)
     })
   } catch (error) {

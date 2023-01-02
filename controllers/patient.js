@@ -33,9 +33,11 @@ export const createPatient = async (req, res, next) => {
       diagnosticos: req.body.diagnosticos,
       prescripciones: req.body.prescripciones
     })
+    // console.log(newPatient)
     await newPatient.save()
     res.status(200).json(newPatient)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }
@@ -88,28 +90,23 @@ export const getPatient = async (req, res, next) => {
 
 export const searchPatient = async (req, res, next) => {
   try {
-    const nombre = req.query.nombre || ''
-    const apellido1 = req.query.apellido1 || ''
-    const apellido2 = req.query.apellido2 || ''
+    const nombre = req.query.nombre?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() || ''
+    const apellido1 = req.query.apellido1?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() || ''
+    const apellido2 = req.query.apellido2?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() || ''
     let sex = req.query.sexo || ''
-    const dni = req.query.dni || ''
-    const cip = req.query.cip || ''
+    const dni = req.query.dni?.toLowerCase() || ''
+    const cip = req.query.cip?.toLowerCase() || ''
     if (sex === 'all') sex = ''
-
-    // if (nombre === '' && apellido1 === '' && apellido2 === '' && sex === '' && dni === '' && cip === '') throw handleError(400)
-    const patients = await Patient
-      .find({
-        nombre: { $regex: nombre, $options: 'i' },
-        apellido1: { $regex: apellido1, $options: 'i' },
-        apellido2: { $regex: apellido2, $options: 'i' },
-        sexo: { $regex: sex, $options: 'i' },
-        dni: { $regex: dni, $options: 'i' },
-        cip: { $regex: cip, $options: 'i' }
-      })
-      .sort({ apellido1: 1, apellido2: 1, nombre: 1 })
-
-    res.status(200).json(patients)
+    const patients = await Patient.find().select('nombre apellido1 apellido2 sexo dni cip edad')
+    const filterPatients = patients.filter((patient) => {
+      return patient.nombre.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(nombre) && patient.apellido1.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(apellido1) && patient.apellido2.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(apellido2) && patient.sexo.includes(sex) && patient.dni.toLowerCase().includes(dni) && patient.cip.toLowerCase().includes(cip)
+    })
+    filterPatients.sort((a, b) => {
+      return (a.apellido1 < b.apellido1 ? -1 : 1) || (a.apellido2 < b.apellido2 ? -1 : 1) || (a.nombre < b.nombre ? -1 : 1)
+    })
+    res.status(200).json(filterPatients)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }
@@ -164,7 +161,7 @@ export const deleteDocument = async (req, res, next) => {
   try {
     const response = await Patient.updateOne({ _id: req.params.id }, { $pull: { documentos: { _id: req.params.idDoc } } })
     fs.unlink(`${__dirname}\\` + req.body.reportName, function (err) {
-      if (err) throw err
+      if (err) console.log(err)
     })
     res.status(200).json(response)
   } catch (error) {

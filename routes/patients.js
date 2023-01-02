@@ -9,8 +9,8 @@ router.get('/', verifyUser, searchPatient)// -
 router.delete('/:id/deleteDoc/:idDoc', verifyUser, deleteDocument)// -
 router.post('/report/upload', verifyUser, uploadReport)
 router.get('/report/download', verifyUser, downloadReport)
+router.patch('/:id/updatePatient', verifyUser, updatePatient)// cambiar a verify
 
 router.post('/createPatient', createPatient)// -
-router.patch('/:id/updatePatient', updatePatient)// -
 
 export default router

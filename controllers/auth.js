@@ -2,6 +2,7 @@ import Worker from '../models/Trabajador.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { handleError } from '../middleware/handleErrors.js'
+import Agenda from '../models/Agenda.js'
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
@@ -44,7 +45,15 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   const username = req.body.username
   try {
-    const worker = await Worker.findOne({ username })
+    const worker = await Worker.findOne({ username }).populate({
+      path: 'centros',
+      populate: [
+        {
+          path: 'agenda',
+          module: Agenda
+        }
+      ]
+    })
     if (!worker) return next(handleError(404, 'That user does not exists!'))
     const passwordCorrect = await bcrypt.compare(req.body.password, worker.password)
     if (!passwordCorrect) return next(handleError(400, 'The password or the username is incorrect!'))

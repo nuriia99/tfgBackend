@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/getGoals/:id', verifyUser, getGoals)// -
 router.get('/getPatientsListGoal', verifyUser, getPatients)// -
-router.get('/getPatientsLists', verifyUser, getPatientsLists)
+router.post('/getPatientsLists', verifyUser, getPatientsLists)
 
 router.post('/createGoal', createGoal)// -
 router.patch('/updateGoal/:id', updateGoal)// -
