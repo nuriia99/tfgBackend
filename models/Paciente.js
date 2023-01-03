@@ -3,13 +3,13 @@ import { encrypt, decrypt } from '../middleware/verifyUser.js'
 
 const PacienteSchema = new mongoose.Schema(
   {
-    nombre: { type: String, required: true, set: encrypt, get: decrypt }, // encrypt
-    apellido1: { type: String, required: true, set: encrypt, get: decrypt }, // encrypt
-    apellido2: { type: String, set: encrypt, get: decrypt }, // encrypt
-    dni: { type: String, required: true, unique: true, set: encrypt, get: decrypt }, // encrypt
-    correo: { type: String, required: true, set: encrypt, get: decrypt }, // encrypt
-    telefono: { type: String, required: true, set: encrypt, get: decrypt }, // encrypt
-    cip: { type: String, required: true, unique: true, set: encrypt, get: decrypt }, // encrypt
+    nombre: { type: String, required: true, set: encrypt, get: decrypt },
+    apellido1: { type: String, required: true, set: encrypt, get: decrypt },
+    apellido2: { type: String, set: encrypt, get: decrypt },
+    dni: { type: String, required: true, unique: true, set: encrypt, get: decrypt },
+    correo: { type: String, required: true, set: encrypt, get: decrypt },
+    telefono: { type: String, required: true, set: encrypt, get: decrypt },
+    cip: { type: String, required: true, unique: true, set: encrypt, get: decrypt },
     fechaNacimiento: { type: Date, required: true },
     edad: { type: Number, required: true },
     sexo: { type: String, required: true },

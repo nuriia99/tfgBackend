@@ -97,7 +97,7 @@ export const searchPatient = async (req, res, next) => {
     const dni = req.query.dni?.toLowerCase() || ''
     const cip = req.query.cip?.toLowerCase() || ''
     if (sex === 'all') sex = ''
-    const patients = await Patient.find().select('nombre apellido1 apellido2 sexo dni cip edad')
+    const patients = await Patient.find().select('nombre apellido1 apellido2 sexo dni cip edad direccion telefono')
     const filterPatients = patients.filter((patient) => {
       return patient.nombre.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(nombre) && patient.apellido1.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(apellido1) && patient.apellido2.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(apellido2) && patient.sexo.includes(sex) && patient.dni.toLowerCase().includes(dni) && patient.cip.toLowerCase().includes(cip)
     })

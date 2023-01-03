@@ -12,6 +12,7 @@ export const register = async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(req.body.password, salt)
+    console.log(hash)
     const newWorker = new Worker({
       nombre: req.body.nombre,
       apellido1: req.body.apellido1,
@@ -68,19 +69,19 @@ export const login = async (req, res, next) => {
     const centros = worker._doc.centros.map(centro => centro.nombre)
 
     const workerData = {
-      _id: worker._doc._id,
-      nombre: worker._doc.nombre + ' ' + worker._doc.apellido1 + ' ' + worker._doc.apellido2,
-      username: worker._doc.username,
-      dni: worker._doc.dni,
-      correo: worker._doc.correo,
-      telefono: worker._doc.telefono,
-      numColegiado: worker._doc.numColegiado,
-      lenguaje: worker._doc.lenguaje,
+      _id: worker._id,
+      nombre: worker.nombre + ' ' + worker.apellido1 + ' ' + worker.apellido2,
+      username: worker.username,
+      dni: worker.dni,
+      correo: worker.correo,
+      telefono: worker.telefono,
+      numColegiado: worker.numColegiado,
+      lenguaje: worker.lenguaje,
       turno: shift[0],
-      turnos: worker._doc.turnos,
-      especialidades: worker._doc.especialidades,
+      turnos: worker.turnos,
+      especialidades: worker.especialidades,
       centros,
-      centrosInfo: worker._doc.centros
+      centrosInfo: worker.centros
     }
     res.status(200).json({ workerData, token })
   } catch (error) {

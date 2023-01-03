@@ -7,8 +7,8 @@
     "telefono": "765897698",
     "username": "FBU578MN",
     "password": "FBU578MN",
-    "esDoctor": true,
     "numColegiado": "364378",
+    "esDoctor": true,
     "lenguaje": "ca",
     "pacientes": ["6378be9738938f2984193dbe","6378cf259172ee3d235c102d"],
     "especialidades": ["Medicina general"],
@@ -67,9 +67,9 @@
     "correo": "MarcoCarreñoMillan@gmail.com",
     "telefono": "765897698",
     "username": "1Q2W3E4R",
+    "numColegiado": "364320",
     "password": "1Q2W3E4R",
     "esDoctor": true,
-    "numColegiado": "364320",
     "lenguaje": "es",
     "pacientes": [],
     "especialidades": ["Medicina general", "Enfermeria"],
@@ -102,6 +102,66 @@
         {
             "horaInicio": "2022-09-20T09:00:00",
             "horaFinal": "2022-10-20T09:00:00",
+            "rol": "Medicina general",
+            "centro": "CUAP Gran Corazón"
+        }
+    ],
+    "citasPrevias": [],
+    "visitasUrgencias": [],
+    "informes": [],
+    "entradas": [],
+    "eleccionMedicamento": []
+}
+
+
+{
+    "nombre": "Ariadna",
+    "apellido1": "Corral",
+    "apellido2": "Moreno",
+    "dni": "45674567Y",
+    "correo": "AriadnaCorralMoreno@gmail.com",
+    "telefono": "939419145",
+    "username": "KI986HYT",
+    "numColegiado": "986578",
+    "password": "KI986HYT",
+    "esDoctor": false,
+    "lenguaje": "es",
+    "pacientes": ["6378be9738938f2984193dbe","6378cf259172ee3d235c102d"],
+    "especialidades": ["Enfermeria"],
+    "centros": [
+        {
+            "nombre": "CUAP Gran Corazón",
+            "objetivos": ["63864049451fbc6cc4409be5","638659a87d93b8e9cdab77d6","638676f2d9058d78b2578a8e","638676ffd9058d78b2578aed"],
+            "pacientes": ["63866ceb8a592a2aa398a23e"]
+        },
+        {
+            "nombre": "CAP Antón de Borja",
+            "objetivos": [],
+            "pacientes": ["6378cf259172ee3d235c102d"],
+            "agenda": "63a1dd8b536f565da1466ab3"
+        },
+        {
+            "nombre": "CAP San Genís",
+            "objetivos": [],
+            "agenda": "63a1dd96536f565da1466ab5"
+        },
+        {
+            "nombre": "CAP Doctor Joan Planas",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Vallirana",
+            "objetivos": []
+        },
+        {
+            "nombre": "CAP Baix Ebre",
+            "objetivos": []
+        }
+    ],
+    "turnos": [
+        {
+            "horaInicio": "2022-10-20T09:00:00",
+            "horaFinal": "2023-10-20T09:00:00",
             "rol": "Medicina general",
             "centro": "CUAP Gran Corazón"
         }
