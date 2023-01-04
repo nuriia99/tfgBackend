@@ -19,7 +19,7 @@ export const app = express()
 dotenv.config()
 
 app.use(cors({
-  origin: ['http://localhost:3001', 'http://tfg-sistema-sanitario-upc.onrender.com']
+  origin: ['http://localhost:3001', 'https://tfg-sistema-sanitario-upc.onrender.com']
 })) // Use this after the variable declaration
 
 export const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
