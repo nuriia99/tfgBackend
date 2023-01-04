@@ -18,7 +18,9 @@ import path from 'path'
 export const app = express()
 dotenv.config()
 
-app.use(cors()) // Use this after the variable declaration
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://tfg-sistema-sanitario-UPC.onrender.com']
+})) // Use this after the variable declaration
 
 export const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
