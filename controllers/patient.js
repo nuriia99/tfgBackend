@@ -193,7 +193,7 @@ export const uploadReport = async (req, res, next) => {
 
 const htmlTemplate = (report) => {
   return `
-    <!doctype html>
+  <!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
@@ -229,7 +229,7 @@ const htmlTemplate = (report) => {
           }
           .export_first_patientData_row{
             display: flex;
-            padding: 10px 0 0 0;
+            padding: 10px 0;
           }
           .export_title{
             background-color: #0979b0;
@@ -237,12 +237,26 @@ const htmlTemplate = (report) => {
             padding: 5px;
             color: white;
           }
+          .export_second, .export_second_dates, .export_second_visita{
+            display: flex;
+            padding: 20px 0;
+          }
+          .visita_row{
+            display: flex;
+          }
+          .solid{
+            background-color: #bbb;
+            height: 3px;
+            width: 100%;
+          }
         </style>
       </head>
       <body>
         <div class="export">
+          <div class="export_title">
+            ${report.tradTitle}
+          </div>
           <div class="export_first">
-            <div class='export_first_center'>${report.center}</div>
             <div class="export_first_patientData">
               <div class="export_first_patientData_row">
                 <label>${report.tradName}:</label>
@@ -258,8 +272,53 @@ const htmlTemplate = (report) => {
               </div>
             </div>
           </div>
-          <div class="export_title">
-            ${report.tradTitle}
+          <div class="solid"></div>
+          <div class="export_second">
+            <div class='export_first_center'>${report.center}</div>
+            <div class="export_second_dates">
+              <label>${report.tradHoraEntrada}:</label>
+              <div className='box'>${report.horaEntrada}</div>
+              <label>{leng.horaAsistencia}:</label>
+              <div className='box'>${report.horaAsistencia}</div>
+            </div>
+            <div class="export_second_visita">
+              <label>${report.tradVisitado}:</label>
+              <div>
+                <p>${report.visitado}</p>
+              </div>
+            </div>
+          </div>
+          <div class="solid"></div>
+          <div class="export_second">
+            <label>${report.tradAnamnesio}</label>
+            <div className='box'>${report.anamnsesio}</div>
+          </div>
+          <div class="export_second">
+            <label>${report.tradExploracion}</label>
+            <div className='box'>${report.exploracion}</div>
+          </div>
+          <div class="export_second">
+            <label>${report.tradPruebasComplementarias}</label>
+            <div className='box'>${report.pruebasComplementarias}</div>
+          </div>
+          <div class="export_second">
+            <label>${report.tradDiagnositco}</label>
+            <div className='box'>${report.diagnostico}</div>
+          </div>
+          <div class="export_second">
+            <label>${report.tradPlanTerapeutico}</label>
+            <div className='box'>${report.planTerapeutico}</div>
+          </div>
+          <div class="solid"></div>
+          <div class="firma">
+            <label>${report.tradFirma}</label>
+            <div>${report.nombreMedico}</div>
+            <label>${report.tradNumColegiado}</label>
+            <div>${report.numColegiado}</div>
+            <label>${report.tradTelefono}</label>
+            <div>${report.telefono}</div>
+            <label>${report.tradEspecialidad}</label>
+            <div>${report.especialidad}</div>
           </div>
         </div>
       </body>
