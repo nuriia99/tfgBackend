@@ -265,7 +265,7 @@ const htmlTemplate = (report) => {
             <div class="export_second_dates">
               <label>${report.tradHoraEntrada}:</label>
               <div className='box'>${report.horaEntrada}</div>
-              <label>{leng.horaAsistencia}:</label>
+              <label>${report.tradHoraAsistencia}:</label>
               <div className='box'>${report.horaAsistencia}</div>
             </div>
             <div class="export_second_visita">

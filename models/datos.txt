@@ -315,6 +315,33 @@
                     "_id": "63756e4f1318a104b59f9619"
                 }
             ]
+        },
+        {
+            "name": "tensionArterial",
+            "values": [
+                {
+                    "value": "103",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "glucemiaCapilar",
+            "values": [
+                {
+                    "value": "120 mg/dL",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "saturacionOxigeno",
+            "values": [
+                {
+                    "value": "98%",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
         }
     ],
     "documentos": [
@@ -436,6 +463,33 @@
                 {
                     "value": "Al polen y al paracetamol.",
                     "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "tensionArterial",
+            "values": [
+                {
+                    "value": "103",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "glucemiaCapilar",
+            "values": [
+                {
+                    "value": "145 mg/dL",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "saturacionOxigeno",
+            "values": [
+                {
+                    "value": "98%",
+                    "date": "2022-10-25T00:00:00.511Z"
                 }
             ]
         }
@@ -560,6 +614,33 @@
                 {
                     "value": "Al polen y al paracetamol.",
                     "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "tensionArterial",
+            "values": [
+                {
+                    "value": "103",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "glucemiaCapilar",
+            "values": [
+                {
+                    "value": "120 mg/dL",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "saturacionOxigeno",
+            "values": [
+                {
+                    "value": "98%",
+                    "date": "2022-10-25T00:00:00.511Z"
                 }
             ]
         }
@@ -687,6 +768,33 @@
                 {
                     "value": "Al polen y al paracetamol.",
                     "date": "2018-02-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "tensionArterial",
+            "values": [
+                {
+                    "value": "103",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "glucemiaCapilar",
+            "values": [
+                {
+                    "value": "120 mg/dL",
+                    "date": "2022-10-25T00:00:00.511Z"
+                }
+            ]
+        },
+        {
+            "name": "saturacionOxigeno",
+            "values": [
+                {
+                    "value": "98%",
+                    "date": "2022-10-25T00:00:00.511Z"
                 }
             ]
         }
