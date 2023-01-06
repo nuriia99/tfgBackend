@@ -4,8 +4,6 @@ import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/handleErrors.js'
 import pdf from 'html-pdf'
-import { __dirname } from '../docs/path.js'
-import fs from 'fs'
 
 export const createPatient = async (req, res, next) => {
   try {
@@ -147,9 +145,6 @@ export const getActiveIntelligence = async (req, res, next) => {
 export const deleteDocument = async (req, res, next) => {
   try {
     const response = await Patient.updateOne({ _id: req.params.id }, { $pull: { documentos: { _id: req.params.idDoc } } })
-    fs.unlink(`${__dirname}\\` + req.body.reportName, function (err) {
-      if (err) console.log(err)
-    })
     res.status(200).json(response)
   } catch (error) {
     console.log(error)
@@ -163,15 +158,10 @@ export const uploadReport = async (req, res, next) => {
     currentDay = currentDay.getTime()
     const doc = {
       nombre: 'Informe ' + req.body.report.center,
-      pdfUrl: 'Informe' + currentDay + '.pdf',
+      pdfUrl: JSON.stringify(htmlTemplate(req.body.report)),
       fechaSubida: new Date(currentDay)
     }
     await Patient.updateOne({ _id: req.body.report.paciente }, { $push: { documentos: doc } })
-    pdf.create(htmlTemplate(req.body.report), {}).toFile('./docs/Informe' + currentDay + '.pdf', (err) => {
-      // eslint-disable-next-line prefer-promise-reject-errors
-      if (err) res.send(Promise.reject())
-      res.send(Promise.resolve())
-    })
   } catch (error) {
     console.log(error)
     next(error)
@@ -313,9 +303,23 @@ const htmlTemplate = (report) => {
     `
 }
 
-export const downloadReport = (req, res, next) => {
+export const downloadReport = async (req, res, next) => {
   try {
-    res.sendFile(`${__dirname}\\` + req.query.reportName)
+    const patient = await Patient.findById(req.query.patient).select('documentos')
+    let doc
+    patient.documentos.every(d => {
+      if (d._id.toString() === req.query.document) {
+        doc = d
+        return false
+      }
+      return true
+    })
+    // eslint-disable-next-line new-cap
+    pdf.create(JSON.parse(doc.pdfUrl)).toStream((err, stream) => {
+      if (err) return res.end(err.stack)
+      res.setHeader('Content-type', 'application/pdf')
+      stream.pipe(res)
+    })
   } catch (error) {
     console.log(error)
     next(error)
