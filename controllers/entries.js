@@ -307,7 +307,7 @@ export const updateDiagnosis = async (req, res, next) => {
 export const getDiagnosisRec = async (req, res, next) => {
   try {
     // eslint-disable-next-line quotes
-    const allWords = ["disnea", "tos", "tos seca", "fiebre", "febril", "dolor de cabeza", "ronchas", "piel", "picor", "inflamacion", "dificultad", "diarrea", "nauseas", "vomitos", "dolor", "fiebre", "pecho", "meareo", "fatiga", "debilidad", "aliento", "latidos", "apetito", "malestar", "picazón", "resequedad", "peso"]
+    const allWords = ["disnea", "tos", "tos seca", "fiebre", "febril", "dolor de cabeza", "ronchas", "piel", "picor", "inflamacion", "dificultad", "diarrea", "nauseas", "vomitos", "dolor", "fiebre", "pecho", "meareo", "fatiga", "debilidad", "aliento", "latidos", "apetito", "malestar", "picazón", "resequedad", "peso", "poliuria", "polidipsia", "polifagia", "perdida", "vision", "borrosa"]
     const clinicaWords = req.query.clinica.split(' ')
     const matchWords = []
     clinicaWords.forEach((word) => {

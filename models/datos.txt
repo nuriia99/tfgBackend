@@ -1007,6 +1007,15 @@
   "palabrasClave": ["apetito", "malestar", "dolor", "fatiga", "picazón", "resequedad", "peso"]
 }
 
+{
+  "nombre": "Diabetes",
+  "severidad": "grave",
+  "informes": [],
+  "entradas": [],
+  "pacientes": [],
+  "palabrasClave": ["poliuria", "polidipsia", "polifagia", "fatiga", "perdida", "vision", "borrosa", "peso"]
+}
+
 
 
 
