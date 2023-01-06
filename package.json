@@ -30,7 +30,8 @@
     "mongoose": "^6.6.5",
     "mongoose-autopopulate": "^0.16.1",
     "mongoose-bcrypt": "^1.10.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "phantomjs-prebuilt": "^2.1.16"
   },
   "devDependencies": {
     "eslint": "^8.26.0",
