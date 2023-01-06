@@ -18,9 +18,7 @@ import path from 'path'
 export const app = express()
 dotenv.config()
 
-app.use(cors({
-  origin: ['http://localhost:3001', 'https://tfg-sistema-sanitario-upc.onrender.com', 'https://tfg-sistema-sanitario-upc.netlify.app']
-})) // Use this after the variable declaration
+app.use(cors()) // Use this after the variable declaration
 
 export const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
