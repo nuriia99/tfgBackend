@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose'
 
 const CitaPreviaSchema = new mongoose.Schema({
   paciente: { type: Schema.ObjectId, ref: 'Paciente', required: true },
-  trabajador: { type: Schema.ObjectId, ref: 'Trabajador', required: true },
+  trabajador: { type: Schema.ObjectId, ref: 'Trabajador' },
   agenda: { type: Schema.ObjectId, ref: 'Agenda', required: true },
   tipoVisita: { type: String, required: true },
   centro: { type: String, required: true },
