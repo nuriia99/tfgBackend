@@ -1,25 +1,21 @@
 import CitaPrevia from '../models/CitaPrevia.js'
 import VisitaUrgencias from '../models/VisitaUrgencias.js'
 import Agenda from '../models/Agenda.js'
-import Trabajador from '../models/Trabajador.js'
 import Paciente from '../models/Paciente.js'
 
 export const getAppointments = async (req, res, next) => {
   try {
-    const appointments = await Paciente.findById(req.params.idPatient).populate({
-      path: 'citasPrevias',
-      populate: [
-        {
-          path: 'trabajador',
-          module: Trabajador
-        },
-        {
-          path: 'agenda',
-          module: Agenda
-        }
-      ]
-    }).select('citasPrevias')
-    res.status(200).json(appointments)
+    let currentDay = new Date()
+    currentDay = currentDay.setHours(0, 0, 0, 0)
+    currentDay = new Date(currentDay)
+    currentDay = currentDay.toISOString()
+    const appointments = await CitaPrevia.find({ paciente: req.params.idPatient, fecha: { $gte: currentDay } }).populate('trabajador agenda')
+    const sortAppointments = appointments.sort((a, b) => {
+      const date1 = new Date(a.fecha)
+      const date2 = new Date(b.fecha)
+      return date1 - date2
+    })
+    res.status(200).json(sortAppointments)
   } catch (error) {
     console.log(error)
     next(error)
