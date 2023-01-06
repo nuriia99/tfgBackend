@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose'
 
 const ObjetivoSchema = new mongoose.Schema({
   tipo: { type: String, required: true },
-  codigo: { type: String, required: true, unique: true },
+  codigo: { type: String, required: true },
   nombre: { type: String, required: true },
   descripcion: { type: String, required: true },
   definicion: { type: String, required: true },

@@ -15,6 +15,7 @@ const TrabajadorSchema = new mongoose.Schema(
     numColegiado: { type: String, required: true, unique: true, set: encrypt, get: decrypt },
     lenguaje: String,
     especialidades: { type: [String], required: true },
+    pacientes: [{ type: Schema.ObjectId, ref: 'Paciente' }],
     centros: [{
       nombre: String,
       objetivos: [{ type: Schema.ObjectId, ref: 'Objetivo' }],
