@@ -56,8 +56,8 @@ app.use((error, req, res, next) => {
   const errorMessage = descErrors[errorStatus]
   return res.status(errorStatus).json(errorMessage)
 })
-
-export const server = app.listen(process.env.PORT || 3000, () => {
+const PORT = process.env.PORT || 3000
+export const server = app.listen(PORT, () => {
   connect()
   console.log('connected')
 })
