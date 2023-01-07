@@ -160,6 +160,7 @@ export const createSchedule = async (req, res, next) => {
 
 export const updateAppointment = async (req, res, next) => {
   try {
+    await CitaPrevia.findByIdAndDelete(req.params.id)
     const newAppointment = new CitaPrevia({
       _id: req.params.id,
       paciente: req.body.appointment.paciente,
@@ -194,7 +195,9 @@ export const updateAppointment = async (req, res, next) => {
       return true
     })
     if (!solapa) return res.status(200).json({ message: 'El trabajador no tiene ese turno asignado' })
-    await CitaPrevia.findByIdAndUpdate(req.params.id, newAppointment)
+    const appointment = await newAppointment.save()
+    await Agenda.findByIdAndUpdate({ _id: req.body.appointment.agenda._id }, { $push: { citasPrevias: appointment } })
+    await Paciente.findByIdAndUpdate({ _id: req.body.appointment.paciente }, { $push: { citasPrevias: appointment } })
     res.status(200).json(newAppointment)
   } catch (error) {
     console.log(error)
