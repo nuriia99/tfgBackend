@@ -3,7 +3,7 @@ import Diagnostico from '../models/Diagnostico.js'
 import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/handleErrors.js'
-import puppeteer, { executablePath } from 'puppeteer-core'
+import puppeteer from 'puppeteer'
 
 export const createPatient = async (req, res, next) => {
   try {
@@ -316,10 +316,9 @@ export const downloadReport = async (req, res, next) => {
     })
     const browser = await puppeteer.launch({
       args: ['--no-sandbox'],
-      headless: true,
+      headless: false,
       userDataDir: '/opt/render/.cache/puppeteer',
-      ignoreHTTPSErrors: true,
-      executablePath: executablePath()
+      ignoreHTTPSErrors: true
     })
     const page = await browser.newPage()
     await page.setContent(JSON.parse(doc.pdfUrl), {
