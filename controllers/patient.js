@@ -314,7 +314,9 @@ export const downloadReport = async (req, res, next) => {
       }
       return true
     })
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({
+      headless: true
+    })
     const page = await browser.newPage()
     await page.setContent(JSON.parse(doc.pdfUrl), {
       waitUntil: 'domcontentloaded'
