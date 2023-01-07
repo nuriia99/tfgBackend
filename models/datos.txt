@@ -861,7 +861,7 @@
     "lenguaje": "es",
     "notas": [
         {
-            "asunto": "El paciente viene a consulta con fiebre desde el dia anterior, con cuadro de MEG, odinofagia y carraspera.",
+            "motivo": "El paciente viene a consulta con fiebre desde el dia anterior, con cuadro de MEG, odinofagia y carraspera.",
             "exploracion": "MVC sin ruidos añadidos . Faringe hiperémica con moco claro.",
             "tratamiento": "Ibuprofeno de 600 alterno con paracetamol 1gr cada 4 horas por 5-7 días.",
             "diagnostico": "6378cbdb3fd7f657a2b2bf65",
