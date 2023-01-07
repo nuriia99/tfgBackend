@@ -3,7 +3,6 @@ import Diagnostico from '../models/Diagnostico.js'
 import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/handleErrors.js'
-import puppeteer from 'puppeteer'
 
 export const createPatient = async (req, res, next) => {
   try {
@@ -158,149 +157,15 @@ export const uploadReport = async (req, res, next) => {
     currentDay = currentDay.getTime()
     const doc = {
       nombre: 'Informe ' + req.body.report.center,
-      pdfUrl: JSON.stringify(htmlTemplate(req.body.report)),
+      pdfUrl: JSON.stringify(req.body.report),
       fechaSubida: new Date(currentDay)
     }
     await Patient.updateOne({ _id: req.body.report.paciente }, { $push: { documentos: doc } })
+    res.status(200).json('upload')
   } catch (error) {
     console.log(error)
     next(error)
   }
-}
-
-const htmlTemplate = (report) => {
-  return `
-  <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>PDF Result Template</title>
-        <style>
-          .export {
-            font-family: "Segoe UI",Helvetica,Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";
-            position: absolute;
-            top: 0;
-            z-index: 7;
-            display: flex;
-            flex-direction: column;
-            padding: 30px 50px;
-            width: 100%;
-            box-sizing: border-box;
-          }
-          .export label{
-            font-weight: 600;
-            padding: 0;
-            padding-right: 4px;
-          }
-          .export p{
-            margin: 0;
-            padding-right: 4px;
-          }
-          .export_first{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-          .export_first_center{
-            align-self: flex-end;
-          }
-          .export_first_patientData_row{
-            display: flex;
-            padding: 10px 0;
-          }
-          .export_title{
-            background-color: #0979b0;
-            margin: 15px 0;
-            padding: 5px;
-            color: white;
-          }
-          .export_second, .export_second_dates, .export_second_visita{
-            display: flex;
-            padding: 20px 0;
-          }
-          .visita_row{
-            display: flex;
-          }
-          .solid{
-            background-color: #bbb;
-            height: 3px;
-            width: 100%;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="export">
-          <div class="export_title">
-            ${report.tradTitle}
-          </div>
-          <div class="export_first">
-            <div class="export_first_patientData">
-              <div class="export_first_patientData_row">
-                <label>${report.tradName}:</label>
-                <p>${report.name}</p>
-              </div>
-              <div class="export_first_patientData_row">
-                <label>CIP : </label>
-                <p>${report.cip}</p>
-                <label>${report.tradNacimiento}</label>
-                <p>${report.nacimiento}</p>
-                <label>${report.tradSexo}</label>
-                <p>${report.sexo}</p>
-              </div>
-            </div>
-          </div>
-          <div class="solid"></div>
-          <div class="export_second">
-            <div class='export_first_center'>${report.center}</div>
-            <div class="export_second_dates">
-              <label>${report.tradHoraEntrada}:</label>
-              <div className='box'>${report.horaEntrada}</div>
-              <label>${report.tradHoraAsistencia}:</label>
-              <div className='box'>${report.horaAsistencia}</div>
-            </div>
-            <div class="export_second_visita">
-              <label>${report.tradVisitado}:</label>
-              <div>
-                <p>${report.visitado}</p>
-              </div>
-            </div>
-          </div>
-          <div class="solid"></div>
-          <div class="export_second">
-            <label>${report.tradAnamnesio}</label>
-            <div className='box'>${report.anamnsesio}</div>
-          </div>
-          <div class="export_second">
-            <label>${report.tradExploracion}</label>
-            <div className='box'>${report.exploracion}</div>
-          </div>
-          <div class="export_second">
-            <label>${report.tradPruebasComplementarias}</label>
-            <div className='box'>${report.pruebasComplementarias}</div>
-          </div>
-          <div class="export_second">
-            <label>${report.tradDiagnositco}</label>
-            <div className='box'>${report.diagnostico}</div>
-          </div>
-          <div class="export_second">
-            <label>${report.tradPlanTerapeutico}</label>
-            <div className='box'>${report.planTerapeutico}</div>
-          </div>
-          <div class="solid"></div>
-          <div class="firma">
-            <label>${report.tradFirma}</label>
-            <div>${report.nombreMedico}</div>
-            <label>${report.tradNumColegiado}</label>
-            <div>${report.numColegiado}</div>
-            <label>${report.tradTelefono}</label>
-            <div>${report.telefono}</div>
-            <label>${report.tradEspecialidad}</label>
-            <div>${report.especialidad}</div>
-          </div>
-        </div>
-      </body>
-  </html>
-    `
 }
 
 export const downloadReport = async (req, res, next) => {
@@ -314,22 +179,7 @@ export const downloadReport = async (req, res, next) => {
       }
       return true
     })
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox'],
-      headless: false,
-      userDataDir: '/opt/render/.cache/puppeteer',
-      ignoreHTTPSErrors: true
-    })
-    const page = await browser.newPage()
-    await page.setContent(JSON.parse(doc.pdfUrl), {
-      waitUntil: 'domcontentloaded'
-    })
-    const pdf = await page.pdf({
-      format: 'A4'
-    })
-    await browser.close()
-    res.contentType('application/pdf')
-    res.send(pdf)
+    res.status(200).json(doc)
   } catch (error) {
     console.log(error)
     next(error)
