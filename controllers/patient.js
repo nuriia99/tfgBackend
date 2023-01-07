@@ -3,7 +3,7 @@ import Diagnostico from '../models/Diagnostico.js'
 import Trabajador from '../models/Trabajador.js'
 import _ from 'lodash'
 import { handleError } from '../middleware/handleErrors.js'
-import pdf from 'html-pdf'
+import puppeteer from 'puppeteer'
 
 export const createPatient = async (req, res, next) => {
   try {
@@ -314,12 +314,17 @@ export const downloadReport = async (req, res, next) => {
       }
       return true
     })
-    // eslint-disable-next-line new-cap
-    pdf.create(JSON.parse(doc.pdfUrl)).toStream((err, stream) => {
-      if (err) return res.end(err.stack)
-      res.setHeader('Content-type', 'application/pdf')
-      stream.pipe(res)
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
+    await page.setContent(JSON.parse(doc.pdfUrl), {
+      waitUntil: 'domcontentloaded'
     })
+    const pdf = await page.pdf({
+      format: 'A4'
+    })
+    await browser.close()
+    res.contentType('application/pdf')
+    res.send(pdf)
   } catch (error) {
     console.log(error)
     next(error)
