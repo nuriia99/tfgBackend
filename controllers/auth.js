@@ -12,7 +12,6 @@ export const register = async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(req.body.password, salt)
-    console.log(hash)
     const newWorker = new Worker({
       nombre: req.body.nombre,
       apellido1: req.body.apellido1,
@@ -23,6 +22,7 @@ export const register = async (req, res, next) => {
       username: req.body.username,
       password: hash,
       esDoctor: req.body.esDoctor,
+      esAdmin: req.body.esAdmin,
       numColegiado: req.body.numColegiado,
       lenguaje: req.body.lenguaje,
       pacientes: req.body.pacientes,
@@ -36,8 +36,7 @@ export const register = async (req, res, next) => {
       eleccionMedicamento: req.body.eleccionMedicamento
     })
     await newWorker.save()
-
-    res.status(200).json({ newWorker })
+    res.status(201).json({ newWorker })
   } catch (error) {
     next(error)
   }

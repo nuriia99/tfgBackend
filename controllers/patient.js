@@ -31,7 +31,7 @@ export const createPatient = async (req, res, next) => {
     })
     // console.log(newPatient)
     await newPatient.save()
-    res.status(200).json(newPatient)
+    res.status(201).json(newPatient)
   } catch (error) {
     console.log(error)
     next(error)
@@ -161,7 +161,7 @@ export const uploadReport = async (req, res, next) => {
       fechaSubida: new Date(currentDay)
     }
     await Patient.updateOne({ _id: req.body.report.paciente }, { $push: { documentos: doc } })
-    res.status(200).json('upload')
+    res.status(201).json('upload')
   } catch (error) {
     console.log(error)
     next(error)

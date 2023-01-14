@@ -56,6 +56,7 @@ export const getSchedule = async (req, res, next) => {
       })
       schedule.citasPrevias = appointments
     }
+    console.log(schedule)
     res.status(200).json(schedule)
   } catch (error) {
     console.log(error)
@@ -114,7 +115,7 @@ export const createAppointment = async (req, res, next) => {
     const appointment = await newAppointment.save()
     await Agenda.findByIdAndUpdate({ _id: req.body.appointment.agenda._id }, { $push: { citasPrevias: appointment } })
     await Paciente.findByIdAndUpdate({ _id: req.body.appointment.paciente }, { $push: { citasPrevias: appointment } })
-    res.status(200).json(appointment)
+    res.status(201).json(appointment)
   } catch (error) {
     console.log(error)
     next(error)
@@ -134,7 +135,7 @@ export const createUrgAppointment = async (req, res, next) => {
     })
     const appointment = await newAppointment.save()
     await Agenda.findByIdAndUpdate({ _id: req.body.agenda }, { $push: { visitasUrgencia: appointment } })
-    res.status(200).json(appointment)
+    res.status(201).json(appointment)
   } catch (error) {
     console.log(error)
     next(error)
@@ -151,7 +152,7 @@ export const createSchedule = async (req, res, next) => {
       visitasUrgencia: req.body.visitasUrgencia
     })
     await newSchedule.save()
-    res.status(200).json(newSchedule)
+    res.status(201).json(newSchedule)
   } catch (error) {
     console.log(error)
     next(error)

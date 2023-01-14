@@ -47,7 +47,7 @@ export const createEntry = async (req, res, next) => {
     }
     const diagnosis = { idDiagnostico: newEntry.notas[0].diagnostico._id, fecha: new Date(), estadoDiagnostico: 'active' }
     await Patient.updateOne({ _id: req.body.newEntry.paciente }, { $push: { entradas: { $each: [entry._id], $position: 0 }, diagnosticos: diagnosis } })
-    res.status(200).json(entry)
+    res.status(201).json(entry)
   } catch (error) {
     console.log(error)
     next(error)
@@ -90,7 +90,7 @@ export const createNote = async (req, res, next) => {
         refreshObj(obj, req.body.patient)
       })
     }
-    res.status(200).json(entry)
+    res.status(201).json(entry)
   } catch (error) {
     console.log(error)
     next(error)
@@ -209,7 +209,7 @@ export const createDiagnosis = async (req, res, next) => {
       palabrasClave: req.body.palabrasClave
     })
     await newDiagnosis.save()
-    res.status(200).json(newDiagnosis)
+    res.status(201).json(newDiagnosis)
   } catch (error) {
     console.log(error)
     next(error)

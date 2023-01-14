@@ -70,7 +70,7 @@ export const createMed = async (req, res, next) => {
       duracion: req.body.duracion
     })
     await newMed.save()
-    res.status(200).json(newMed)
+    res.status(201).json(newMed)
   } catch (error) {
     console.log(error)
     next(error)
@@ -138,7 +138,7 @@ export const createPrescription = async (req, res, next) => {
         refreshObj(obj, newPres.paciente)
       })
     }
-    res.status(200).json(newPrescription)
+    res.status(201).json(newPrescription)
   } catch (error) {
     console.log(error)
     next(error)

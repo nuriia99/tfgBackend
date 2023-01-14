@@ -12,6 +12,7 @@ const TrabajadorSchema = new mongoose.Schema(
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     esDoctor: { type: Boolean, required: true },
+    esAdmin: { type: Boolean, default: false },
     numColegiado: { type: String, required: true, unique: true, set: encrypt, get: decrypt },
     lenguaje: String,
     especialidades: { type: [String], required: true },

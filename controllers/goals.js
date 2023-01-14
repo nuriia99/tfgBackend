@@ -68,7 +68,7 @@ export const createGoal = async (req, res, next) => {
       return true
     })
     await Trabajador.updateOne({ _id: req.body.trabajador }, { $set: { centros } })
-    res.status(200).json(goal)
+    res.status(201).json(goal)
   } catch (error) {
     console.log(error)
     next(error)
