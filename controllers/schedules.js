@@ -51,12 +51,13 @@ export const getSchedule = async (req, res, next) => {
       appointments = schedule.citasPrevias.filter((cita) => {
         const currentDate = new Date(req.query.scheduleDay)
         const appointmentDate = new Date(cita.fecha)
+        console.log('schedule day', req.query.scheduleDay)
+        console.log('appointment day', cita.fecha)
         if (appointmentDate.getHours() === 0) return currentDate.getFullYear() === appointmentDate.getFullYear() && currentDate.getMonth() === appointmentDate.getMonth() && currentDate.getDate() === (appointmentDate.getDate() - 1)
         return currentDate.getFullYear() === appointmentDate.getFullYear() && currentDate.getMonth() === appointmentDate.getMonth() && currentDate.getDate() === appointmentDate.getDate()
       })
       schedule.citasPrevias = appointments
     }
-    console.log(schedule)
     res.status(200).json(schedule)
   } catch (error) {
     console.log(error)
