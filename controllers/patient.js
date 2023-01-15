@@ -160,7 +160,7 @@ export const uploadReport = async (req, res, next) => {
       pdfUrl: JSON.stringify(req.body.report),
       fechaSubida: new Date(currentDay)
     }
-    await Patient.updateOne({ _id: req.body.report.paciente }, { $push: { documentos: doc } })
+    await Patient.updateOne({ _id: req.body.report.paciente }, { $push: { documentos: { $each: [doc], $position: 0 } } })
     res.status(201).json('upload')
   } catch (error) {
     console.log(error)
@@ -179,6 +179,7 @@ export const downloadReport = async (req, res, next) => {
       }
       return true
     })
+    console.log(doc)
     res.status(200).json(doc)
   } catch (error) {
     console.log(error)

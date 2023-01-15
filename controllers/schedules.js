@@ -52,7 +52,6 @@ export const getSchedule = async (req, res, next) => {
         const currentDate = new Date(req.query.scheduleDay)
         const appointmentDate = new Date(cita.fecha)
         currentDate.setHours(currentDate.getHours() + 1)
-        console.log(currentDate)
         if (appointmentDate.getHours() === 0) return currentDate.getFullYear() === appointmentDate.getFullYear() && currentDate.getMonth() === appointmentDate.getMonth() && currentDate.getDate() === (appointmentDate.getDate() - 1)
         return currentDate.getFullYear() === appointmentDate.getFullYear() && currentDate.getMonth() === appointmentDate.getMonth() && currentDate.getDate() === appointmentDate.getDate()
       })

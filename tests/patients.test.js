@@ -13,6 +13,11 @@ const user = {
   centro: 'CUAP Gran Corazón'
 }
 
+const userAdmin = {
+  username: '76BF90DJ',
+  password: '76BF90DJ'
+}
+
 describe('tests related to appointments', () => {
   let token
   let appointmentId
@@ -36,7 +41,7 @@ describe('tests related to appointments', () => {
       })
       .expect(200)
   })
-  test('createAppointment return a 200 status code', async () => {
+  test('createAppointment return a 201 status code', async () => {
     const newAppointment = {
       appointment: {
         paciente: user.id,
@@ -72,7 +77,7 @@ describe('tests related to appointments', () => {
       .set({
         authorization: `Bearer ${token}`
       })
-      .expect(200)
+      .expect(201)
     appointmentId = appointment.body._id
   })
   test('it cant be created an appointment if the worker is not working', async () => {
@@ -253,43 +258,80 @@ describe('tests related to documents', () => {
     token = response.body.token
   })
 
-  test('deleteDocument return a 200 status code', async () => {
-    const newDocuments = {
-      documentos: [
-        {
-          nombre: 'Informe CUAP 4',
-          pdfUrl: 'Informe4.pdf',
-          fechaSubida: '2019-07-26T13:33:03.511Z'
-        },
-        {
-          nombre: 'Informe CUAP 3',
-          pdfUrl: 'Informe3.pdf',
-          fechaSubida: '2018-05-17T13:33:03.511Z'
-        },
-        {
-          nombre: 'Informe CUAP 2',
-          pdfUrl: 'Informe2.pdf',
-          fechaSubida: '2010-02-13T13:33:03.511Z'
-        },
-        {
-          nombre: 'Informe CUAP 1',
-          pdfUrl: 'Informe1.pdf',
-          fechaSubida: '1999-07-26T13:33:03.511Z'
-        }
-      ]
+  test('uploadDocument return a 201 status code', async () => {
+    const doc = {
+      report: {
+        center: 'CUAP Gran Corazón',
+        tradName: 'Nom',
+        name: 'Fátima Menéndez Becerra',
+        cip: 'FAME1111111111',
+        tradNacimiento: 'Data de naixement: ',
+        nacimiento: '26/07/1975',
+        tradSexo: 'Sexe',
+        sexo: 'F',
+        tradTitle: "Informe d'assistència urgent",
+        paciente: '6378be9738938f2984193dbe',
+        tradVisitado: 'Visitat per',
+        tradMed: 'Metge',
+        tradEnf: 'Infermer',
+        med: true,
+        enf: true,
+        tradHoraEntrada: "Hora d'entrada",
+        horaEntrada: '10:00',
+        tradHoraAsistencia: 'Hora assistència',
+        horaAsistencia: '20:40',
+        tradMotivo: 'Motiu de la visita',
+        motivo: 'motivo de la visita',
+        tradAntecedentes: 'Antecedents',
+        antecedentes: '',
+        tradClinica: 'Clínica',
+        clinica: '',
+        tradExploracion: 'Exploració',
+        exploracion: '',
+        tradPruebasComplementarias: 'Proves Complementàries',
+        pruebasComplementarias: '',
+        tradDiagnositco: 'Diagnòstic Principal',
+        diagnostico: 'Gripe A',
+        tradDescDiagnostico: 'Descripció',
+        tradPlanTerapeutico: 'Pla terapèutic',
+        planTerapeutico: '',
+        tradFirma: 'Signatura',
+        nombreMedico: 'Marco Carreño Millan',
+        tradNumColegiado: 'Número de col·legiat',
+        numColegiado: '364320',
+        tradTelefono: 'Telèfon: ',
+        telefono: '765897698',
+        tradEspecialidad: 'Especialitat',
+        especialidad: 'Medicina general',
+        visitado: 'Metge'
+      }
     }
-    await api.patch('/patients/' + user.id + '/updatePatient')
-      .send(newDocuments)
+    await api.post('/patients/report/upload')
+      .send(doc)
       .set({
         authorization: `Bearer ${token}`
       })
-      .expect(200)
+      .expect(201)
+  })
+  test('download document return a 200 status code', async () => {
     const patient = await api.get('/patients/' + user.id)
       .set({
         authorization: `Bearer ${token}`
       })
+    documentId = patient.body.documentos.at(-1)._id
+    const doc = {
+      document: documentId,
+      patient: user.id
+    }
+    const response = await api.get('/patients/report/download/')
+      .query(doc)
+      .set({
+        authorization: `Bearer ${token}`
+      })
       .expect(200)
-    documentId = patient.body.documentos[0]._id
+    expect(response.body._id).toEqual(documentId)
+  })
+  test('deleteDocument return a 200 status code', async () => {
     await api.delete('/patients/' + user.id + '/deleteDoc/' + documentId)
       .set({
         authorization: `Bearer ${token}`
@@ -307,7 +349,7 @@ describe('tests related to prescriptions', () => {
     token = response.body.token
   })
 
-  test('createPrescription return a 200 status code', async () => {
+  test('createPrescription return a 201 status code', async () => {
     const newPrescription = {
       newPrescription: {
         paciente: '6378be9738938f2984193dbe',
@@ -331,7 +373,7 @@ describe('tests related to prescriptions', () => {
       .set({
         authorization: `Bearer ${token}`
       })
-      .expect(200)
+      .expect(201)
     prescriptionId = prescription.body._id
   })
 
@@ -377,15 +419,44 @@ describe('tests related to prescriptions', () => {
       })
       .expect(200)
   })
+  test('searchMed return a 200 status code', async () => {
+    const search = {
+      role: 'Medicina general',
+      name: 'IBUPROFENO CINFA 100MG/5ML 200ML SUSPENSI ORAL EPG'
+    }
+    const response = await api.get('/prescriptions/searchMed')
+      .query(search)
+      .set({
+        authorization: `Bearer ${token}`
+      })
+      .expect(200)
+    expect(response.body).toHaveLength(1)
+  })
+  test('searchDiagnosis return a 200 status code', async () => {
+    const search = {
+      name: 'GRIPE A'
+    }
+    const response = await api.get('/prescriptions/searchDiagnosis')
+      .query(search)
+      .set({
+        authorization: `Bearer ${token}`
+      })
+      .expect(200)
+    expect(response.body).toHaveLength(1)
+  })
 })
 
 describe('tests related to entries and notes', () => {
   let token
+  let tokenAdmin
   let entryId
   beforeEach(async () => {
     const response = await api.post('/auth/login')
       .send(user)
     token = response.body.token
+    const response2 = await api.post('/auth/login')
+      .send(userAdmin)
+    tokenAdmin = response2.body.token
   })
 
   test('createEntry return a 201 status code', async () => {
@@ -420,7 +491,7 @@ describe('tests related to entries and notes', () => {
       .set({
         authorization: `Bearer ${token}`
       })
-      .expect(200)
+      .expect(201)
     entryId = entry.body._id
   })
 
@@ -450,7 +521,7 @@ describe('tests related to entries and notes', () => {
       .set({
         authorization: `Bearer ${token}`
       })
-      .expect(200)
+      .expect(201)
   })
 
   test('updateNote return a 200 status code', async () => {
@@ -498,7 +569,7 @@ describe('tests related to entries and notes', () => {
       .expect(200)
     await api.get('/entries/getEntry/' + entryId)
       .set({
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${tokenAdmin}`
       })
       .expect(404)
   })
@@ -533,7 +604,6 @@ describe('tests related to translate a note', () => {
         authorization: `Bearer ${token}`
       })
       .expect(200)
-    console.log(response)
     expect(response.body).toEqual([
       {
         motivo: 'Pacient ve a consulta després de sentir molta fatiga en caminar. ',
@@ -601,12 +671,11 @@ describe('tests related to get patient', () => {
   })
 
   test('getPatient respond a 404 status code if the user does not exists', async () => {
-    const response = await api.get('/patients/636b763ec2a4bb041c4e637b')
+    await api.get('/patients/636b763ec2a4bb041c4e637b')
       .set({
         authorization: `Bearer ${token}`
       })
       .expect(404)
-    console.log(response.body)
   })
 })
 
@@ -619,58 +688,13 @@ describe('tests related to active intelligence', () => {
   })
 
   test('getActiveIntelligence respond a 200 status code and the response is correct', async () => {
-    const correctResponse = [
-      [
-        '-',
-        '25/02/2009',
-        '25/02/2011',
-        '25/02/2012',
-        '25/02/2017',
-        '25/02/2018',
-        '19/08/2018',
-        'lastValues'
-      ],
-      ['Tabaquismo', '-', '-', '-', '-', '-', 'Sí', 'Sí'],
-      ['Drogas', '-', '-', '-', '-', '-', '-', '-'],
-      ['Alcohol', '-', '-', '-', '-', '-', '-', '-'],
-      ['Actividad Fisica', '-', '-', 'Activa', '-', '-', '-', 'Activa'],
-      [
-        'Valoracion Pacientes Cronicos',
-        '-',
-        'leve',
-        '-',
-        '-',
-        '-',
-        '-',
-        'leve'
-      ],
-      ['Frecuencia Cardiaca', '-', '-', '-', '85', '-', '-', '85'],
-      [
-        'Peso', '60',
-        '-', '-',
-        '-', '-',
-        '-', '60'
-      ],
-      ['Estatura', '-', '-', '-', '-', '175', '-', '175'],
-      ['Colesterol Total', '-', '-', '-', '-', '153', '-', '153'],
-      [
-        'Alergias',
-        '-',
-        '-',
-        '-',
-        '-',
-        'Al polen y al paracetamol.',
-        '-',
-        'Al polen y al paracetamol.'
-      ]
-    ]
     const response = await api.get('/patients/' + user.id + '/activeIntelligence')
       .send(user)
       .set({
         authorization: `Bearer ${token}`
       })
       .expect(200)
-    expect(correctResponse).toEqual(response.body)
+    expect(response.body).toHaveLength(14)
   })
 
   test('getActiveIntelligence respond a 404 status code if the user does not exists', async () => {

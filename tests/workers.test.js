@@ -6,7 +6,8 @@ const api = request(app)
 
 const user = {
   username: '1Q2W3E4R',
-  password: '1Q2W3E4R'
+  password: '1Q2W3E4R',
+  id: '6378b7c938938f2984193d56'
 }
 
 describe('tests related to login', () => {
@@ -37,7 +38,7 @@ describe('tests related to login', () => {
   })
 })
 
-describe('tests related to update the workers lenguage', () => {
+describe('tests related to workers', () => {
   let worker
   let token
   beforeEach(async () => {
@@ -47,8 +48,16 @@ describe('tests related to update the workers lenguage', () => {
     token = response.body.token
   })
 
-  test('if the token and the id are valid respond with a 200 status code', async () => {
-    console.log('/trabajadores/' + worker._id + '/updateLenguage')
+  test('get recs meds returns and 200 code and the recs', async () => {
+    const response = await api.get('/trabajadores/' + user.id + '/getRecs/6378cbdb3fd7f657a2b2bf65')
+      .set({
+        authorization: `Bearer ${token}`
+      })
+      .expect(200)
+    expect(response.body).toHaveLength(2)
+  })
+
+  test('update the worker lenguaje respond with a 200 status code', async () => {
     await api.patch('/trabajadores/' + worker._id + '/updateLenguage')
       .send({ lenguage: 'Español' })
       .set({
