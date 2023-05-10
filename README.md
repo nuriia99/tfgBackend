@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-# BookingProject
-=======
-# tfgBackend
->>>>>>> 879d747de4d75a2064861c49f2d9f843806cc877
+As my final degree project, I created a **multiplatform web application** for primary care centers in Spain. On this website you can search for a patient, take a look at their medical history, create visits, and generate patient lists. As backend technologies, I used **Node.js** as server, **Express** as framework and **Jest** to create the unit test. Also, as **Database**, I used **MongoDB** with **Mongoose** as framework. In this project, I create an **APIRest** as a service for the frontend project.
